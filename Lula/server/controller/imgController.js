@@ -33,7 +33,7 @@ export const getNewImgData = async(request, response)=>{
     const imagelink = request.body.imagelink;
     const sectionid = request.body.sectionid;
     try {
-        const img = await addImg(imagename, imagelink, sectionid)
+        const img = await addImg({imagename, imagelink, sectionid})
         response.json(img)
             
         } catch (error) {
@@ -51,7 +51,7 @@ export const updateImgData = async(request, response)=>{
     const sectionid = request.body.sectionid;
 
     try {
-        const img = await updateImg(imgid, imagename, imagelink, sectionid)
+        const img = await updateImg({imgid, imagename, imagelink, sectionid})
         response.json(img)
             
         } catch (error) {

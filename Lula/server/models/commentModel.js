@@ -26,20 +26,20 @@ export const getCommentById = async (commentid)=>{
         console.log(error);
         throw new Error(error.message);    
     }
-}
+} 
 
 //ADD COMMENT
-export const addComment = ({commentid, userid, recordid, commenttext, created, updated}) => {
+export const addComment = ({userid, recordid, commenttext}) => {
     return db('comments')
-    .insert ({commentid, recordid, commenttext, created, updated})
+    .insert ({userid, recordid, commenttext, created: new Date()})
     .returning(["commentid", "userid", "recordid", "commenttext", "created", "updated"])
   }
 
 //UPDATE COMMENT
 export const updateComment = ({commenttext, updated}, commentid) => {
     return db('comments')
-    .update({commenttext, updated})
     .where('commentid', commentid)
+    .update({commenttext, updated: new Date()})
     .returning(["commentid", "userid", "recordid", "commenttext", "created", "updated"])
   }
   

@@ -37,7 +37,7 @@ export const getNewPendingAudioData = async(request, response)=>{
     const created = request.body.created;
 
     try {
-        const audio = await addPendingAudio(userid, recordname, recordlink, recordduration, created)
+        const audio = await addPendingAudio({userid, recordname, recordlink, recordduration, created})
         response.json(audio)
             
         } catch (error) {

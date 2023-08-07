@@ -6,4 +6,4 @@ export const avatarRouter = express.Router();
 avatarRouter.get('/avatar', getAllAvatarsData);
 avatarRouter.get('/avatar/:avatarid', getAvatarData);
 avatarRouter.post('/avatar/post', getNewAvatarData);
-avatarRouter.delete('avatar/delete/:avatarid', deleteAvatarData);
+avatarRouter.delete('/avatar/delete/:avatarid', deleteAvatarData);

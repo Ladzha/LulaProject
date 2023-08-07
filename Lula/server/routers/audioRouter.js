@@ -9,10 +9,10 @@ audioRouter.get('/audio/records/:userid', getUserAudioData);
 
 audioRouter.post('/audio/post', getNewAudioData);
 audioRouter.put('/audio/update/:recordid', updateAudioData);
-audioRouter.delete('audio/delete/:recordid', deleteAudioData);
+audioRouter.delete('/audio/delete/:recordid', deleteAudioData);
 
 audioRouter.get('/audio/pending', getAllPendingAudiosData);
 audioRouter.get('/audio/pending/:recordid', getPendingAudioData);
 audioRouter.post('/audio/pending/post', getNewPendingAudioData);
-audioRouter.delete('audio/pending/delete/:recordid', deletePendingAudioData);
+audioRouter.delete('/audio/pending/delete/:recordid', deletePendingAudioData);
 

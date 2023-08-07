@@ -19,7 +19,7 @@ export const getLanguageData= async(request, response)=>{
         if(language){
             response.json(language);
         }else{
-            response.status(404).json({ msg: 'language not found.' });
+            response.status(404).json({ msg: 'Language not found.' });
         }               
         } catch (error) {
             console.log(error)
@@ -29,12 +29,11 @@ export const getLanguageData= async(request, response)=>{
 
 //ADD LANGUAGE
 export const getNewLanguageData = async(request, response)=>{
-    const userid = request.body.userid;
-    const imagename = request.body.imagename;
-    const imagelink = request.body.imagelink;
+    const languageid = request.body.languageid;
+    const language = request.body.language;
     try {
-        const language = await addLanguage(userid, imagename, imagelink)
-        response.json(language)
+        const languageNew = await addLanguage({languageid, language})
+        response.json(languageNew)
             
         } catch (error) {
             console.log(error)

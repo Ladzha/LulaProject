@@ -13,9 +13,9 @@ export const getAllSectionData = async(request, response)=>{
 
 //GET SECTION BY ID
 export const getSectionData= async(request, response)=>{
-    const sectonid = request.params.sectonid;
+    const sectionid = request.params.sectionid;
     try {
-        const section = await getSectionById(sectonid);
+        const section = await getSectionById(sectionid);
         if(section){
             response.json(section);
         }else{
@@ -32,7 +32,7 @@ export const getNewSectionData = async(request, response)=>{
     const sectionname = request.body.sectionname;
 
     try {
-        const section = await addSection(sectionname)
+        const section = await addSection({sectionname})
         response.json(section)
             
         } catch (error) {
@@ -48,8 +48,8 @@ export const updateSectionData = async(request, response)=>{
     const sectionname = request.body.sectionname;
 
     try {
-        const user = await updateSection(sectionname)
-        response.json(user)
+        const section = await updateSection({sectionid, sectionname})
+        response.json(section)
             
         } catch (error) {
             console.log(error)

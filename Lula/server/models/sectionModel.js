@@ -30,15 +30,15 @@ export const getSectionById = async (sectionid)=>{
 }
 
 //ADD SECTION
-export const addSection = ({sectionid, sectionname}) => {
-    return db('sections')
-    .insert ({sectionid, sectionname})
+export const addSection = ({sectionname}) => {
+    return db('section')
+    .insert ({sectionname})
     .returning(["sectionid", "sectionname"])
   }
 
 //UPDATE SECTION
-export const updateSection = ({sectiontext, updated}, sectionid) => {
-    return db('sections')
+export const updateSection = ({sectionname}, sectionid) => {
+    return db('section')
     .update({sectionname})
     .where('sectionid', sectionid)
     .returning(["sectionid", "sectionname"])
@@ -46,7 +46,7 @@ export const updateSection = ({sectiontext, updated}, sectionid) => {
   
   //DELETE SECTION
   export const deleteSection = (sectionid) => {
-    return db('sections')
+    return db('section')
     .where('sectionid', sectionid)
     .del()
     .returning(["sectionid", "sectionname"])

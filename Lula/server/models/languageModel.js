@@ -17,7 +17,7 @@ export const getAllLanguage  = async ()=>{
 //GET LANGUAGE BY ID
 export const getLanguageById = async (languageid)=>{
     try {
-        const lamguage = await db('lamguage')
+        const lamguage = await db('language')
         .select('*')
         .where('languageid', languageid)
         return lamguage;      
@@ -30,7 +30,7 @@ export const getLanguageById = async (languageid)=>{
 
 //ADD LANGUAGE
 export const addLanguage = ({language}) => {
-    return db('languages')
+    return db('language')
     .insert ({language})
     .returning(["languageid", "language"])
   }
@@ -38,7 +38,7 @@ export const addLanguage = ({language}) => {
   
   //DELETE LANGUAGE
   export const deleteLanguage = (languageid) => {
-    return db('languages')
+    return db('language')
     .where('languageid', languageid)
     .del()
     .returning(["languageid", "language"])

@@ -45,17 +45,17 @@ export const getAudioByUserId = async (userid)=>{
 }
 
 //ADD AUDIO
-export const addAudio = ({userid, recordid, audiotext, created, updated}) => {
+export const addAudio = ({userid, recordname, recordLink, recordDuration, created, recordRating, recordLikes, recordDislikes}) => {
     return db('audios')
-    .insert ({userid, recordid, audiotext, created, updated})
+    .insert ({userid, recordname, recordLink, recordDuration, created, recordRating, recordLikes, recordDislikes})
     .returning(["recordid", "userid", "recordname", "recordLink", "recordDuration", "created", "recordRating", "recordLikes", "recordDislikes"])
   }
 
 //UPDATE AUDIO
 export const updateAudio = ({recordname, recordRating, recordLikes, recordDislikes}, audioid) => {
     return db('audios')
-    .update({recordname, recordRating, recordLikes, recordDislikes})
     .where('audioid', audioid)
+    .update({recordname, recordRating, recordLikes, recordDislikes})
     .returning(["recordid", "userid", "recordname", "recordLink", "recordDuration", "created", "recordRating", "recordLikes", "recordDislikes"])
   }
   

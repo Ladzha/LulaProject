@@ -55,7 +55,7 @@ export const getNewAudioData = async(request, response)=>{
     const recorddislikes = request.body.recorddislikes;
 
     try {
-        const audio = await addAudio(userid, recordname, recordlink, recordduration, created, recordrating, recordlikes, recorddislikes)
+        const audio = await addAudio({userid, recordname, recordlink, recordduration, created, recordrating, recordlikes, recorddislikes})
         response.json(audio)
             
         } catch (error) {
@@ -74,7 +74,7 @@ export const updateAudioData = async(request, response)=>{
     const recorddislikes = request.body.recorddislikes;
 
     try {
-        const audio = await updateAudio(recordid, recordname, recordrating , recordlikes , recorddislikes)
+        const audio = await updateAudio({recordid, recordname, recordrating , recordlikes , recorddislikes})
         response.json(audio)
             
         } catch (error) {

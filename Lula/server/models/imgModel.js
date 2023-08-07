@@ -29,24 +29,24 @@ export const getImgById = async (imgid)=>{
 }
 
 //ADD IMAGE
-export const addImg = ({userid, recordid, imgtext, created, updated}) => {
-    return db('imgs')
-    .insert ({userid, recordid, imgtext, created, updated})
-    .returning(["imgid", "userid", "recordid", "imgtext", "created", "updated"])
+export const addImg = ({imagename, imagelink, sectionid}) => {
+    return db('img')
+    .insert ({imagename, imagelink, sectionid})
+    .returning(["imgid", "imagename", "imagelink", "sectionid"])
   }
 
 //UPDATE IMAGE
-export const updateImg = ({imgtext, updated}, imgid) => {
-    return db('imgs')
-    .update({imgtext, updated})
+export const updateImg = ({imagename, sectionid}, imgid) => {
+    return db('img')
+    .update({imagename, sectionid})
     .where('imgid', imgid)
-    .returning(["imgid", "userid", "recordid", "imgtext", "created", "updated"])
+    .returning(["imgid", "imagename", "imagelink", "sectionid"])
   }
   
   //DELETE IMAGE
   export const deleteImg = (imgid) => {
-    return db('imgs')
+    return db('img')
     .where('imgid', imgid)
     .del()
-    .returning(["imgid", "userid", "recordid", "imgtext", "created", "updated "])
+    .returning(["imgid", "imagename", "imagelink", "sectionid"])
   }

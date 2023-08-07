@@ -9,5 +9,5 @@ commentRouter.get('/comments/:commentid', getCommentData);
 
 commentRouter.post('/comments/post', getNewCommentData);
 commentRouter.put('/comments/update/:commentid', updateCommentData);
-commentRouter.delete('comments/delete/:commentid', deleteCommentData);
+commentRouter.delete('/comments/delete/:commentid', deleteCommentData);
 

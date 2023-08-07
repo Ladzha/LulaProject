@@ -4,8 +4,8 @@ import { getAllSectionData, getSectionData, getNewSectionData, updateSectionData
 export const sectionRouter = express.Router();
 
 sectionRouter.get('/section', getAllSectionData);
-sectionRouter.get('/language/:languageid', getSectionData);
+sectionRouter.get('/section/:sectionid', getSectionData);
 
-sectionRouter.post('/language/post', getNewSectionData);
-sectionRouter.put('/language/update/:languageid', updateSectionData);
-sectionRouter.delete('language/delete/:languageid', deleteSectionData);
+sectionRouter.post('/section/post', getNewSectionData);
+sectionRouter.put('/section/update/:sectionid', updateSectionData);
+sectionRouter.delete('/section/delete/:sectionid', deleteSectionData);

@@ -8,4 +8,4 @@ imgRouter.get('/img/:imgid', getImgData);
 
 imgRouter.post('/img/post', getNewImgData);
 imgRouter.put('/img/update/:imgid', updateImgData);
-imgRouter.delete('img/delete/:imgid', deleteImgData);
+imgRouter.delete('/img/delete/:imgid', deleteImgData);

@@ -36,8 +36,8 @@ export const getNewCommentData = async(request, response)=>{
     const updated = request.body.updated;
 
     try {
-        const rows = await addComment(userid, recordid, commenttext, created, updated)
-        response.json(rows)
+        const comment = await addComment({userid, recordid, commenttext, created, updated})
+        response.json(comment)
             
         } catch (error) {
             console.log(error)
@@ -53,8 +53,8 @@ export const updateCommentData = async(request, response)=>{
     const updated = request.body.updated;
 
     try {
-        const user = await updateComment(commentid, commenttext, updated)
-        response.json(user)
+        const comment = await updateComment({commentid, commenttext, updated})
+        response.json(comment)
             
         } catch (error) {
             console.log(error)

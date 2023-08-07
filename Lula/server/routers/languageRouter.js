@@ -7,4 +7,4 @@ languageRouter.get('/language', getAllLanguagesData);
 languageRouter.get('/language/:languageid', getLanguageData);
 
 languageRouter.post('/language/post', getNewLanguageData);
-languageRouter.delete('language/delete/:languageid', deleteLanguageData);
+languageRouter.delete('/language/delete/:languageid', deleteLanguageData);

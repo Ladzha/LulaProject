@@ -29,18 +29,10 @@ export const getAvatarById = async (avatarid)=>{
 }
 
 //ADD AVATAR
-export const addAvatar = ({userid, recordid, avatartext, created, updated}) => {
+export const addAvatar = ({userid, imagename, imagelink}) => {
     return db('avatars')
-    .insert ({userid, recordid, avatartext, created, updated})
-    .returning(["avatarid", "userid", "recordid", "avatartext", "created", "updated"])
-  }
-
-//UPDATE AVATAR
-export const updateAvatar = ({avatartext, updated}, avatarid) => {
-    return db('avatars')
-    .update({avatartext, updated})
-    .where('avatarid', avatarid)
-    .returning(["avatarid", "userid", "recordid", "avatartext", "created", "updated"])
+    .insert ({userid, imagename, imagelink})
+    .returning(["avatarid", "userid", "imagename", "imagelink"])
   }
   
   //DELETE AVATAR
@@ -48,5 +40,5 @@ export const updateAvatar = ({avatartext, updated}, avatarid) => {
     return db('avatars')
     .where('avatarid', avatarid)
     .del()
-    .returning(["avatarid", "userid", "recordid", "avatartext", "created", "updated "])
+    .returning(["avatarid", "userid", "imagename", "imagelink"])
   }
