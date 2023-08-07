@@ -1,0 +1,137 @@
+Tables:
+
+users:
+        userId - number
+        username - string
+        firstName - string
+        lastName - string
+        email - email
+        password - string
+avatars:
+        username - string
+        avatarId - number
+        imageName - string
+        imageLink - string
+
+audios: 
+        username - string
+        recordId - number
+        recordName - string
+        recordLink - string
+        recordDuration - number
+        recordDate - date of creating
+        recordRatting - number
+        recordLikes - number
+        recordDislikes - number
+
+comments:
+        username - string FOREIGN KEY (username) REFERENCES users (username)
+        commentId - SERIAL PRIMARY KEY,
+        commentText - text
+        recordId - string FOREIGN KEY (recordId) REFERENCES audios (recordId)
+        commentCreatedDate - date and time of creating
+        commentUpdateDate - date and time of update
+
+
+recordMaxLikes - 1 place in recordRatting max in array
+recordMaxDisLikes - last place in recordRatting max in array
+if(recordDislikes >= recordMaxDisLikes && recordDislikes > recordLikes*2){
+    sendRecordToArchive 
+}
+
+
+CREATE TABLE users (
+    userid SERIAL PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(100) NOT NULL,
+    email VARCHAR(200) NOT NULL UNIQUE,
+    password VARCHAR(200) NOT NULL
+    created TIMESTAMP DEFAULT NOW();
+);
+
+CREATE TABLE avatars (
+    avatarid SERIAL PRIMARY KEY,
+    userid INT NOT NULL,
+    imagename VARCHAR(100) NOT NULL,
+    imagelink VARCHAR(255) NOT NULL,
+    FOREIGN KEY (userid) REFERENCES users (userid)
+);
+
+CREATE TABLE audios (
+    recordId SERIAL PRIMARY KEY,
+    userid INT NOT NULL,
+    recordName VARCHAR(255) NOT NULL,
+    recordLink VARCHAR(255) NOT NULL,
+    recordDuration INTERVAL NOT NULL,
+    created TIMESTAMP DEFAULT NOW();
+    recordRating NUMERIC NOT NULL,
+    recordLikes INT NOT NULL,
+    recordDislikes INT NOT NULL,
+    FOREIGN KEY (userid) REFERENCES users (userid)
+);
+
+CREATE TABLE pendingaudios (
+    recordId SERIAL PRIMARY KEY,
+    userid INT NOT NULL,
+    recordName VARCHAR(255) NOT NULL,
+    recordLink VARCHAR(255) NOT NULL,
+    recordDuration INTERVAL NOT NULL,
+    created TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (userid) REFERENCES users (userid)
+);
+
+CREATE TABLE comments (
+    commentId SERIAL PRIMARY KEY,
+    userid INT NOT NULL,
+    recordId INT NOT NULL,
+    commentText TEXT NOT NULL,
+    created TIMESTAMP DEFAULT NOW(),
+    updated TIMESTAMP,
+    FOREIGN KEY (userid) REFERENCES users (userid),
+    FOREIGN KEY (recordId) REFERENCES audios (recordId)
+);
+
+
+CREATE TABLE img(
+    imgid SERIAL PRIMARY KEY,
+    imagename VARCHAR(100) NOT NULL,
+    imagelink VARCHAR(255) NOT NULL,
+    sectionid INT NOT NULL,
+    FOREIGN KEY (sectionid) REFERENCES section (sectionid)
+);
+
+CREATE TABLE section(
+    sectionid SERIAL PRIMARY KEY,
+    sectionname VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE language(
+    languageid SERIAL PRIMARY KEY,
+    language VARCHAR(100) NOT NULL
+);
+
+INSERT INTO img (imagename, imagelink, sectionid)
+VALUES ('sample', 'https://picsum.photos/200/300', 1);
+
+INSERT INTO section(sectionname)
+VALUES ('Grammar');
+
+INSERT INTO language(language)
+VALUES ('English');
+
+INSERT INTO users (username, firstName, lastName, email, password)
+VALUES ('Dzha', 'Alla', 'Nud', 'test@mail.com', '1234');
+
+INSERT INTO avatars (userid, imageName, imageLink)
+VALUES (1, 'sky', 'https://picsum.photos/200/300');
+
+INSERT INTO pendingaudios (userid, recordName, recordLink, recordDuration, created, recordRating, recordLikes, recordDislikes)
+VALUES (1, 'pending Audio', 'https://example.com/audio/sample.mp3', INTERVAL '5 minutes 30 seconds', '2023-08-01');
+
+INSERT INTO audios (userid, recordName, recordLink, recordDuration, created, recordRating, recordLikes, recordDislikes)
+VALUES (1, 'Sample Audio', 'https://example.com/audio/sample.mp3', INTERVAL '5 minutes 30 seconds', '2023-08-01', 4.5, 100, 5);
+
+INSERT INTO comments (userid, commentText, recordId, created, updated)
+VALUES (1, 'This is a great audio!', 2, '2023-08-01 12:34:56', NULL);

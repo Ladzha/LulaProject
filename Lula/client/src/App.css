@@ -1,0 +1,222 @@
+body{
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--green-color);
+
+}
+:root{
+  --red-color: #FF363C;
+  --yellow-color: #FFE500;
+  --green-color: #58DC00;
+  --blue-color: #50CAFC;
+  --purple-color: #9747FF;
+  --pink-color: #FFD8BF;
+  --gray-admin-color: #F5F5F5;
+  --main-text-color: #403F3F;
+  --secondary-text-color: #949494;
+  --placeholder-text-color: #BABABA;
+  --white-text-color: white;
+  --border-container: 5px solid;
+  --border-container-radius: 30px;
+  --border-elements: 3px solid;
+  --border-elements-radius: 20px;
+
+
+}
+
+.App {
+  text-align: center;
+  font-size: 1.3rem;
+  margin: 0px;
+  padding: 0px;
+  color: var(--main-text-color);
+}
+
+.mainContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.3rem;
+  background-color: #58DC00;
+}
+
+.commentHeader{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+textarea{
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.commentBox {
+  /* background-color: blanchedalmond; */
+  /* width: 500px; */
+  border: solid red;
+  border-radius: var(--border-elements-radius);
+}
+
+.userIconInComment{
+  width: 30px;
+  border-radius: 50px;
+}
+
+
+.title{
+color: var(--red-color);
+font-size: 1.5rem;
+font-weight: bold;
+}
+
+.registerBox, .toApprovalBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  background-color: var(--white-text-color);
+  border: var(--border-container) var(--red-color);
+  border-radius: var(--border-container-radius);
+  margin: 50px;
+  padding: 20px;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+
+link{
+  text-decoration: none;
+  color: #58DC00;
+}
+
+link:visited {
+  text-decoration: none;
+  color: #58DC00;
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.input, .submitButton {
+  border: var(--border-elements) var(--red-color);
+  border-radius: var(--border-elements-radius);
+  margin: 0px 10px 13px 10px;
+  padding-left: 15px;
+  height: 35px;
+}
+.input:hover{
+  border: var(--border-elements) var(--red-color);
+}
+
+.submitButton{
+  background-color: var(--red-color);
+  color: var(--white-text-color);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight:600;
+  height: 40px;
+}
+
+.submitButton:active{
+  background-color: var(--green-color);
+  color: var(--white-text-color);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight:600;
+  height: 40px;
+}
+
+::placeholder {
+  color: var(--placeholder-text-color);
+  font-size: 0.9rem;
+}
+
+.hint, .boldLink{
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--secondary-text-color);
+  margin: 0px;
+}
+
+.boldLink{
+  color: var(--main-text-color);
+}
+
+.boldLink:visited{
+  color: var(--main-text-color);
+  color: #58DC00;
+}
+
+li{
+  display: inline;
+  margin-left: 20px;
+}
+
+.listRecord{
+  display: block;
+}
+
+/*audio block*/
+
+.infoRecordBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.infoBox{
+  border: var(--border-elements) var(--secondary-text-color);
+  border-radius: 0 var(--border-elements-radius) var(--border-elements-radius) 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap:10px;
+  width: 150%;
+  margin: 0px 10px 0px -35px;
+  padding: 5px;
+  padding-left: 35px;
+  height: 40px;
+}
+
+.userIcon{
+  border-radius: 50px;
+  width: 25%;
+  z-index: 1;
+}
+
+.infoTextBox{
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  justify-content:flex-end;
+  margin-right: 50px;
+}
+
+.infoName{
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0px;
+}
+
+.infoDuration{
+  font-size: 0.9rem;
+  margin: 1px;
+}
+
+.icon-red{
+  color: var(--green-color);
+  font-size: 1.7rem;
+}
+
+.icon-grey{
+  color: var(--red-color);
+  font-size: 1.7rem;
+}
