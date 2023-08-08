@@ -28,18 +28,34 @@ export const getCommentById = async (commentid)=>{
     }
 } 
 
+
+//GET ALL COMMENTS RECORDS FROM DATABASE BY USERID
+export const getCommentByUserId = async (userid)=>{
+    try {
+        const commentList = await db('comments')
+        .select('*')
+        .where('userid', userid)
+        .returning(["commentid", "userid", "recordid", "commenttext", "created", "updated"])
+        console.log("commentList=>",  commentList)
+        return commentList;       
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.message);    
+    }
+}
+
 //ADD COMMENT
 export const addComment = ({userid, recordid, commenttext}) => {
     return db('comments')
-    .insert ({userid, recordid, commenttext, created: new Date()})
+    .insert ({userid, recordid, commenttext, created: new Date(), updated: new Date()})
     .returning(["commentid", "userid", "recordid", "commenttext", "created", "updated"])
   }
 
 //UPDATE COMMENT
-export const updateComment = ({commenttext, updated}, commentid) => {
+export const updateComment = ({commenttext}, commentid) => {
     return db('comments')
     .where('commentid', commentid)
-    .update({commenttext, updated: new Date()})
+    .update({commenttext})
     .returning(["commentid", "userid", "recordid", "commenttext", "created", "updated"])
   }
   

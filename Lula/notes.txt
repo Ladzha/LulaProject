@@ -63,21 +63,21 @@ CREATE TABLE audios (
     userid INT NOT NULL,
     recordName VARCHAR(255) NOT NULL,
     recordLink VARCHAR(255) NOT NULL,
-    recordDuration INTERVAL NOT NULL,
-    created TIMESTAMP DEFAULT NOW();
-    recordRating NUMERIC NOT NULL,
-    recordLikes INT NOT NULL,
-    recordDislikes INT NOT NULL,
+    duration INTERVAL NOT NULL,
+    created DATE DEFAULT CURRENT_DATE
+    rating NUMERIC DEFAULT 0,
+    likes INT DEFAULT 0,
+    dislikes INT DEFAULT 0,
     FOREIGN KEY (userid) REFERENCES users (userid)
 );
 
 CREATE TABLE pendingaudios (
-    recordId SERIAL PRIMARY KEY,
+    recordid SERIAL PRIMARY KEY,
     userid INT NOT NULL,
-    recordName VARCHAR(255) NOT NULL,
-    recordLink VARCHAR(255) NOT NULL,
-    recordDuration INTERVAL NOT NULL,
-    created TIMESTAMP DEFAULT NOW(),
+    recordname VARCHAR(255) NOT NULL,
+    recordlink VARCHAR(255) NOT NULL,
+    duration INTERVAL NOT NULL,
+    created DATE DEFAULT CURRENT_DATE
     FOREIGN KEY (userid) REFERENCES users (userid)
 );
 
@@ -86,8 +86,8 @@ CREATE TABLE comments (
     userid INT NOT NULL,
     recordId INT NOT NULL,
     commentText TEXT NOT NULL,
-    created TIMESTAMP DEFAULT NOW(),
-    updated TIMESTAMP,
+    created DATE DEFAULT CURRENT_DATE
+    updated DATE DEFAULT CURRENT_DATE
     FOREIGN KEY (userid) REFERENCES users (userid),
     FOREIGN KEY (recordId) REFERENCES audios (recordId)
 );
@@ -113,7 +113,10 @@ CREATE TABLE language(
 );
 
 INSERT INTO img (imagename, imagelink, sectionid)
-VALUES ('sample', 'https://picsum.photos/200/300', 1);
+VALUES ('sample', 'https://picsum.photos/200/300', 2);
+
+INSERT INTO img (imagename, imagelink, sectionid)
+VALUES ('img1', 'https://picsum.photos/200/300', 2);
 
 INSERT INTO section(sectionname)
 VALUES ('Grammar');
@@ -127,11 +130,37 @@ VALUES ('Dzha', 'Alla', 'Nud', 'test@mail.com', '1234');
 INSERT INTO avatars (userid, imageName, imageLink)
 VALUES (1, 'sky', 'https://picsum.photos/200/300');
 
-INSERT INTO pendingaudios (userid, recordName, recordLink, recordDuration, created, recordRating, recordLikes, recordDislikes)
-VALUES (1, 'pending Audio', 'https://example.com/audio/sample.mp3', INTERVAL '5 minutes 30 seconds', '2023-08-01');
+INSERT INTO pendingaudios (userid, recordname, recordlink, duration)
+VALUES (3, 'Michael Jackson We Are The World', 'https://www.computerhope.com/jargon/m/example.mp3', INTERVAL '5 minutes 30 seconds')
+INSERT INTO pendingaudios (userid, recordname, recordlink, duration)
+VALUES (3, 'Trinix ft Rushawn - Its a beautiful day', 'https://www.computerhope.com/jargon/m/example.mp3', INTERVAL '5 minutes 30 seconds');
 
-INSERT INTO audios (userid, recordName, recordLink, recordDuration, created, recordRating, recordLikes, recordDislikes)
-VALUES (1, 'Sample Audio', 'https://example.com/audio/sample.mp3', INTERVAL '5 minutes 30 seconds', '2023-08-01', 4.5, 100, 5);
+
+INSERT INTO audios (userid, recordname, recordlink, duration, created, rating, likes, dislikes)
+VALUES (1, 'Sample', 'https://example.com/audio/sample.mp3', INTERVAL '2 minutes 30 seconds', '2023-08-01', 4.5, 0, 0)
 
 INSERT INTO comments (userid, commentText, recordId, created, updated)
 VALUES (1, 'This is a great audio!', 2, '2023-08-01 12:34:56', NULL);
+
+READY!:
+
+1. users
+2. audio + BY USER
+3. pending - net update
+4. avatar - net update
+5. comment - vse krome update!!!
+6. language - net update
+7. img - NET BY SECTION
+8. section
+
+
+Example post audio
+{
+    "userid": 1,
+    "recordname": "One more for luck",
+    "recordlink": "https://example.com/audio/sample.mp3",
+    "duration": "00:06:30"
+}
+
+
+

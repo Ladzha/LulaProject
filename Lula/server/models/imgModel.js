@@ -28,6 +28,21 @@ export const getImgById = async (imgid)=>{
     }
 }
 
+//GET ALL USERS IMG FROM DATABASE BY USERID
+export const getImgBySectionId = async (sectionid)=>{
+    try {
+        const imgList = await db('img')
+        .select('*')
+        .where('sectionid', sectionid)
+        .returning(["imgid", "imagename", "imagelink", "sectionid"])
+        console.log("imgList=>",  imgList)
+        return imgList;       
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.message);    
+    }
+}
+
 //ADD IMAGE
 export const addImg = ({imagename, imagelink, sectionid}) => {
     return db('img')

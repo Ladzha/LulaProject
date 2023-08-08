@@ -1,4 +1,4 @@
-import { getAllImg, getImgById, addImg, updateImg, deleteImg } from '../models/imgModel.js';
+import { getAllImg, getImgById, getImgBySectionId, addImg, updateImg, deleteImg } from '../models/imgModel.js';
 
 //GET ALL IMAGES
 export const getAllImgData = async(request, response)=>{
@@ -24,6 +24,22 @@ export const getImgData= async(request, response)=>{
         } catch (error) {
             console.log(error)
             response.status(500).json({ msg: 'Failed to fetch image.'})
+        }
+}
+
+//GET LIST OF IMG BY USERID
+export const getSectionImgData= async(request, response)=>{
+    const sectionid = request.params.sectionid;
+    try {
+        const img = await getImgBySectionId(sectionid);
+        if(img){
+            response.json(img);
+        }else{
+            response.status(404).json({ msg: 'Img not found.' });
+        }               
+        } catch (error) {
+            console.log(error)
+            response.status(500).json({ msg: 'Failed to fetch img.'})
         }
 }
 

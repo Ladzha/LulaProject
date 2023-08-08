@@ -1,16 +1,15 @@
 import {db} from '../config/db.js';
 
-export const getAllPendingAudios  = async ()=>{
+export const getAllPendingAudios = async () => {
     try {
         const pendingAudioList = await db('pendingaudios')
-        .select('*')
-        .returning(["recordid", "userid", "recordname", "recordLink", "recordDuration", "created"])
-        console.log("pendingAudioList=>",  pendingAudioList)
+            .select('*')
+            .returning(["recordid", "userid", "recordname", "recordlink", "duration", "created"]);
+        console.log("pendingAudioList =>", pendingAudioList);
         return pendingAudioList;
-        
     } catch (error) {
         console.log(error);
-        throw new Error(error.message); 
+        throw new Error(error.message);
     }
 }
 
@@ -29,31 +28,18 @@ export const getPendingAudioById = async (recordid)=>{
     }
 }
 
-//GET ALL USERS RECORDS FROM DATABASE BY USERID
-export const getAllPendingAudioByUserId = async (userid)=>{
-    try {
-        const audios = await db('pendingaudios')
-        .select('*')
-        .where('userid', userid)
-        return audios;      
-
-    } catch (error) {
-        console.log(error); 
-        throw new Error(error.message);    
-    }
-}
 
 //ADD PENDING AUDIO
-export const addPendingAudio = ({userid, recordname, recordlink, recordduration, created}) => {
-    return db('audios')
-    .insert ({userid, recordname, recordlink, recordduration, created})
-    .returning(["recordid", "userid", "recordname", "recordlink", "recordduration", "created"])
+export const addPendingAudio = ({userid, recordname, recordlink, duration}) => {
+    return db('pendingaudios')
+    .insert ({userid, recordname, recordlink, duration})
+    .returning(["recordid", "userid", "recordname", "recordlink", "duration", "created"])
   }
 
   //DELETE PENDING AUDIO
-  export const deletePendingAudio = (audioid) => {
-    return db('audios')
-    .where('audioid', audioid)
+  export const deletePendingAudio = (recordid) => {
+    return db('pendingaudios')
+    .where('recordid', recordid)
     .del()
-    .returning(["recordid", "userid", "recordname", "recordlink", "recordduration", "created"])
+    .returning(["recordid", "userid", "recordname", "recordlink", "duration", "created"])
   }

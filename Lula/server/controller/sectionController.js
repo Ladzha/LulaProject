@@ -48,7 +48,7 @@ export const updateSectionData = async(request, response)=>{
     const sectionname = request.body.sectionname;
 
     try {
-        const section = await updateSection({sectionid, sectionname})
+        const section = await updateSection({sectionname}, sectionid)
         response.json(section)
             
         } catch (error) {

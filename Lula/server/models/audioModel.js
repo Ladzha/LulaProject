@@ -5,7 +5,7 @@ export const getAllAudios  = async ()=>{
     try {
         const audioList = await db('audios')
         .select('*')
-        .returning(["recordid", "userid", "recordname", "recordLink", "recordDuration", "created", "recordRating", "recordLikes", "recordDislikes"])
+        .returning(["recordid", "userid", "recordname", "recordlink", "duration", "created", "rating", "likes", "dislikes"])
         console.log("audioList=>",  audioList)
         return audioList;       
     } catch (error) {
@@ -32,37 +32,37 @@ export const getAudioById = async (recordid)=>{
 //GET ALL USERS RECORDS FROM DATABASE BY USERID
 export const getAudioByUserId = async (userid)=>{
     try {
-        const audios = await db('audios')
+        const audioList = await db('audios')
         .select('*')
         .where('userid', userid)
-        .returning(["recordid", "userid", "recordname", "recordLink", "recordDuration", "created", "recordRating", "recordLikes", "recordDislikes"])
-        return audios;      
-
+        .returning(["recordid", "userid", "recordname", "recordlink", "duration", "created", "rating", "likes", "dislikes"])
+        console.log("audioList=>",  audioList)
+        return audioList;       
     } catch (error) {
-        console.log(error); 
+        console.log(error);
         throw new Error(error.message);    
     }
 }
 
 //ADD AUDIO
-export const addAudio = ({userid, recordname, recordLink, recordDuration, created, recordRating, recordLikes, recordDislikes}) => {
+export const addAudio = ({userid, recordname, recordlink, duration}) => {
     return db('audios')
-    .insert ({userid, recordname, recordLink, recordDuration, created, recordRating, recordLikes, recordDislikes})
-    .returning(["recordid", "userid", "recordname", "recordLink", "recordDuration", "created", "recordRating", "recordLikes", "recordDislikes"])
-  }
+    .insert ({userid, recordname, recordlink, duration})
+    .returning(["recordid", "userid", "recordname", "recordlink", "duration", "created", "rating", "likes", "dislikes"])
+}
 
 //UPDATE AUDIO
-export const updateAudio = ({recordname, recordRating, recordLikes, recordDislikes}, audioid) => {
+export const updateAudio = ({recordname, likes, dislikes, rating}, recordid) => {
     return db('audios')
-    .where('audioid', audioid)
-    .update({recordname, recordRating, recordLikes, recordDislikes})
-    .returning(["recordid", "userid", "recordname", "recordLink", "recordDuration", "created", "recordRating", "recordLikes", "recordDislikes"])
-  }
+    .where('recordid', recordid)
+    .update({recordname, likes, dislikes, rating})
+    .returning(["recordid", "userid", "recordname", "recordlink", "duration", "created", "rating", "likes", "dislikes"])
+}
   
   //DELETE AUDIO
-  export const deleteAudio = (audioid) => {
+  export const deleteAudio = (recordid) => {
     return db('audios')
-    .where('audioid', audioid)
+    .where('recordid', recordid)
     .del()
-    .returning(["recordid", "userid", "recordname", "recordLink", "recordDuration", "created", "recordRating", "recordLikes", "recordDislikes"])
+    .returning(["recordid", "userid", "recordname", "recordlink", "duration", "created", "rating", "likes", "dislikes"])
   }

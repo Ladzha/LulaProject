@@ -31,9 +31,9 @@ export const getAudioData= async(request, response)=>{
 export const getUserAudioData= async(request, response)=>{
     const userid = request.params.userid;
     try {
-        const audio = await getAudioByUserId(userid);
-        if(audio){
-            response.json(audio);
+        const audios = await getAudioByUserId(userid);
+        if(audios){
+            response.json(audios);
         }else{
             response.status(404).json({ msg: 'Record not found.' });
         }               
@@ -48,14 +48,9 @@ export const getNewAudioData = async(request, response)=>{
     const userid = request.body.userid ;
     const recordname = request.body.recordname;
     const recordlink = request.body.recordlink ;
-    const recordduration = request.body.recordduration;
-    const created = request.body.created;
-    const recordrating = request.body.recordrating;
-    const recordlikes = request.body.recordlikes ;
-    const recorddislikes = request.body.recorddislikes;
-
+    const duration = request.body.duration;
     try {
-        const audio = await addAudio({userid, recordname, recordlink, recordduration, created, recordrating, recordlikes, recorddislikes})
+        const audio = await addAudio({userid, recordname, recordlink, duration})
         response.json(audio)
             
         } catch (error) {
@@ -69,12 +64,12 @@ export const updateAudioData = async(request, response)=>{
     const recordid = request.params.recordid
 
     const recordname = request.body.recordname;
-    const recordrating = request.body.recordrating;
-    const recordlikes = request.body.recordlikes ;
-    const recorddislikes = request.body.recorddislikes;
+    const rating = request.body.rating;
+    const likes = request.body.likes;
+    const dislikes = request.body.dislikes;
 
     try {
-        const audio = await updateAudio({recordid, recordname, recordrating , recordlikes , recorddislikes})
+        const audio = await updateAudio({recordname, likes, dislikes, rating}, recordid)
         response.json(audio)
             
         } catch (error) {

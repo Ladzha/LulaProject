@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 
-const RecordToApproval = (props) => {
+const PendingElement = ({username, duration, created}) => {
 
 const handleApproval=()=>{
     console.log('Record Approved');
@@ -14,15 +14,15 @@ const handleRejection=()=>{
   return (
     <div className='toApprovalBox'>
     <div className='blockToApproval'>
-        <p className='hint'>Upload: 24/01/2023 12:12:47</p>
+        <p className='hint'>Upload: {created}</p>
         
         <div className='infoRecordBox'>
-            <img className='userIcon' src={props.img}></img>
+            {/* <img className='userIcon' src={props.avatar}></img> */}
 
             <div className='infoBox'>     
                 <div className='infoTextBox'>
-                <p className='infoName'>Doriana</p>
-                <p className='infoDuration'>3:34</p>
+                <p className='infoName'>{username}</p>
+                <p className='infoDuration'>{duration}</p>
                 </div>
                 <AiFillCheckCircle className='icon-red' onClick={handleApproval}/>
                 <AiFillCloseCircle className='icon-grey' onClick={handleRejection}/>          
@@ -37,4 +37,4 @@ const handleRejection=()=>{
   )
 }
 
-export default RecordToApproval
+export default PendingElement

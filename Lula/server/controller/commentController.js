@@ -1,4 +1,4 @@
-import {getAllComments, getCommentById, addComment, updateComment, deleteComment} from '../models/commentModel.js'
+import {getAllComments, getCommentById, getCommentByUserId, addComment, updateComment, deleteComment} from '../models/commentModel.js'
 
 //GET ALL COMMENTS
 export const getAllCommentData = async(request, response)=>{
@@ -18,6 +18,22 @@ export const getCommentData= async(request, response)=>{
         const comment = await getCommentById(commentid);
         if(comment){
             response.json(comment);
+        }else{
+            response.status(404).json({ msg: 'Comment not found.' });
+        }               
+        } catch (error) {
+            console.log(error)
+            response.status(500).json({ msg: 'Failed to fetch comment.'})
+        }
+}
+
+//GET LIST OF COMMENTS BY USERID
+export const getUserCommentData= async(request, response)=>{
+    const userid = request.params.userid;
+    try {
+        const comments = await getCommentByUserId(userid);
+        if(comments){
+            response.json(comments);
         }else{
             response.status(404).json({ msg: 'Comment not found.' });
         }               
@@ -48,12 +64,9 @@ export const getNewCommentData = async(request, response)=>{
 //UPDATE COMMENT
 export const updateCommentData = async(request, response)=>{
     const commentid = request.params.commentid;
-
     const commenttext = request.body.commenttext;
-    const updated = request.body.updated;
-
     try {
-        const comment = await updateComment({commentid, commenttext, updated})
+        const comment = await updateComment({commentid, commenttext})
         response.json(comment)
             
         } catch (error) {

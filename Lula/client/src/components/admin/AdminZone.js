@@ -1,6 +1,7 @@
 import React from 'react';
-import RecordToApproval from './RecordToApproval'
 import AllUsers from './AllUsers'
+import OneUser from './OneUser'
+import AllPending from './AllPending'
 
 const AdminZone = (props) => {
   return (
@@ -8,7 +9,9 @@ const AdminZone = (props) => {
       <p className='title'>Users list</p>
       <AllUsers/>
       <p className='title'>Waiting approval</p>
-      <RecordToApproval img = {props.img}/>
+      <AllPending/>
+
+      {/* <OneUser id="1"/> */}
     </div>
   )
 }

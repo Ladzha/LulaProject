@@ -1,15 +1,15 @@
 
 import {getAllPendingAudios, getPendingAudioById, addPendingAudio, deletePendingAudio} from '../models/pendingAudioModel.js'
 
-//GET ALL USERS
-export const getAllPendingAudiosData = async(request, response)=>{
+//GET ALL AUDIO
+export const getAllPendingAudiosData = async (request, response) => {
     try {
         const pendingAudioList = await getAllPendingAudios();
-        response.json(pendingAudioList)           
-        } catch (error) {
-            console.log(error)
-            response.status(500).json({ msg: 'Failed to fetch audios.'})
-        }
+        response.json(pendingAudioList);
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({ msg: 'Failed to fetch pending audios.' });
+    }
 }
 
 //GET PENDINGAUDIO BY ID
@@ -33,11 +33,9 @@ export const getNewPendingAudioData = async(request, response)=>{
     const userid = request.body.userid ;
     const recordname = request.body.recordname;
     const recordlink = request.body.recordlink ;
-    const recordduration = request.body.recordduration;
-    const created = request.body.created;
-
+    const duration = request.body.duration;
     try {
-        const audio = await addPendingAudio({userid, recordname, recordlink, recordduration, created})
+        const audio = await addPendingAudio({userid, recordname, recordlink, duration})
         response.json(audio)
             
         } catch (error) {
