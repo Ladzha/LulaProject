@@ -221,3 +221,8 @@ li{
   color: var(--red-color);
   font-size: 1.7rem;
 }
+
+.imgPreview{
+  width: 200px;
+  height: 200px;
+}

@@ -3,7 +3,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import avatar from './img/avatar13.jpg'
-import Exercise from './components/exercises/Exercise'
+import ExerciseComponent from './components/exercises/ExerciseComponent'
 
 
 import Login from './components/user/Login';
@@ -36,7 +36,7 @@ function App() {
       <Route path='/account' element={<Account username="Sara" about="I am soo cool" img={avatar}/>}/>
       <Route path='/admin' element={<AdminZone username="Harry" about="I am Harry and I am soo cool" img={avatar}/>}/>
       <Route path='/support' element={<Support/>}/>
-      <Route path='/exercise' element={<Exercise/>}/>
+      <Route path='/exercise' element={<ExerciseComponent/>}/>
       </Routes>
 
       </div>
