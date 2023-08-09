@@ -13,6 +13,19 @@ export const LanguageService = {
         } catch (error) {
             console.log(error);
         }
+    },
+
+    async getById(id) {
+        try {
+        const response = await axios.get(`http://localhost:3001/api/language/${id}`)
+        if(response){
+            return response.data;
+        }else{
+            console.log('Failed to find language');
+        }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 }

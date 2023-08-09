@@ -29,10 +29,10 @@ export const getSectionData= async(request, response)=>{
 
 //ADD SECTION
 export const getNewSectionData = async(request, response)=>{
-    const sectionname = request.body.sectionname;
+    const name = request.body.name;
 
     try {
-        const section = await addSection({sectionname})
+        const section = await addSection({name})
         response.json(section)
             
         } catch (error) {
@@ -45,10 +45,10 @@ export const getNewSectionData = async(request, response)=>{
 export const updateSectionData = async(request, response)=>{
     const sectionid = request.params.sectionid;
 
-    const sectionname = request.body.sectionname;
+    const name = request.body.name;
 
     try {
-        const section = await updateSection({sectionname}, sectionid)
+        const section = await updateSection({name}, sectionid)
         response.json(section)
             
         } catch (error) {

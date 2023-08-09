@@ -13,6 +13,19 @@ export const AvatarService = {
         } catch (error) {
             console.log(error);
         }
+    },
+
+    async getById(id) {
+        try {
+        const response = await axios.get(`http://localhost:3001/api/avatar/${id}`)
+        if(response){
+            return response.data;
+        }else{
+            console.log('Failed to find avatar');
+        }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 }

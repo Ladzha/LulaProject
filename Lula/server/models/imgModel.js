@@ -4,7 +4,7 @@ export const getAllImg  = async ()=>{
     try {
         const imgList = await db('img')
         .select('*')
-        .returning(["imgid", "imagename", "imagelink", "sectionid"])
+        .returning(["imgid", "name", "link", "sectionid"])
         console.log("imgList=>",  imgList)
         return imgList;
         
@@ -34,7 +34,7 @@ export const getImgBySectionId = async (sectionid)=>{
         const imgList = await db('img')
         .select('*')
         .where('sectionid', sectionid)
-        .returning(["imgid", "imagename", "imagelink", "sectionid"])
+        .returning(["imgid", "name", "link", "sectionid"])
         console.log("imgList=>",  imgList)
         return imgList;       
     } catch (error) {
@@ -44,18 +44,18 @@ export const getImgBySectionId = async (sectionid)=>{
 }
 
 //ADD IMAGE
-export const addImg = ({imagename, imagelink, sectionid}) => {
+export const addImg = ({name, link, sectionid}) => {
     return db('img')
-    .insert ({imagename, imagelink, sectionid})
-    .returning(["imgid", "imagename", "imagelink", "sectionid"])
+    .insert ({name, link, sectionid})
+    .returning(["imgid", "name", "link", "sectionid"])
   }
 
 //UPDATE IMAGE
-export const updateImg = ({imagename, sectionid}, imgid) => {
+export const updateImg = ({name, sectionid}, imgid) => {
     return db('img')
-    .update({imagename, sectionid})
+    .update({name, sectionid})
     .where('imgid', imgid)
-    .returning(["imgid", "imagename", "imagelink", "sectionid"])
+    .returning(["imgid", "name", "link", "sectionid"])
   }
   
   //DELETE IMAGE
@@ -63,5 +63,5 @@ export const updateImg = ({imagename, sectionid}, imgid) => {
     return db('img')
     .where('imgid', imgid)
     .del()
-    .returning(["imgid", "imagename", "imagelink", "sectionid"])
+    .returning(["imgid", "name", "link", "sectionid"])
   }

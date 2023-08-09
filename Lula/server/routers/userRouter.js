@@ -3,8 +3,8 @@ import { getAllUsersData, getUserData, getNewUserData, updateUserData, deleteUse
 
 export const userRouter = express.Router();
 userRouter.get('/users', getAllUsersData)
-userRouter.get('/users/:username', getUserData)
+userRouter.get('/users/:userid', getUserData)
 userRouter.post('/users/register', getNewUserData)
-userRouter.put('/users/update/:uname', updateUserData)
-userRouter.delete('/users/delete/:username', deleteUserData)
+userRouter.put('/users/update/:userid', updateUserData)
+userRouter.delete('/users/delete/:userid', deleteUserData)
 // userRouter.post('/users/login/:username', getLoginUserData)

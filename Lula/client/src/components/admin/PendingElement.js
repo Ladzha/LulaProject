@@ -1,8 +1,12 @@
-import React from 'react'
+import React, {createContext,useState} from 'react'
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
+import OneUser from './OneUser'
+
+export const PendingElementContext = createContext('');
 
 const PendingElement = ({username, duration, created}) => {
-
+    const [avatar, setAvatar]=useState([{}]);
+    
 const handleApproval=()=>{
     console.log('Record Approved');
 }
@@ -12,12 +16,14 @@ const handleRejection=()=>{
 }
 
   return (
+    <PendingElementContext.Provider value={{avatar, setAvatar}}>
     <div className='toApprovalBox'>
     <div className='blockToApproval'>
         <p className='hint'>Upload: {created}</p>
-        
+        <OneUser id={3}/>
         <div className='infoRecordBox'>
-            {/* <img className='userIcon' src={props.avatar}></img> */}
+
+            <img className='userIcon' src={avatar[0].link??'img.jpg'}></img>
 
             <div className='infoBox'>     
                 <div className='infoTextBox'>
@@ -29,11 +35,9 @@ const handleRejection=()=>{
             </div>
 
         </div>
-
-    
     </div>
-    
     </div>
+    </PendingElementContext.Provider>
   )
 }
 

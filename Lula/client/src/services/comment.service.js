@@ -13,6 +13,19 @@ export const CommentService = {
         } catch (error) {
             console.log(error);
         }
+    },
+
+    async getById(id) {
+        try {
+        const response = await axios.get(`http://localhost:3001/api/comment/${id}`)
+        if(response){
+            return response.data;
+        }else{
+            console.log('Failed to find comment');
+        }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 }

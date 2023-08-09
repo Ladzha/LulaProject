@@ -47,12 +47,12 @@ export const getUserCommentData= async(request, response)=>{
 export const getNewCommentData = async(request, response)=>{
     const userid = request.body.userid;
     const recordid = request.body.recordid;
-    const commenttext = request.body.commenttext;
+    const text = request.body.text;
     const created = request.body.created;
     const updated = request.body.updated;
 
     try {
-        const comment = await addComment({userid, recordid, commenttext, created, updated})
+        const comment = await addComment({userid, recordid, text, created, updated})
         response.json(comment)
             
         } catch (error) {
@@ -64,9 +64,9 @@ export const getNewCommentData = async(request, response)=>{
 //UPDATE COMMENT
 export const updateCommentData = async(request, response)=>{
     const commentid = request.params.commentid;
-    const commenttext = request.body.commenttext;
+    const text = request.body.text;
     try {
-        const comment = await updateComment({commentid, commenttext})
+        const comment = await updateComment({commentid, text})
         response.json(comment)
             
         } catch (error) {

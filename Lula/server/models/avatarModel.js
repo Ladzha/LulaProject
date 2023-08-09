@@ -4,7 +4,7 @@ export const getAllAvatars  = async ()=>{
     try {
         const avatarList = await db('avatars')
         .select('*')
-        .returning(["avatarid", "userid", "imagename", "imagelink"])
+        .returning(["avatarid", "name", "link"])
         console.log("avatarList=>",  avatarList)
         return avatarList;
         
@@ -29,10 +29,10 @@ export const getAvatarById = async (avatarid)=>{
 }
 
 //ADD AVATAR
-export const addAvatar = ({userid, imagename, imagelink}) => {
+export const addAvatar = ({name, link}) => {
     return db('avatars')
-    .insert ({userid, imagename, imagelink})
-    .returning(["avatarid", "userid", "imagename", "imagelink"])
+    .insert ({name, link})
+    .returning(["avatarid", "name", "link"])
   }
   
   //DELETE AVATAR
@@ -40,5 +40,5 @@ export const addAvatar = ({userid, imagename, imagelink}) => {
     return db('avatars')
     .where('avatarid', avatarid)
     .del()
-    .returning(["avatarid", "userid", "imagename", "imagelink"])
+    .returning(["avatarid", "name", "link"])
   }

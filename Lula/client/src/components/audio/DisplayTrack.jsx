@@ -1,5 +1,5 @@
 import React from 'react';
-import Comment from './Comment';
+import CommentsBlock from './CommentsBlock';
 import Rating from './Rating';
 import avatar from '../../img/avatar13.jpg';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
@@ -20,8 +20,9 @@ const DisplayTrack = ({currentTrack, audioRef}) => {
         <BsMusicNoteBeamed />
 
         <audio style={{backgroundColor:'blue'}} src={currentTrack.src} controls ref={audioRef}>Play</audio>
-        {/* <Comment placeholder="Remember to be polite" username='Sara' avatarLink={avatar}/> */}
-        <Rating/>
+        
+         <Rating/>
+         <CommentsBlock/>
 
     </div>
   )

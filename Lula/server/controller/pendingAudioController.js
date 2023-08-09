@@ -31,11 +31,11 @@ export const getPendingAudioData= async(request, response)=>{
 //ADD AUDIO
 export const getNewPendingAudioData = async(request, response)=>{
     const userid = request.body.userid ;
-    const recordname = request.body.recordname;
-    const recordlink = request.body.recordlink ;
+    const name = request.body.name;
+    const link = request.body.link ;
     const duration = request.body.duration;
     try {
-        const audio = await addPendingAudio({userid, recordname, recordlink, duration})
+        const audio = await addPendingAudio({userid, name, link, duration})
         response.json(audio)
             
         } catch (error) {

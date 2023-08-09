@@ -1,4 +1,4 @@
-import {getAllUsers, getUserByUsername, addNewUser, updateUser, deleteUser} from '../models/userModel.js'
+import {getAllUsers, addNewUser, updateUser, deleteUser, getUserByUserId} from '../models/userModel.js'
 import bcrypt from 'bcrypt';
 
 
@@ -15,9 +15,9 @@ export const getAllUsersData = async(request, response)=>{
 
 //FIND USER
 export const getUserData= async(request, response)=>{
-    const username = request.params.username;
+    const userid = request.params.userid;
     try {
-        const user = await getUserByUsername(username);
+        const user = await getUserByUserId(userid);
         if(user){
             response.json(user);
         }else{
@@ -52,7 +52,7 @@ export const getNewUserData = async(request, response)=>{
 
 //UPDATE USER
 export const updateUserData = async(request, response)=>{
-    const uname = request.params.uname
+    const userid = request.params.userid
     const username = request.body.username;
     const firstname = request.body.firstname;
     const lastname = request.body.lastname;
@@ -63,7 +63,7 @@ export const updateUserData = async(request, response)=>{
     const hashPassword = bcrypt.hashSync(password, salt);
 
     try {
-        const user = await updateUser(uname, username, firstname, lastname, email, hashPassword)
+        const user = await updateUser(userid, username, firstname, lastname, email, hashPassword)
         response.json(user)
             
         } catch (error) {
@@ -74,7 +74,7 @@ export const updateUserData = async(request, response)=>{
 
 //DELETE USER
 export const deleteUserData = async(request, response)=>{
-    const username = request.params.username;
+    const userid = request.params.userid;
     try {
         await deleteUser(username);
         response.json({ msg: 'User deleted successfully.'});

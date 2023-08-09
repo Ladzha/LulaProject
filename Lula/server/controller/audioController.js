@@ -46,11 +46,11 @@ export const getUserAudioData= async(request, response)=>{
 //ADD AUDIO
 export const getNewAudioData = async(request, response)=>{
     const userid = request.body.userid ;
-    const recordname = request.body.recordname;
-    const recordlink = request.body.recordlink ;
+    const name = request.body.name;
+    const link = request.body.link ;
     const duration = request.body.duration;
     try {
-        const audio = await addAudio({userid, recordname, recordlink, duration})
+        const audio = await addAudio({userid, name, link, duration})
         response.json(audio)
             
         } catch (error) {
@@ -63,13 +63,13 @@ export const getNewAudioData = async(request, response)=>{
 export const updateAudioData = async(request, response)=>{
     const recordid = request.params.recordid
 
-    const recordname = request.body.recordname;
+    const name = request.body.name;
     const rating = request.body.rating;
     const likes = request.body.likes;
     const dislikes = request.body.dislikes;
 
     try {
-        const audio = await updateAudio({recordname, likes, dislikes, rating}, recordid)
+        const audio = await updateAudio({name, likes, dislikes, rating}, recordid)
         response.json(audio)
             
         } catch (error) {

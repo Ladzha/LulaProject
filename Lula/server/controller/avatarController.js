@@ -29,11 +29,11 @@ export const getAvatarData= async(request, response)=>{
 
 //ADD AVATAR
 export const getNewAvatarData = async(request, response)=>{
-    const userid = request.body.userid;
-    const imagename = request.body.imagename;
-    const imagelink = request.body.imagelink;
+    const avatarid = request.body.avatarid;
+    const name = request.body.name;
+    const link = request.body.link;
     try {
-        const avatar = await addAvatar({userid, imagename, imagelink})
+        const avatar = await addAvatar({avatarid, name, link})
         response.json(avatar)
             
         } catch (error) {

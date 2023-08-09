@@ -4,8 +4,8 @@ import {db} from '../config/db.js';
 export const getAllUsers  = async ()=>{
     try {
         const usersList = await db('users')
-        .select(["userid", "username", "firstname", "lastname", "email", "created"])
-        .returning(["userid", "username", "firstname", "lastname", "email", "created"])
+        .select(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid"])
+        .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid"])
         console.log("user=>",  usersList)
         return usersList;      
     } catch (error) {
@@ -15,11 +15,11 @@ export const getAllUsers  = async ()=>{
 }
 
 //GET USER FROM DATABASE BY USERNAME
-export const getUserByUsername = async (username)=>{
+export const getUserByUserId = async (userid)=>{
     try {
         const user = await db('users')
-        .select(["userid", "username", "firstname", "lastname", "email", "password"])
-        .where('username', username)
+        .select(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid"])
+        .where('userid', userid)
         .first()
         return user;      
 
@@ -30,12 +30,12 @@ export const getUserByUsername = async (username)=>{
 }
 
 //ADD NEW USER 
-export const addNewUser = async (username, firstname, lastname, email, hash)=>{
+export const addNewUser = async (userid, username, firstname, lastname, email, hash)=>{
     try {
         const newUser = await db('users')
-        .where('username', username)
+        .where('userid', userid)
         .insert({username, firstname, lastname, email, password: hash, created: new Date()})
-        .returning(["userid", "username", "firstname", "lastname", "email", "password", "created"]);
+        .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid"]);
         // console.log("New user", newUser);
         return newUser;      
     } catch (error) {
@@ -45,10 +45,10 @@ export const addNewUser = async (username, firstname, lastname, email, hash)=>{
 }
 
 //UPDATE NEW USER 
-export const updateUser = async (uname,username, firstname, lastname, email, hashPassword)=>{
+export const updateUser = async (userid, username, firstname, lastname, email, hashPassword)=>{
     try {
         const updatedUser = await db('users')
-        .where('username', uname)
+        .where('userid', userid)
         .update({username, firstname, lastname, password:hashPassword},["*"]);
         return updatedUser;     
 
@@ -59,10 +59,10 @@ export const updateUser = async (uname,username, firstname, lastname, email, has
 }
 
 //DELETE USER 
-export const deleteUser = async (username)=>{ 
+export const deleteUser = async (userid)=>{ 
     try {
         const deleteUser = await db('users')
-        .where('username', username)
+        .where('userid', userid)
         .del();
         return deleteUser;      
     } catch (error) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {UserService} from '../../services/users.service.js'
+import {UserService} from '../../services/user.service.js'
 import {useState, useEffect, useContext} from 'react';
 
 const AllUsers = () => {

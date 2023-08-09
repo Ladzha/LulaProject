@@ -1,6 +1,5 @@
 import React from 'react';
 import AllUsers from './AllUsers'
-import OneUser from './OneUser'
 import AllPending from './AllPending'
 
 const AdminZone = (props) => {
@@ -10,8 +9,7 @@ const AdminZone = (props) => {
       <AllUsers/>
       <p className='title'>Waiting approval</p>
       <AllPending/>
-
-      {/* <OneUser id="1"/> */}
+=
     </div>
   )
 }

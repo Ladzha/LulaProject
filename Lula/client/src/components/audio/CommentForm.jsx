@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Comment = (props) => {
+const CommentForm = (props) => {
   const handleCommentSubmit = (event)=>{
     event.preventDefault()
     const userComment = event.target.commentInput.value
@@ -22,4 +22,4 @@ const Comment = (props) => {
   )
 }
 
-export default Comment
+export default CommentForm

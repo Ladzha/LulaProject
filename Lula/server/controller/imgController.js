@@ -45,11 +45,11 @@ export const getSectionImgData= async(request, response)=>{
 
 //ADD IMAGE
 export const getNewImgData = async(request, response)=>{
-    const imagename = request.body.imagename;
-    const imagelink = request.body.imagelink;
+    const name = request.body.name;
+    const link = request.body.link;
     const sectionid = request.body.sectionid;
     try {
-        const img = await addImg({imagename, imagelink, sectionid})
+        const img = await addImg({name, link, sectionid})
         response.json(img)
             
         } catch (error) {
@@ -62,12 +62,12 @@ export const getNewImgData = async(request, response)=>{
 export const updateImgData = async(request, response)=>{
     const imgid = request.params.recordid
 
-    const imagename = request.body.imagename;
-    const imagelink = request.body.imagelink;
+    const name = request.body.name;
+    const link = request.body.link;
     const sectionid = request.body.sectionid;
 
     try {
-        const img = await updateImg({imgid, imagename, imagelink, sectionid})
+        const img = await updateImg({imgid, name, link, sectionid})
         response.json(img)
             
         } catch (error) {
