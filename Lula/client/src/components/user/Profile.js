@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import avatar from '../../img/avatar13.jpg';
 
 
 const Profile = (props) => {
@@ -27,7 +28,7 @@ const Profile = (props) => {
   }
 
   return (
-    <div>
+    <div className='homeContainer'>
         Profile
         <img className='userIconInComment' src={props.img}></img>
         <p>My name is: {props.username}</p>
@@ -53,6 +54,20 @@ const Profile = (props) => {
           dtcm kusok reiting comment
           </li>
         </ul>
+
+
+        <div className='userBox'>
+            <img className='userIcon' src={avatar}></img>
+            <div className='infoBox'>     
+                <div className='infoTextBox'>
+                <p className='infoName'>{"username"}</p>
+                <p className='infoText'>{"some text"}</p>
+                </div>
+            </div>
+        </div>
+        <div>
+          kjlkjlkjdlkj
+        </div>
 
     </div>
   )

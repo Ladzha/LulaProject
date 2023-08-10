@@ -1,5 +1,4 @@
-import { getAllImg, getImgById, getImgBySectionId, addImg, updateImg, deleteImg } from '../models/imgModel.js';
-
+import { getAllImg, getImgById, getImgBySectionId, addImg, updateImg, deleteImg, getAudioAndCommentsByImgId } from '../models/imgModel.js';
 //GET ALL IMAGES
 export const getAllImgData = async(request, response)=>{
     try {
@@ -87,4 +86,11 @@ export const deleteImgData = async(request, response)=>{
             console.log(error)
             response.status(500).json({ msg: 'Failed to delete img.' });
         }
+}
+
+export const getData = async(request, response)=>{
+    console.log(request.body);
+    const data = await getAudioAndCommentsByImgId(request.body.imgid)
+    response.json(data.rows)
+
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import UserBox from '../elements/UserBox.js'
 
 const CommentForm = (props) => {
   const handleCommentSubmit = (event)=>{
@@ -7,18 +8,18 @@ const CommentForm = (props) => {
     console.log(userComment);
   }
   return (
-    <div className='commentBox'>
-      <div className='commentHeader'> 
-      <img className='userIconInComment' src={props.avatarLink}/>
-      <p className='usernameInComment'>{props.username}</p>
-      </div>
 
-      <form onSubmit={(event)=>handleCommentSubmit(event)}>
-        <textarea className='input inputComment' type='text' maxLength={200} rows={5} cols={40}name='commentInput' placeholder={props.placeholder}/>
+      <div className='commentBlock'>
+
+      <UserBox avatar={props.avatar} username ={props.username} info={props.about}/>
+
+      <form className='newComment' onSubmit={(event)=>handleCommentSubmit(event)}>
+        <textarea className='input' type='text' maxLength={200} rows={5} cols={40}name='commentInput' placeholder="Remember to be polite"/>
         <button className='submitButton' type="submit">Submit</button>
-      </form>
-      
-    </div>
+      </form> 
+      <p className='hint'>Clean comment</p>
+
+      </div>
   )
 }
 

@@ -34,7 +34,7 @@ const Register = () => {
 
 
   return (
-    <div className='registerBox'>
+    <div className='registerBox box'>
       <p className='title'>Create Account</p>
       <form className='form' onSubmit={(event)=>handleSubmit(event)}>
         <input className="input" type='text'id="inputUsername" name="inputUsername" placeholder='Username' required/>

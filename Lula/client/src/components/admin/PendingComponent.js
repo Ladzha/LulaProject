@@ -1,9 +1,8 @@
 import React, {createContext, useState, useContext, useEffect} from 'react'
-import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { AvatarService } from '../../services/avatar.service.js';
 import { UserService } from '../../services/user.service.js';
 import { PendingService } from '../../services/pending.service.js';
-
+import InfoBox from '../elements/InfoBox.js';
 
 const PendingComponent = ({id, duration, created}) => {
 
@@ -52,21 +51,14 @@ const PendingComponent = ({id, duration, created}) => {
 
   return (
 
-    <div className='toApprovalBox'>
-    <div className='blockToApproval'>
+    <div className='listBox'>
+    
+    <div className='infoBlock'>
+        
         <p className='hint'>Upload: {created}</p>
-        <div className='infoRecordBox'>
 
-            <img className='userIcon' src={avatar[0].link??'img.jpg'}></img>
-            <div className='infoBox'>     
-                <div className='infoTextBox'>
-                <p className='infoName'>{user.username}</p>
-                <p className='infoDuration'>{duration}</p>
-                </div>
-                <AiFillCheckCircle className='icon-red' onClick={handleApproval}/>
-                <AiFillCloseCircle className='icon-grey' onClick={handleRejection}/>          
-            </div>
-        </div>
+        <InfoBox avatar={avatar[0].link} username ={user.username} info={duration}/>
+
     </div>
     </div>
 

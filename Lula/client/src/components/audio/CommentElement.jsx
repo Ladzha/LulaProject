@@ -4,6 +4,8 @@ import { AvatarService } from '../../services/avatar.service.js';
 import { UserService } from '../../services/user.service.js';
 import { PendingService } from '../../services/pending.service.js';
 import { CommentService } from '../../services/comment.service.js';
+import UserBox from '../elements/UserBox.js'
+
 
 const CommentElement = ({ id }) => {
 
@@ -12,10 +14,22 @@ const CommentElement = ({ id }) => {
     const [user, setUser]=useState([{}]);
     const [avatar, setAvatar]=useState([{}]);
 
+
     useEffect(() => {
         if (!id) return;
         const fetchData = async () => {
             try {
+
+              const data = await fetch('http://localhost:3001/api/img/getaudio', {
+                method : "POST",
+                headers:{"content-type":"application/json"},
+                body:JSON.stringify({
+                  imgid:2
+                })
+
+              })
+const response = await data.json()
+console.log("RESPONSE", response);
 
                 const commentData = await CommentService.getById(id);
                 setComment(commentData);
@@ -45,17 +59,12 @@ const CommentElement = ({ id }) => {
     }, [id]);
 
   return (
-    <div className='commentBox'>CommentElement
-      <img className='userIconInComment' src={avatar[0].link}/>
-      <p className='usernameInComment'>{user.username}</p>
-      {/* <p>{new Intl.DateTimeFormat('en-US', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-}).format(new Date(comment[0].created))}</p> */}
-      <div>{comment[0].text}</div>
+    <div className='commentBlock'>
+
+     <UserBox avatar={avatar[0].link} username ={user.username} info={comment[0].created}/>
+
+      <div className='commentBox'>{comment[0].text}</div>
+
     </div>
   )
 }

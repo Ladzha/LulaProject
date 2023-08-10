@@ -5,7 +5,7 @@ export const getAllUsers  = async ()=>{
     try {
         const usersList = await db('users')
         .select(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid"])
-        .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid"])
+        .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"])
         console.log("user=>",  usersList)
         return usersList;      
     } catch (error) {
@@ -18,7 +18,7 @@ export const getAllUsers  = async ()=>{
 export const getUserByUserId = async (userid)=>{
     try {
         const user = await db('users')
-        .select(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid"])
+        .select(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"])
         .where('userid', userid)
         .first()
         return user;      
@@ -35,7 +35,7 @@ export const addNewUser = async (userid, username, firstname, lastname, email, h
         const newUser = await db('users')
         .where('userid', userid)
         .insert({username, firstname, lastname, email, password: hash, created: new Date()})
-        .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid"]);
+        .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"]);
         // console.log("New user", newUser);
         return newUser;      
     } catch (error) {

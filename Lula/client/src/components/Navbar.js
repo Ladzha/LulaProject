@@ -1,13 +1,14 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
-
+import { AiFillHome } from "react-icons/ai";
 
 const Navbar = () => {
   return (
     <div className='navbar'>
       <ul>
         <li>
-          <NavLink to="/">Home</NavLink>
+          
+          <NavLink to="/"><AiFillHome className='icon-grey'/></NavLink>
         </li>
         <li>
           <NavLink to='/profile/alla'>Profile</NavLink>
@@ -19,16 +20,7 @@ const Navbar = () => {
           <NavLink to="/login">Login</NavLink>
         </li>
         <li>
-          <NavLink to="/record">Record</NavLink>
-        </li>
-          <li>
-          <NavLink to="/audio">Audio</NavLink>
-        </li>
-        <li>
-          <NavLink to="/account">Account</NavLink>
-        </li>
-        <li>
-          <NavLink to="/admin">Admin Zone</NavLink>
+          <NavLink to="/admin">Admin</NavLink>
         </li>
         <li>
           <NavLink to="/support">Contact us</NavLink>

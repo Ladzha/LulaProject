@@ -15,10 +15,10 @@ const AllUsers = () => {
     },[])
 
   return (
-    <div>AllUsers
+    <div className='box'>AllUsers
         <ul>
         {users.length>0 && users.map(user=> { 
-            return (<div>
+            return (<div className='hint'>
             <li key={user.id}>
             <p>User Id: {user.userid}</p>
             <p>User Username: {user.username}</p>

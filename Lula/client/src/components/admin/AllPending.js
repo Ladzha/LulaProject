@@ -24,7 +24,7 @@ const AllPending =()=>{
     }, [])
 
     return(
-        <div className='container'>
+        <div className= 'box listRecord'>
             {audios.length > 0 && audios.map(audio=>{
                 return( 
                      <div key={audio.id}>

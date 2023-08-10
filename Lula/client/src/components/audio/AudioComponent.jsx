@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { AvatarService } from '../../services/avatar.service.js';
 import { UserService } from '../../services/user.service.js';
 import { AudioService } from '../../services/audio.service.js';
+import InfoBox from '../elements/InfoBox.js'
 
 
 const AudioComponent = ({id, duration, created}) => {
@@ -44,19 +45,16 @@ const AudioComponent = ({id, duration, created}) => {
   return (
 
     <div className='toApprovalBox'>
-    <div className='blockToApproval'>
-        <p className='hint'>Upload: {created}</p>
-        <div className='infoRecordBox'>
 
-            <img className='userIcon' src={avatar[0].link??'img.jpg'}></img>
-            <div className='infoBox'>     
-                <div className='infoTextBox'>
-                <p className='infoName'>{user.username}</p>
-                <p className='infoDuration'>{duration}</p>
-                </div>    
-            </div>
+    <div className='listBox'>
+    
+        <div className='infoBlock'>        
+        <p className='hint'>Upload: {created}</p>    
+            <InfoBox avatar={avatar[0].link} username ={user.username} info={duration}/>
         </div>
+
     </div>
+
     </div>
 
   )

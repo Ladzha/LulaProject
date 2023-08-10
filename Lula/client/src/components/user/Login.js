@@ -12,11 +12,11 @@ const Login = () => {
 
   }
   return (
-    <div className='registerBox'>
+    <div className='registerBox box'>
       <p className='title'>Login</p>
       <form className='form' onSubmit={(event)=>handleSubmit(event)}>
-        <input className="input" type='text' name="inputUsername" placeholder='username'/>
-        <input className="input" type='password' name="inputPassword" placeholder='password'/>
+        <input className="input" type='text' name="inputUsername" placeholder='username' required/>
+        <input className="input" type='password' name="inputPassword" placeholder='password' required/>
         {/* <label className='hint'>Save Password</label>
         <input className="checkbox" type='checkbox' name="inputPassword" placeholder='password'/>
         <label className='hint'>Forgot Password</label> */}

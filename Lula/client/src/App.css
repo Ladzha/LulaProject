@@ -18,11 +18,12 @@ body{
   --border-container: 5px solid;
   --border-container-radius: 30px;
   --border-elements: 3px solid;
-  --border-elements-radius: 20px;
-
+  --border-elements-radius: 25px;
+  --shadow: 0 2px 6px rgba(255, 54, 60, 0.4);
 
 }
 
+/*Main css*/
 .App {
   text-align: center;
   font-size: 1.3rem;
@@ -32,6 +33,7 @@ body{
 }
 
 .mainContainer{
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,27 +42,65 @@ body{
   background-color: #58DC00;
 }
 
+.homeContainer{
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.adminContainer{
+/* background-color: #BABABA;
+width: 100vw;
+height: 100vh; */
+}
+
+.navbar{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--white-text-color);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+  z-index: 1000; /* Ensure the navbar is above other content */
+}
+
+
 .commentHeader{
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 textarea{
   border-radius: 20px;
   padding: 10px;
 }
 
-.commentBox {
-  /* background-color: blanchedalmond; */
-  /* width: 500px; */
-  border: solid red;
-  border-radius: var(--border-elements-radius);
+.commentBlock {
+  background-color: var(--white-text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 2px solid rgb(0, 140, 86);
+  width: 250px;
+
 }
 
-.userIconInComment{
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
+.commentBox {
+  font-size: 0.9rem;
+  text-align: left;
+  padding: 20px;
+  background-color: var(--white-text-color);
+  border: var(--border-elements) var(--red-color);
+  border-radius: var(--border-container-radius);
+  width: 200px;
 }
 
 
@@ -70,22 +110,36 @@ font-size: 1.5rem;
 font-weight: bold;
 }
 
-.registerBox, .toApprovalBox{
+.box, .audioList{
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;
   background-color: var(--white-text-color);
   border: var(--border-container) var(--red-color);
   border-radius: var(--border-container-radius);
+
+}
+
+.registerBox {
+
+  width: 300px;
   margin: 50px;
   padding: 20px;
+}
+
+.newCommentBox{
+  width: 300px;
 }
 
 .form{
   display: flex;
   flex-direction: column;
   width: 85%;
+}
+
+.newComment{
+  display: flex;
+  flex-direction: column;
 }
 
 link{
@@ -111,6 +165,7 @@ button {
   margin: 0px 10px 13px 10px;
   padding-left: 15px;
   height: 35px;
+ 
 }
 .input:hover{
   border: var(--border-elements) var(--red-color);
@@ -123,6 +178,7 @@ button {
   font-size: 0.85rem;
   font-weight:600;
   height: 40px;
+  box-shadow: var(--shadow);
 }
 
 .submitButton:active{
@@ -162,34 +218,52 @@ li{
 
 .listRecord{
   display: block;
+  padding: 30px;
+  border: 1 solid green;
 }
 
-/*audio block*/
 
-.infoRecordBox{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.infoBox{
-  border: var(--border-elements) var(--secondary-text-color);
-  border-radius: 0 var(--border-elements-radius) var(--border-elements-radius) 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap:10px;
-  width: 150%;
-  margin: 0px 10px 0px -35px;
+.listBox {
   padding: 5px;
-  padding-left: 35px;
-  height: 40px;
 }
+
+.infoBlock{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+
+
+/*INFO BLOCK: COMMENT, AUDIO INFO, PENDING AUDIO ELEMENTS*/
+
+.infoBox {
+  border: var(--border-elements) var(--secondary-text-color);
+  border-radius: var(--border-elements-radius);
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  width: 250px;
+  height: 45px;
+}
+
+.redBorder{
+  border: var(--border-elements) var(--red-color);
+}
+
+ .userBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap:15px; 
+  /* margin-left: -40px; */
+ }  
 
 .userIcon{
   border-radius: 50px;
-  width: 25%;
+  width:60px;
+  height:60px;
   z-index: 1;
 }
 
@@ -197,32 +271,72 @@ li{
   display: flex;
   flex-direction: column;
   align-items:flex-start;
-  justify-content:flex-end;
-  margin-right: 50px;
+  justify-content: center;
+  border: 1px solid blue;
 }
 
 .infoName{
   font-size: 1rem;
   font-weight: bold;
-  margin: 0px;
-}
-
-.infoDuration{
-  font-size: 0.9rem;
   margin: 1px;
 }
 
+.infoText{
+  font-size: 0.7rem;
+  margin: 1px;
+}
+
+.infoIconBox{
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content:space-between;
+  border: 1px solid rgb(61, 1, 134);
+  gap: 10px;
+  margin-right: 20px;
+}
+
+
 .icon-red{
+  color: var(--red-color);
+  font-size: 1.7rem;
+}
+
+.icon-green{
   color: var(--green-color);
   font-size: 1.7rem;
 }
 
 .icon-grey{
-  color: var(--red-color);
+  color: var(--secondary-text-color);
   font-size: 1.7rem;
 }
+
+.icon-more{
+  color: var(--red-color);
+  font-size: 48px;
+}
+
 
 .imgPreview{
   width: 200px;
   height: 200px;
+}
+
+.imgExercise{
+  width: 400px;
+  height: 400px;
+}
+
+.likeCircle{
+  border: var(--border-elements) var(--red-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white-text-color);
+  border-radius: 50px;
+  width:60px;
+  height:60px;
+  box-shadow: var(--shadow);
+  z-index: 1;
 }

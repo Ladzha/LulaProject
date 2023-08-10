@@ -65,3 +65,23 @@ export const updateImg = ({name, sectionid}, imgid) => {
     .del()
     .returning(["imgid", "name", "link", "sectionid"])
   }
+
+
+  export const getAudioAndCommentsByImgId=(id)=>{
+
+    return db.raw(`SELECT
+        audios.*,
+        users.*,
+        avatars.*
+      
+      FROM
+        audios 
+      JOIN
+        users ON audios.userid = users.userid
+      LEFT JOIN
+        avatars ON users.avatarid = avatars.avatarid
+      WHERE
+        audios.imgid = ${id};`)
+
+  }
+

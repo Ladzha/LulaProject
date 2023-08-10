@@ -8,6 +8,7 @@ import CommentElement from './CommentElement';
 const CommentsBlock = () => {
 
     const [commentForm, setCommentForm] = useState(false)
+    const [comments, setComments]=useState([]);
 
     const handleComment = ()=>{
         setCommentForm(!commentForm)
@@ -15,12 +16,23 @@ const CommentsBlock = () => {
 
 
   return (
-    <div className='commentBox'>CommentsBlock
-<CommentElement id={2}/>
-<CommentElement id={13}/>
+    <div className='box listRecord'>
+    <div>
+    {comments.length>0 && comments.map(comment=> { 
+              return(
+                <CommentElement id={comment.commentid}/>
+    )})}
+            
+    </div>
 
-<button onClick={handleComment}>Comment</button>
-{commentForm && <CommentForm placeholder="Remember to be polite" username='Yossi' avatarLink={avatar}/>}
+    
+
+    <CommentElement id={2}/>
+    <CommentElement id={13}/>
+
+<button className='submitButton' onClick={handleComment}>{commentForm? 'Hide form' : 'Leave a comment'}</button>
+
+{commentForm && <CommentForm username='Yossi' avatar={avatar} about={'abot'}/>}
 
     </div>
   )

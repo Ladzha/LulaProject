@@ -8,7 +8,7 @@ const Support = (props) => {
     console.log(userComment);
   }
   return (
-    <div className='registerBox'>
+    <div className='registerBox box'>
       <p className='title'>Contact Us</p>
       <form className='form' onSubmit={(event)=>handleCommentSubmit(event)}>
         <input className="input" type='text'id="inputUsername" name="inputUsername" placeholder='Username' required/>

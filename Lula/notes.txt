@@ -1,38 +1,5 @@
 Tables:
 
-users:
-        userId - number
-        username - string
-        firstName - string
-        lastName - string
-        email - email
-        password - string
-avatars:
-        username - string
-        avatarId - number
-        imageName - string
-        imageLink - string
-
-audios: 
-        username - string
-        recordId - number
-        recordName - string
-        recordLink - string
-        recordDuration - number
-        recordDate - date of creating
-        recordRatting - number
-        recordLikes - number
-        recordDislikes - number
-
-comments:
-        username - string FOREIGN KEY (username) REFERENCES users (username)
-        commentId - SERIAL PRIMARY KEY,
-        commentText - text
-        recordId - string FOREIGN KEY (recordId) REFERENCES audios (recordId)
-        commentCreatedDate - date and time of creating
-        commentUpdateDate - date and time of update
-
-
 recordMaxLikes - 1 place in recordRatting max in array
 recordMaxDisLikes - last place in recordRatting max in array
 if(recordDislikes >= recordMaxDisLikes && recordDislikes > recordLikes*2){
@@ -53,16 +20,16 @@ CREATE TABLE users (
 CREATE TABLE avatars (
     avatarid SERIAL PRIMARY KEY,
     userid INT NOT NULL,
-    imagename VARCHAR(100) NOT NULL,
-    imagelink VARCHAR(255) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    link VARCHAR(255) NOT NULL,
     FOREIGN KEY (userid) REFERENCES users (userid)
 );
 
 CREATE TABLE audios (
-    recordId SERIAL PRIMARY KEY,
+    recordid SERIAL PRIMARY KEY,
     userid INT NOT NULL,
-    recordName VARCHAR(255) NOT NULL,
-    recordLink VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    link VARCHAR(255) NOT NULL,
     duration INTERVAL NOT NULL,
     created DATE DEFAULT CURRENT_DATE
     rating NUMERIC DEFAULT 0,
@@ -73,19 +40,19 @@ CREATE TABLE audios (
 
 CREATE TABLE pendingaudios (
     recordid SERIAL PRIMARY KEY,
-    userid INT NOT NULL,
-    recordname VARCHAR(255) NOT NULL,
-    recordlink VARCHAR(255) NOT NULL,
+    userid INT NOT NULL,audio
+    name VARCHAR(255) NOT NULL,
+    link VARCHAR(255) NOT NULL,
     duration INTERVAL NOT NULL,
     created DATE DEFAULT CURRENT_DATE
     FOREIGN KEY (userid) REFERENCES users (userid)
 );
 
 CREATE TABLE comments (
-    commentId SERIAL PRIMARY KEY,
+    commentid SERIAL PRIMARY KEY,
     userid INT NOT NULL,
-    recordId INT NOT NULL,
-    commentText TEXT NOT NULL,
+    recordid INT NOT NULL,
+    text TEXT NOT NULL,
     created DATE DEFAULT CURRENT_DATE
     updated DATE DEFAULT CURRENT_DATE
     FOREIGN KEY (userid) REFERENCES users (userid),
@@ -95,15 +62,15 @@ CREATE TABLE comments (
 
 CREATE TABLE img(
     imgid SERIAL PRIMARY KEY,
-    imagename VARCHAR(100) NOT NULL,
-    imagelink VARCHAR(255) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    link VARCHAR(255) NOT NULL,
     sectionid INT NOT NULL,
     FOREIGN KEY (sectionid) REFERENCES section (sectionid)
 );
 
 CREATE TABLE section(
     sectionid SERIAL PRIMARY KEY,
-    sectionname VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL
 );
 
 
@@ -142,6 +109,17 @@ VALUES (1, 'Sample', 'https://example.com/audio/sample.mp3', INTERVAL '2 minutes
 INSERT INTO comments (userid, commentText, recordId, created, updated)
 VALUES (1, 'This is a great audio!', 2, '2023-08-01 12:34:56', NULL);
 
+ALTER TABLE tickets
+DROP COLUMN quantity;
+
+ALTER TABLE tickets
+ADD COLUMN quantity INTEGER NOT NULL;
+
+
+8:47
+ALTER TABLE users
+ADD COLUMN about VARCHAR(255) DEFAULT 'I am user';
+
 READY!:
 
 1. users
@@ -163,4 +141,34 @@ Example post audio
 }
 
 
+SELECT
+    audios.*,
+    users.*,
+    avatars.*
 
+FROM
+    audios 
+JOIN
+    users ON audios.userid = users.userid
+LEFT JOIN
+    avatars ON users.avatarid = avatars.avatarid
+WHERE
+    audios.imgid = 2;
+
+select * from comments WHERE recordid = 1
+
+
+Comment 1:
+"Audio descriptions add a whole new dimension to images, allowing those with visual impairments to vividly experience the content. It's a beautiful way to ensure inclusivity and make visual media truly accessible."
+
+Comment 2:
+"I'm always amazed by how audio descriptions enhance images. They provide intricate details that might go unnoticed, giving everyone the opportunity to appreciate the richness and depth of visual content."
+
+Comment 3:
+"Audio descriptions turn images into a captivating story for individuals who can't see them. This thoughtful addition opens up a world of imagination and understanding, making art and media more meaningful for everyone."
+
+Comment 4:
+"The magic of audio descriptions lies in their ability to paint pictures with words. By weaving together vivid descriptions, they bridge the gap between sighted and visually impaired audiences, making images a shared experience."
+
+Comment 5:
+"Audio descriptions are like a guide that leads you through the intricate tapestry of an image. It's heartwarming to know that this accessibility feature ensures that no one misses out on the beauty and context within visual content."
