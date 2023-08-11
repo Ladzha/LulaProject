@@ -16,7 +16,7 @@ const CommentsBlock = () => {
 
 
   return (
-    <div className='box listRecord'>
+    <div className='listComment'>
     <div>
     {comments.length>0 && comments.map(comment=> { 
               return(
@@ -30,7 +30,7 @@ const CommentsBlock = () => {
     <CommentElement id={2}/>
     <CommentElement id={13}/>
 
-<button className='submitButton' onClick={handleComment}>{commentForm? 'Hide form' : 'Leave a comment'}</button>
+<button className='submitButton addButton' onClick={handleComment}>{commentForm? 'Hide form' : 'Leave a comment'}</button>
 
 {commentForm && <CommentForm username='Yossi' avatar={avatar} about={'abot'}/>}
 

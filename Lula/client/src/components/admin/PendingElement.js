@@ -25,14 +25,14 @@
 
 //             <img className='userIcon' src={avatar[0].link??'img.jpg'}></img>
 
-//             <div className='infoBox'>     
+//             <div className='PendingInfoBox'>     
 //                 <div className='infoTextBox'>
 //                 <p className='infoName'>{username}</p>
 //                 <p className='infoText'>{duration}</p>
 //                 </div>
 //             </div>
             
-//             <div className='infoIconBox'>
+//             <div className='PendingIconBox'>
 //                 <AiFillCheckCircle className='icon-red' onClick={handleApproval}/>
 //                 <AiFillCloseCircle className='icon-green' onClick={handleRejection}/> 
 //             </div>

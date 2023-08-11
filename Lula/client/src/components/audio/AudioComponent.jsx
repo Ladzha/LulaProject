@@ -2,16 +2,21 @@ import React, { useState, useEffect} from 'react'
 import { AvatarService } from '../../services/avatar.service.js';
 import { UserService } from '../../services/user.service.js';
 import { AudioService } from '../../services/audio.service.js';
-import InfoBox from '../elements/InfoBox.js'
+import ActiveInfoBox from '../elements/ActiveInfoBox.js'
+import CommentsBlock from '../audio/CommentsBlock'
 
 
-const AudioComponent = ({id, duration, created}) => {
+const AudioComponent = ({id, duration, created, classname}) => {
 
     const [audio, setAudio]=useState([{}]);
     const [user, setUser]=useState([{}]);
     const [avatar, setAvatar]=useState([{}]);
+    const [commentBlock, setCommentBlock] =useState(false)
     
-
+    const toggleComments = () => {
+        setCommentBlock(!commentBlock);
+      };
+    
     useEffect(() => {
       if (!id) return;
       const fetchData = async () => {
@@ -45,12 +50,12 @@ const AudioComponent = ({id, duration, created}) => {
   return (
 
     <div className='toApprovalBox'>
-
     <div className='listBox'>
     
         <div className='infoBlock'>        
-        <p className='hint'>Upload: {created}</p>    
-            <InfoBox avatar={avatar[0].link} username ={user.username} info={duration}/>
+            <ActiveInfoBox avatar={avatar[0].link} username ={user.username} info={duration} toggleComments={toggleComments}/>
+            {commentBlock && <CommentsBlock/>}
+            
         </div>
 
     </div>

@@ -1,11 +1,13 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AudioService } from '../../services/audio.service.js';
 import { ImgService } from '../../services/img.service.js';
 
 import {useState, useEffect, useContext} from 'react';
 import AudioComponent from '../audio/AudioComponent.jsx';
-import LikeButton from '../elements/LikeButton.js'
+import ActiveIconBox from '../elements/ActiveIconBox.js'
+import PlayerButtons from '../elements/PlayerButtons.js';
+import Template from '../../img/template.svg'
 
 
 const ExerciseComponent = () => {
@@ -48,6 +50,12 @@ const ExerciseComponent = () => {
       return(
           <div className='homeContainer'>
             <div className= 'box listRecord'>
+
+            <div className='playBlock'>
+            <img src={Template} className='activeRecordAvatar'/>
+            <PlayerButtons/>
+            <div/>
+
             {audios.length > 0 && audios.map((audio, index)=>{
                   return( 
                        <div key={index}>
@@ -67,14 +75,11 @@ const ExerciseComponent = () => {
             </div>
             <img className='imgExercise' src={img[0].link}/>
             <div className='sectionExercise'>
-            <NavLink to="/audio">Audio</NavLink>...
-            <NavLink to="/record">Record</NavLink>
+            <Link to="/audio">Audio</Link>...
+            <Link to="/record">Record</Link>
             </div>
-
-            <LikeButton/>
-
           </div>
       )
-  }
+}
 
 export default ExerciseComponent

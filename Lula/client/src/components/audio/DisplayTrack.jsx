@@ -15,9 +15,7 @@ const DisplayTrack = ({currentTrack, audioRef}) => {
 
         <audio style={{backgroundColor:'blue'}} src={currentTrack.src} controls ref={audioRef}>Play</audio>
         
-         <Rating/>
-
-         <CommentsBlock/>
+         {/* <Rating/> */}
 
     </div>
   )

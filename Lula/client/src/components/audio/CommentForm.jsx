@@ -9,13 +9,13 @@ const CommentForm = (props) => {
   }
   return (
 
-      <div className='commentBlock'>
+      <div className='newCommentBlock'>
 
       <UserBox avatar={props.avatar} username ={props.username} info={props.about}/>
 
       <form className='newComment' onSubmit={(event)=>handleCommentSubmit(event)}>
-        <textarea className='input' type='text' maxLength={200} rows={5} cols={40}name='commentInput' placeholder="Remember to be polite"/>
-        <button className='submitButton' type="submit">Submit</button>
+        <textarea className='newCommentText' type='text' maxLength={200} rows={5} cols={40}name='commentInput' placeholder="Remember to be polite"/>
+        <button className='submitButton addButton' type="submit">Submit</button>
       </form> 
       <p className='hint'>Clean comment</p>
 

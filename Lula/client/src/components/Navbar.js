@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { AiFillHome } from "react-icons/ai";
 
 const Navbar = () => {
@@ -8,26 +8,26 @@ const Navbar = () => {
       <ul>
         <li>
           
-          <NavLink to="/"><AiFillHome className='icon-grey'/></NavLink>
+          <NavLink to="/"><AiFillHome className='icon-grey icon-home'/></NavLink>
         </li>
         <li>
-          <NavLink to='/profile/alla'>Profile</NavLink>
+          <NavLink to='/profile/alla' className='link'>Profile</NavLink>
         </li>
         <li>
-          <NavLink to='/register'>Register</NavLink>
+          <NavLink to='/register' className='link'>Register</NavLink>
         </li>
         <li>
-          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/login" className='link'>Login</NavLink>
         </li>
         <li>
-          <NavLink to="/admin">Admin</NavLink>
+          <NavLink to="/admin" className='link'>Admin</NavLink>
         </li>
         <li>
-          <NavLink to="/support">Contact us</NavLink>
+          <NavLink to="/support" className='link'>Contact us</NavLink>
         </li>
 
         <li>
-          <NavLink to="/exercise">Exercise</NavLink>
+          <NavLink to="/exercise" className='link'>Exercise</NavLink>
         </li>
         
       </ul>

@@ -2,6 +2,8 @@ import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
 import avatar from './img/avatar13.jpg'
 import ExerciseComponent from './components/exercises/ExerciseComponent'
 
@@ -40,6 +42,7 @@ function App() {
       </Routes>
 
       </div>
+      <Footer/>
     </div>
   );
 }

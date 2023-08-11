@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import { ImgService } from '../../services/img.service.js';
 import { LanguageService } from '../../services/language.service.js';
 import { SectionService } from '../../services/section.service.js';
@@ -40,10 +41,13 @@ const ExercisePreview = ({ id }) => {
         }, [id]);
     
       return (
-        <div className='Box'>
-          <img className='imgPreview' src={img[0].link}/>
-          <p className='language'>{language[0].language}</p>
-          <p className='section'>{section[0].name}</p>
+        <div className='previewBox'>
+           <Link to="/exercise" ><img className='imgPreview' src={img[0].link}/></Link>
+          <div className='previewInfo'>
+          <p className='languageButton'>{language[0].language}</p>
+          <p className='sectionButton'>{section[0].name}</p>
+         
+          </div>
         </div>
       )
     }

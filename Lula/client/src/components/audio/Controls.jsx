@@ -9,6 +9,10 @@ import {
   IoPauseSharp,
 } from 'react-icons/io5';
 
+
+import Template from '../../img/template.svg';
+import PlayerButtons from '../elements/PlayerButtons'
+
 const Controls = ({audioRef}) => {
   const [isPlaying, setIsPlaying] = useState(false)
 
@@ -48,7 +52,12 @@ const Controls = ({audioRef}) => {
 
       </div>
 
-      
+      <div className='playBlock'>
+      <img src={Template} className='activeRecordAvatar'/>
+      <PlayerButtons/>
+      </div>
+
+
     </div>
   )
 }

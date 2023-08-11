@@ -58,7 +58,7 @@ const Profile = (props) => {
 
         <div className='userBox'>
             <img className='userIcon' src={avatar}></img>
-            <div className='infoBox'>     
+            <div className='PendingInfoBox'>     
                 <div className='infoTextBox'>
                 <p className='infoName'>{"username"}</p>
                 <p className='infoText'>{"some text"}</p>

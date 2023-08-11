@@ -2,7 +2,7 @@ import React, {createContext, useState, useContext, useEffect} from 'react'
 import { AvatarService } from '../../services/avatar.service.js';
 import { UserService } from '../../services/user.service.js';
 import { PendingService } from '../../services/pending.service.js';
-import InfoBox from '../elements/InfoBox.js';
+import PendingInfoBox from '../elements/PendingInfoBox.js';
 
 const PendingComponent = ({id, duration, created}) => {
 
@@ -57,7 +57,7 @@ const PendingComponent = ({id, duration, created}) => {
         
         <p className='hint'>Upload: {created}</p>
 
-        <InfoBox avatar={avatar[0].link} username ={user.username} info={duration}/>
+        <PendingInfoBox avatar={avatar[0].link} username ={user.username} info={duration}/>
 
     </div>
     </div>

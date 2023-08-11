@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 
-const InfoIconBox = () => {
+const PendingIconBox = () => {
 
     const handleApproval=()=>{
         console.log('Record Approved');
@@ -12,11 +12,11 @@ const InfoIconBox = () => {
     }
    
   return (
-    <div className='infoIconBox'>
+    <div className='pendingIconBox'>
     <AiFillCheckCircle className='icon-red' onClick={handleApproval}/>
-    <AiFillCloseCircle className='icon-green' onClick={handleRejection}/> 
+    <AiFillCloseCircle className='icon-green' onClick={handleRejection}/>  
     </div>
   )
 } 
 
-export default InfoIconBox
+export default PendingIconBox

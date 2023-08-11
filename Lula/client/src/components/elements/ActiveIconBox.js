@@ -1,31 +1,32 @@
 import React from 'react';
 import { AiFillHeart } from "react-icons/ai";
-import {AiOutlineEllipsis} from "react-icons/ai"
+import IconMore from '../../img/icon-more.svg'
 
 
-const LikeButton = () => {
+
+const ActiveIconBox = (props) => {
 
 const handleLike=()=>{
     console.log("I click like");
 }
 
 const handleMore=()=>{
+    props.toggleComments()
     console.log("I click more information");
 }
 
 
   return (
-    <div className='infoIconBox'>
+    <div className='activeIconBox'>
 
-    <AiOutlineEllipsis className="icon-red"/>
+    <img src={IconMore} className='icon-more' onClick={handleMore}/>
     
     <div className='likeCircle' onClick={handleMore}>
-        <AiFillHeart className="icon-red" onClick={handleLike}/>
+        <AiFillHeart className="icon-heart" onClick={handleLike}/>
     </div>
         
     </div>
 
   )
 }
-
-export default LikeButton
+export default ActiveIconBox

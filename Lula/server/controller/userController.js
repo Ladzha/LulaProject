@@ -1,5 +1,6 @@
 import {getAllUsers, addNewUser, updateUser, deleteUser, getUserByUserId} from '../models/userModel.js'
 import bcrypt from 'bcrypt';
+import jwt  from 'jsonwebtoken';
 
 
 //GET ALL USERS
@@ -36,13 +37,23 @@ export const getNewUserData = async(request, response)=>{
     const lastname = request.body.lastname;
     const email = request.body.email;
     const password = request.body.password +''; //to make it string
+    // const role = request.body.role; //get user role
+    
+    // const condidate = await getAllUsers({where: {username, email}})
+    // if(condidate){
+    //     return next(ApiError.badRequest('Username already exist'))
+    // }    
+
     //hide password
-    const salt = bcrypt.genSaltSync(10)
+    const salt = bcrypt.genSaltSync(5)
     const hashPassword = bcrypt.hashSync(password, salt)
 
     try {
         const rows = await addNewUser(username, firstname, lastname, email, hashPassword)
         response.json(rows)
+        console.log(rows.username);
+        //Create token
+        // const jwt = jwt.sign({userid:userid, email:email})
             
         } catch (error) {
             console.log(error)
