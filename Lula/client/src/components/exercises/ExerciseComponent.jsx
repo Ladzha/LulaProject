@@ -5,9 +5,6 @@ import { ImgService } from '../../services/img.service.js';
 
 import {useState, useEffect, useContext} from 'react';
 import AudioComponent from '../audio/AudioComponent.jsx';
-import ActiveIconBox from '../elements/ActiveIconBox.js'
-import PlayerButtons from '../elements/PlayerButtons.js';
-import Template from '../../img/template.svg'
 
 
 const ExerciseComponent = () => {
@@ -50,11 +47,6 @@ const ExerciseComponent = () => {
       return(
           <div className='homeContainer'>
             <div className= 'box listRecord'>
-
-            <div className='playBlock'>
-            <img src={Template} className='activeRecordAvatar'/>
-            <PlayerButtons/>
-            <div/>
 
             {audios.length > 0 && audios.map((audio, index)=>{
                   return( 

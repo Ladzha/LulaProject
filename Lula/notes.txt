@@ -13,8 +13,9 @@ CREATE TABLE users (
     firstName VARCHAR(100) NOT NULL,
     lastName VARCHAR(100) NOT NULL,
     email VARCHAR(200) NOT NULL UNIQUE,
-    password VARCHAR(200) NOT NULL
-    created TIMESTAMP DEFAULT NOW();
+    password VARCHAR(200) NOT NULL,
+    created TIMESTAMP DEFAULT NOW(),
+    avatarid INT DEFAULT 1,
 );
 
 CREATE TABLE avatars (
@@ -156,6 +157,9 @@ WHERE
     audios.imgid = 2;
 
 select * from comments WHERE recordid = 1
+
+ALTER TABLE users
+ALTER COLUMN avatarid SET DEFAULT 1;
 
 
 Comment 1:
