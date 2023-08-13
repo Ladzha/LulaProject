@@ -45,7 +45,7 @@ const ExerciseComponent = () => {
     //   }, [])
   
       return(
-          <div className='homeContainer'>
+          <div className='exerciseContainer'>
             <div className= 'box listRecord'>
 
             {audios.length > 0 && audios.map((audio, index)=>{
@@ -65,10 +65,15 @@ const ExerciseComponent = () => {
               }
 
             </div>
+            <div>
+            <p className='title'>Exrsice 1: Speaking about nature.</p>
             <img className='imgExercise' src={img[0].link}/>
             <div className='sectionExercise'>
             <Link to="/audio">Audio</Link>...
             <Link to="/record">Record</Link>
+            </div>
+           
+
             </div>
           </div>
       )

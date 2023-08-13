@@ -6,11 +6,17 @@ import AudioComponent from '../audio/AudioComponent.jsx';
 import { AudioService } from '../../services/audio.service.js';
 import { ImgService } from '../../services/img.service.js';
         
-
+import AudioPlayer from '../audio/audioPlayer/AudioPlayer'
 
 const Profile = (props) => {
+
+
   const [audios, setAudios]=useState([])
-  const [img, setImg]=useState([{}]);          
+  const [img, setImg]=useState([{}]);  
+  
+  
+
+
       useEffect(() => {
         const fetchData = async () => {
                       try {
@@ -68,7 +74,7 @@ const Profile = (props) => {
       </div>
       <div className='homeContainer'>
         <div className= 'box listRecord'>
-        
+        <AudioPlayer/>
         {audios.length > 0 && audios.map((audio, index)=>{
           return( 
                   <div key={index}>
@@ -85,10 +91,9 @@ const Profile = (props) => {
                          })
                       }   
                     </div>
-                  </div>
+                  </div>                 
          <div>
         </div>
-
     </div>
   )
 }

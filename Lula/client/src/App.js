@@ -14,7 +14,7 @@ import Account from './components/user/Account';
 import Profile from './components/user/Profile';
 
 
-import AudioPlayer from './components/audio/AudioPlayer'
+// import AudioPlayer from './components/audio/AudioPlayer'
 import Record from './components/audio/Record';
 import Home from './components/Home';
 import AdminZone from './components/admin/AdminZone';
@@ -34,7 +34,7 @@ function App() {
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/record' element={<Record/>}/>
-      <Route path='/audio' element={<AudioPlayer/>}/>
+      {/* <Route path='/audio' element={<AudioPlayer/>}/> */}
       <Route path='/account' element={<Account username="Sara" about="I am soo cool" img={avatar}/>}/>
       <Route path='/admin' element={<AdminZone username="Harry" about="I am Harry and I am soo cool" img={avatar}/>}/>
       <Route path='/support' element={<Support/>}/>

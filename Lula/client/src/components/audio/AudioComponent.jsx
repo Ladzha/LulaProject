@@ -51,7 +51,7 @@ const AudioComponent = ({id, duration, created, classname}) => {
 
     <div className='toApprovalBox'>
     <div className='listBox'>
-    
+  
         <div className='infoBlock'>        
             <ActiveInfoBox avatar={avatar[0].link} username ={user.username} info={duration} toggleComments={toggleComments}/>
             {commentBlock && <CommentsBlock/>}
