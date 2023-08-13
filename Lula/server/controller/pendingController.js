@@ -1,22 +1,22 @@
 
-import {getAllPendingAudios, getPendingAudioById, addPendingAudio, deletePendingAudio} from '../models/pendingAudioModel.js'
+import {getAllPending, getPending, addPending, deletePending} from '../models/pendingModel.js'
 
 //GET ALL AUDIO
-export const getAllPendingAudiosData = async (request, response) => {
+export const getAllPendingController = async (request, response) => {
     try {
-        const pendingAudioList = await getAllPendingAudios();
+        const pendingAudioList = await getAllPending();
         response.json(pendingAudioList);
     } catch (error) {
         console.log(error);
         response.status(500).json({ msg: 'Failed to fetch pending audios.' });
     }
-}
+} 
 
 //GET PENDINGAUDIO BY ID
-export const getPendingAudioData= async(request, response)=>{
+export const getPendingController= async(request, response)=>{
     const recordid = request.params.recordid ;
     try {
-        const pendingAudio = await getPendingAudioById(recordid);
+        const pendingAudio = await getPending(recordid);
         if(pendingAudio){
             response.json(pendingAudio);
         }else{
@@ -29,13 +29,13 @@ export const getPendingAudioData= async(request, response)=>{
 }
 
 //ADD AUDIO
-export const getNewPendingAudioData = async(request, response)=>{
+export const addPendingController = async(request, response)=>{
     const userid = request.body.userid ;
     const name = request.body.name;
     const link = request.body.link ;
     const duration = request.body.duration;
     try {
-        const audio = await addPendingAudio({userid, name, link, duration})
+        const audio = await addPending({userid, name, link, duration})
         response.json(audio)
             
         } catch (error) {
@@ -45,10 +45,10 @@ export const getNewPendingAudioData = async(request, response)=>{
 }
 
 //DELETE AUDIO
-export const deletePendingAudioData = async(request, response)=>{
+export const deletePendingController = async(request, response)=>{
     const recordid = request.params.recordid;
     try {
-        await deletePendingAudio(recordid);
+        await deletePending(recordid);
         response.json({ msg: 'Record deleted successfully.'});
             
         } catch (error) {

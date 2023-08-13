@@ -1,7 +1,7 @@
-import { getAllAvatars, getAvatarById, addAvatar, deleteAvatar} from '../models/avatarModel.js';
+import { getAllAvatars, getAvatar, addAvatar, deleteAvatar} from '../models/avatarModel.js';
 
 //GET ALL AVATARS
-export const getAllAvatarsData = async(request, response)=>{
+export const getAllAvatarsController = async(request, response)=>{
     try {
         const avatarList = await getAllAvatars();
         response.json(avatarList)           
@@ -9,13 +9,13 @@ export const getAllAvatarsData = async(request, response)=>{
             console.log(error)
             response.status(500).json({ msg: 'Failed to fetch avatars.'})
         }
-}
+} 
 
 //GET AVATAR BY ID
-export const getAvatarData= async(request, response)=>{
+export const getAvatarController= async(request, response)=>{
     const avatarid = request.params.avatarid;
     try {
-        const avatar = await getAvatarById(avatarid);
+        const avatar = await getAvatar(avatarid);
         if(avatar){
             response.json(avatar);
         }else{
@@ -28,7 +28,7 @@ export const getAvatarData= async(request, response)=>{
 }
 
 //ADD AVATAR
-export const getNewAvatarData = async(request, response)=>{
+export const addAvatarController = async(request, response)=>{
     const avatarid = request.body.avatarid;
     const name = request.body.name;
     const link = request.body.link;
@@ -43,7 +43,7 @@ export const getNewAvatarData = async(request, response)=>{
 }
 
 //DELETE AVATAR
-export const deleteAvatarData = async(request, response)=>{
+export const deleteAvatarController = async(request, response)=>{
     const avatarid = request.params.avatarid;
     try {
         await deleteAvatar(avatarid);

@@ -1,7 +1,7 @@
-import { getAllSection, getSectionById, addSection, updateSection, deleteSection } from '../models/sectionModel.js';
+import { getAllSection, getSection, addSection, updateSection, deleteSection } from '../models/sectionModel.js';
 
 //GET ALL SECTIONS
-export const getAllSectionData = async(request, response)=>{
+export const getAllSectionController = async(request, response)=>{
     try {
         const sectionList = await getAllSection();
         response.json(sectionList)           
@@ -9,13 +9,13 @@ export const getAllSectionData = async(request, response)=>{
             console.log(error)
             response.status(500).json({ msg: 'Failed to fetch sections.'})
         }
-}
+} 
 
 //GET SECTION BY ID
-export const getSectionData= async(request, response)=>{
+export const getSectionController= async(request, response)=>{
     const sectionid = request.params.sectionid;
     try {
-        const section = await getSectionById(sectionid);
+        const section = await getSection(sectionid);
         if(section){
             response.json(section);
         }else{
@@ -28,7 +28,7 @@ export const getSectionData= async(request, response)=>{
 }
 
 //ADD SECTION
-export const getNewSectionData = async(request, response)=>{
+export const addSectionController = async(request, response)=>{
     const name = request.body.name;
 
     try {
@@ -42,7 +42,7 @@ export const getNewSectionData = async(request, response)=>{
 }
 
 //UPDATE SECTION
-export const updateSectionData = async(request, response)=>{
+export const updateSectionController = async(request, response)=>{
     const sectionid = request.params.sectionid;
 
     const name = request.body.name;
@@ -58,7 +58,7 @@ export const updateSectionData = async(request, response)=>{
 }
 
 //DELETE SECTION
-export const deleteSectionData = async(request, response)=>{
+export const deleteSectionController = async(request, response)=>{
     const sectionid = request.params.sectionid;
     try {
         await deleteSection(sectionid);

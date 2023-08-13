@@ -1,9 +1,9 @@
 import express from 'express';
-import { getAllAvatarsData, getAvatarData, getNewAvatarData, deleteAvatarData } from '../controller/avatarController.js';
+import { getAllAvatarsController, getAvatarController, addAvatarController, deleteAvatarController } from '../controller/avatarController.js';
 
 export const avatarRouter = express.Router();
 
-avatarRouter.get('/avatar', getAllAvatarsData);
-avatarRouter.get('/avatar/:avatarid', getAvatarData);
-avatarRouter.post('/avatar/post', getNewAvatarData);
-avatarRouter.delete('/avatar/delete/:avatarid', deleteAvatarData);
+avatarRouter.get('/avatar', getAllAvatarsController);
+avatarRouter.get('/avatar/:avatarid', getAvatarController);
+avatarRouter.post('/avatar/post', addAvatarController);
+avatarRouter.delete('/avatar/delete/:avatarid', deleteAvatarController);

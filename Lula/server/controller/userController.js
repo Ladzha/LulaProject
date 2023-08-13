@@ -1,10 +1,10 @@
-import {getAllUsers, addNewUser, updateUser, deleteUser, getUserByUserId} from '../models/userModel.js'
+import {getAllUsers, addUser, updateUser, deleteUser, getUser} from '../models/userModel.js'
 import bcrypt from 'bcrypt';
 import jwt  from 'jsonwebtoken';
 
 
 //GET ALL USERS
-export const getAllUsersData = async(request, response)=>{
+export const getAllUsersController = async(request, response)=>{
     try {
         const usersList = await getAllUsers();
         response.json(usersList)           
@@ -15,10 +15,10 @@ export const getAllUsersData = async(request, response)=>{
 }
 
 //FIND USER
-export const getUserData= async(request, response)=>{
+export const getUserController= async(request, response)=>{
     const userid = request.params.userid;
     try {
-        const user = await getUserByUserId(userid);
+        const user = await getUser(userid);
         if(user){
             response.json(user);
         }else{
@@ -31,7 +31,7 @@ export const getUserData= async(request, response)=>{
 }
 
 //ADD USER
-export const getNewUserData = async(request, response)=>{
+export const addUserController = async(request, response)=>{
     const username = request.body.username;
     const firstname = request.body.firstname;
     const lastname = request.body.lastname;
@@ -49,7 +49,7 @@ export const getNewUserData = async(request, response)=>{
     const hashPassword = bcrypt.hashSync(password, salt)
 
     try {
-        const rows = await addNewUser(username, firstname, lastname, email, hashPassword)
+        const rows = await addUser(username, firstname, lastname, email, hashPassword)
         response.json(rows)
         console.log(rows.username);
         //Create token
@@ -62,7 +62,7 @@ export const getNewUserData = async(request, response)=>{
 }
 
 //UPDATE USER
-export const updateUserData = async(request, response)=>{
+export const updateUserController = async(request, response)=>{
     const userid = request.params.userid
     const username = request.body.username;
     const firstname = request.body.firstname;
@@ -84,7 +84,7 @@ export const updateUserData = async(request, response)=>{
 }
 
 //DELETE USER
-export const deleteUserData = async(request, response)=>{
+export const deleteUserController = async(request, response)=>{
     const userid = request.params.userid;
     try {
         await deleteUser(username);
@@ -94,4 +94,4 @@ export const deleteUserData = async(request, response)=>{
             console.log(error)
             response.status(500).json({ msg: 'Failed to delete user.' });
         }
-}
+} 

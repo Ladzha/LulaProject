@@ -1,15 +1,15 @@
 import express from 'express';
-import { getAllImgData, getImgData, getSectionImgData, getNewImgData, updateImgData, deleteImgData, getData } from '../controller/imgController.js';
+import { getAllImgController, getImgController, getImgSectionController, addImgController, updateImgController, deleteImgController, getData } from '../controller/imgController.js';
 
 export const imgRouter = express.Router();
 
-imgRouter.get('/img', getAllImgData);
-imgRouter.get('/img/:imgid', getImgData);
+imgRouter.get('/img', getAllImgController);
+imgRouter.get('/img/:imgid', getImgController);
 
-imgRouter.get('/img/section/:sectionid', getSectionImgData);
+imgRouter.get('/img/section/:sectionid', getImgSectionController);
 
-imgRouter.post('/img/post', getNewImgData);
-imgRouter.put('/img/update/:imgid', updateImgData);
-imgRouter.delete('/img/delete/:imgid', deleteImgData);
+imgRouter.post('/img/post', addImgController);
+imgRouter.put('/img/update/:imgid', updateImgController);
+imgRouter.delete('/img/delete/:imgid', deleteImgController);
 
 imgRouter.post('/img/getaudio', getData);

@@ -1,10 +1,10 @@
 import {db} from '../config/db.js';
 
-export const getAllPendingAudios = async () => {
+export const getAllPending = async () => {
     try {
-        const pendingAudioList = await db('pendingaudios')
+        const pendingAudioList = await db('pending')
             .select('*')
-            .returning(["recordid", "userid", "name", "link", "duration", "created"]);
+            .returning(["recordid", "userid", "name", "link", "created"]);
         console.log("pendingAudioList =>", pendingAudioList);
         return pendingAudioList;
     } catch (error) {
@@ -14,9 +14,9 @@ export const getAllPendingAudios = async () => {
 }
 
 //GET RECORD FROM DATABASE BY ID
-export const getPendingAudioById = async (recordid)=>{
+export const getPending = async (recordid)=>{
     try {
-        const audio = await db('pendingaudios')
+        const audio = await db('pending')
         .select('*')
         .where('recordid', recordid)
         .first()
@@ -30,16 +30,16 @@ export const getPendingAudioById = async (recordid)=>{
 
 
 //ADD PENDING AUDIO
-export const addPendingAudio = ({userid, name, link, duration}) => {
-    return db('pendingaudios')
+export const addPending = ({userid, name, link, duration}) => {
+    return db('pending')
     .insert ({userid, name, link, duration})
-    .returning(["recordid", "userid", "name", "link", "duration", "created"])
+    .returning(["recordid", "userid", "name", "link", "created"])
   }
 
   //DELETE PENDING AUDIO
-  export const deletePendingAudio = (recordid) => {
-    return db('pendingaudios')
+  export const deletePending = (recordid) => {
+    return db('pending')
     .where('recordid', recordid)
     .del()
-    .returning(["recordid", "userid", "name", "link", "duration", "created"])
+    .returning(["recordid", "userid", "name", "link", "created"])
   }

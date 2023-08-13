@@ -15,7 +15,7 @@ export const getAllLanguage  = async ()=>{
 }
 
 //GET LANGUAGE BY ID
-export const getLanguageById = async (languageid)=>{
+export const getLanguage = async (languageid)=>{
     try {
         const lamguage = await db('language')
         .select('*')

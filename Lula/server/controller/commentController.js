@@ -1,7 +1,7 @@
-import {getAllComments, getCommentById, getCommentByUserId, addComment, updateComment, deleteComment} from '../models/commentModel.js'
+import {getAllComments, getComment, getCommentByUserId, addComment, updateComment, deleteComment} from '../models/commentModel.js'
 
 //GET ALL COMMENTS
-export const getAllCommentData = async(request, response)=>{
+export const getAllCommentController = async(request, response)=>{
     try {
         const commentList = await getAllComments();
         response.json(commentList)           
@@ -12,10 +12,10 @@ export const getAllCommentData = async(request, response)=>{
 }
 
 //GET COMMENT BY ID
-export const getCommentData= async(request, response)=>{
+export const getCommentController= async(request, response)=>{
     const commentid = request.params.commentid;
     try {
-        const comment = await getCommentById(commentid);
+        const comment = await getComment(commentid);
         if(comment){
             response.json(comment);
         }else{
@@ -28,7 +28,7 @@ export const getCommentData= async(request, response)=>{
 }
 
 //GET LIST OF COMMENTS BY USERID
-export const getUserCommentData= async(request, response)=>{
+export const getUserCommentController= async(request, response)=>{
     const userid = request.params.userid;
     try {
         const comments = await getCommentByUserId(userid);
@@ -43,8 +43,25 @@ export const getUserCommentData= async(request, response)=>{
         }
 }
 
+
+//GET COMMENT BY AUDIO ID
+export const getAudioCommentController= async(request, response)=>{
+    const audioid = request.params.audioid;
+    try {
+        const comment = await getCommentByAudioId(audioid);
+        if(comment){
+            response.json(comment);
+        }else{
+            response.status(404).json({ msg: 'Comment not found.' });
+        }               
+        } catch (error) {
+            console.log(error)
+            response.status(500).json({ msg: 'Failed to fetch comment.'})
+        }
+}
+
 //ADD COMMENT
-export const getNewCommentData = async(request, response)=>{
+export const addCommentController = async(request, response)=>{
     const userid = request.body.userid;
     const recordid = request.body.recordid;
     const text = request.body.text;
@@ -59,10 +76,10 @@ export const getNewCommentData = async(request, response)=>{
             console.log(error)
             response.status(404).json({msg: error.message})
         }
-}
+} 
 
 //UPDATE COMMENT
-export const updateCommentData = async(request, response)=>{
+export const updateCommentController = async(request, response)=>{
     const commentid = request.params.commentid;
     const text = request.body.text;
     try {
@@ -76,7 +93,7 @@ export const updateCommentData = async(request, response)=>{
 }
 
 //DELETE COMMENT
-export const deleteCommentData = async(request, response)=>{
+export const deleteCommentController = async(request, response)=>{
     const commentid = request.params.commentid;
     try {
         await deleteComment(commentid);

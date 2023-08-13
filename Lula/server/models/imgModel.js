@@ -15,7 +15,7 @@ export const getAllImg  = async ()=>{
 }
 
 //GET IMG BY ID
-export const getImgById = async (imgid)=>{
+export const getImg = async (imgid)=>{
     try {
         const img = await db('img')
         .select('*')

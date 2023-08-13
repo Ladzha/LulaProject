@@ -4,7 +4,7 @@ import {db} from '../config/db.js';
 export const getAllUsers  = async ()=>{
     try {
         const usersList = await db('users')
-        .select(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid"])
+        .select(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"])
         .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"])
         console.log("user=>",  usersList)
         return usersList;      
@@ -15,7 +15,7 @@ export const getAllUsers  = async ()=>{
 }
 
 //GET USER FROM DATABASE BY USERNAME
-export const getUserByUserId = async (userid)=>{
+export const getUser = async (userid)=>{
     try {
         const user = await db('users')
         .select(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"])
@@ -30,10 +30,10 @@ export const getUserByUserId = async (userid)=>{
 }
 
 //ADD NEW USER 
-export const addNewUser = async (userid, username, firstname, lastname, email, hash)=>{
+export const addUser = async ( username, firstname, lastname, email, hash)=>{
     try {
         const newUser = await db('users')
-        .where('userid', userid)
+        // .where('userid', userid)
         .insert({username, firstname, lastname, email, password: hash, created: new Date()})
         .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"]);
         // console.log("New user", newUser);

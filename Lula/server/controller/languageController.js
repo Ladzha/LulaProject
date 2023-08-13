@@ -1,7 +1,7 @@
-import { getAllLanguage, getLanguageById, addLanguage, deleteLanguage } from '../models/languageModel.js';
+import { getAllLanguage, getLanguage, addLanguage, deleteLanguage } from '../models/languageModel.js';
 
 //GET ALL LANGUAGES
-export const getAllLanguagesData = async(request, response)=>{
+export const getAllLanguagesController = async(request, response)=>{
     try {
         const languageList = await getAllLanguage();
         response.json(languageList)           
@@ -9,13 +9,13 @@ export const getAllLanguagesData = async(request, response)=>{
             console.log(error)
             response.status(500).json({ msg: 'Failed to fetch languages.'})
         }
-}
+} 
 
 //GET LANGUAGE BY ID
-export const getLanguageData= async(request, response)=>{
+export const getLanguageController= async(request, response)=>{
     const languageid = request.params.languageid;
     try {
-        const language = await getLanguageById(languageid);
+        const language = await getLanguage(languageid);
         if(language){
             response.json(language);
         }else{
@@ -28,7 +28,7 @@ export const getLanguageData= async(request, response)=>{
 }
 
 //ADD LANGUAGE
-export const getNewLanguageData = async(request, response)=>{
+export const addLanguageController = async(request, response)=>{
     const languageid = request.body.languageid;
     const language = request.body.language;
     try {
@@ -42,7 +42,7 @@ export const getNewLanguageData = async(request, response)=>{
 }
 
 //DELETE LANGUAGE
-export const deleteLanguageData = async(request, response)=>{
+export const deleteLanguageController = async(request, response)=>{
     const languageid = request.params.languageid;
     try {
         await deleteLanguage(languageid);

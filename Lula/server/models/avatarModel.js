@@ -15,7 +15,7 @@ export const getAllAvatars  = async ()=>{
 }
 
 //GET AVATAR BY ID
-export const getAvatarById = async (avatarid)=>{
+export const getAvatar = async (avatarid)=>{
     try {
         const avatar = await db('avatars')
         .select('*')

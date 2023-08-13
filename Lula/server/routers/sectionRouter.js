@@ -1,11 +1,11 @@
 import express from 'express';
-import { getAllSectionData, getSectionData, getNewSectionData, updateSectionData, deleteSectionData } from '../controller/sectionController.js';
+import { getAllSectionController, getSectionController, addSectionController, updateSectionController, deleteSectionController } from '../controller/sectionController.js';
 
 export const sectionRouter = express.Router();
 
-sectionRouter.get('/section', getAllSectionData);
-sectionRouter.get('/section/:sectionid', getSectionData);
+sectionRouter.get('/section', getAllSectionController);
+sectionRouter.get('/section/:sectionid', getSectionController);
 
-sectionRouter.post('/section/post', getNewSectionData);
-sectionRouter.put('/section/update/:sectionid', updateSectionData);
-sectionRouter.delete('/section/delete/:sectionid', deleteSectionData);
+sectionRouter.post('/section/post', addSectionController);
+sectionRouter.put('/section/update/:sectionid', updateSectionController);
+sectionRouter.delete('/section/delete/:sectionid', deleteSectionController);

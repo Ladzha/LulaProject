@@ -1,6 +1,6 @@
-import { getAllImg, getImgById, getImgBySectionId, addImg, updateImg, deleteImg, getAudioAndCommentsByImgId } from '../models/imgModel.js';
+import { getAllImg, getImg, getImgBySectionId, addImg, updateImg, deleteImg, getAudioAndCommentsByImgId } from '../models/imgModel.js';
 //GET ALL IMAGES
-export const getAllImgData = async(request, response)=>{
+export const getAllImgController = async(request, response)=>{
     try {
         const imgList = await getAllImg();
         response.json(imgList)           
@@ -8,13 +8,13 @@ export const getAllImgData = async(request, response)=>{
             console.log(error)
             response.status(500).json({ msg: 'Failed to fetch images.'})
         }
-}
+} 
 
 //GET IMG BY ID
-export const getImgData= async(request, response)=>{
+export const getImgController= async(request, response)=>{
     const imgid = request.params.imgid;
     try {
-        const image = await getImgById(imgid);
+        const image = await getImg(imgid);
         if(image){
             response.json(image);
         }else{
@@ -27,7 +27,7 @@ export const getImgData= async(request, response)=>{
 }
 
 //GET LIST OF IMG BY USERID
-export const getSectionImgData= async(request, response)=>{
+export const getImgSectionController= async(request, response)=>{
     const sectionid = request.params.sectionid;
     try {
         const img = await getImgBySectionId(sectionid);
@@ -43,7 +43,7 @@ export const getSectionImgData= async(request, response)=>{
 }
 
 //ADD IMAGE
-export const getNewImgData = async(request, response)=>{
+export const addImgController = async(request, response)=>{
     const name = request.body.name;
     const link = request.body.link;
     const sectionid = request.body.sectionid;
@@ -58,7 +58,7 @@ export const getNewImgData = async(request, response)=>{
 }
 
 //UPDATE IMAGE
-export const updateImgData = async(request, response)=>{
+export const updateImgController = async(request, response)=>{
     const imgid = request.params.recordid
 
     const name = request.body.name;
@@ -76,7 +76,7 @@ export const updateImgData = async(request, response)=>{
 }
 
 //DELETE IMAGE
-export const deleteImgData = async(request, response)=>{
+export const deleteImgController = async(request, response)=>{
     const imgid = request.params.imgid;
     try {
         await deleteImg(imgid);
@@ -88,7 +88,7 @@ export const deleteImgData = async(request, response)=>{
         }
 }
 
-export const getData = async(request, response)=>{
+export const getAudioAndCommentsByImgIdController = async(request, response)=>{
     console.log(request.body);
     const data = await getAudioAndCommentsByImgId(request.body.imgid)
     response.json(data.rows)

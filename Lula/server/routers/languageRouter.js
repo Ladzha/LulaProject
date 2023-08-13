@@ -1,10 +1,10 @@
 import express from 'express';
-import { getAllLanguagesData, getLanguageData, getNewLanguageData, deleteLanguageData } from '../controller/languageController.js';
+import { getAllLanguagesController, getLanguageController, addLanguageController, deleteLanguageController } from '../controller/languageController.js';
 
 export const languageRouter = express.Router();
 
-languageRouter.get('/language', getAllLanguagesData);
-languageRouter.get('/language/:languageid', getLanguageData);
+languageRouter.get('/language', getAllLanguagesController);
+languageRouter.get('/language/:languageid', getLanguageController);
 
-languageRouter.post('/language/post', getNewLanguageData);
-languageRouter.delete('/language/delete/:languageid', deleteLanguageData);
+languageRouter.post('/language/post', addLanguageController);
+languageRouter.delete('/language/delete/:languageid', deleteLanguageController);

@@ -16,7 +16,7 @@ export const getAllSection  = async ()=>{
 }
 
 //GET SECTION BY ID
-export const getSectionById = async (sectionid)=>{
+export const getSection = async (sectionid)=>{
     try {
         const section = await db('section')
         .select('*')
