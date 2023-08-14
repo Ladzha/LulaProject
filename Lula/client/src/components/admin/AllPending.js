@@ -42,7 +42,7 @@ const AllPending =()=>{
                         <p>{audio.duration.minutes}:{audio.duration.seconds}</p>
                         <audio src={audio.link} controls/> */}
 
-                        <PendingComponent id={audio.recordid} username = 'Doriana' duration={`${audio.duration.minutes}:${audio.duration.seconds}`} created={new Intl.DateTimeFormat('en-US', {
+                        <PendingComponent id={audio.recordid} username = 'Doriana' duration={`${0}:${0}`} created={new Intl.DateTimeFormat('en-US', {
                             year: 'numeric',
                             month: '2-digit',
                             day: '2-digit',

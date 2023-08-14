@@ -54,6 +54,7 @@ export const addComment = ({userid, recordid, text}) => {
 //UPDATE COMMENT
 export const updateComment = ({text}, commentid) => {
     return db('comments')
+    .select('*')
     .where('commentid', commentid)
     .update({text})
     .returning(["commentid", "userid", "recordid", "text", "created", "updated"])

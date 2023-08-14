@@ -5,20 +5,19 @@ import a3 from '../../../img/avatar15.jpg';
 
 export const tracks = [
   {
-    title: 'Trinix ft Rushawn - Its a beautiful day',
-    src: 'https://www.computerhope.com/jargon/m/example.mp3',
-    src: "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba-online-audio-converter.com_-1.wav",
+    title: 'Its a beautiful day',
+    src: 'https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3',
     author: 'At1',
     thumbnail: a1,
   },
   {
-    title: 'Michael Jackson We Are The World',
+    title: 'We Are The World',
     src: 'https://www.computerhope.com/jargon/m/example.mp3',
     author: 'At2',
     thumbnail: a2,
   },
   {
-    title: 'Dbanj -Top Of The World',
+    title: 'Top Of The World',
     src: "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
     author: 'At3',
     thumbnail: a3,

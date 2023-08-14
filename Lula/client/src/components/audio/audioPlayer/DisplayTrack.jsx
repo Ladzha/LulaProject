@@ -7,9 +7,14 @@ import Template from '../../../img/template.svg';
 
 
 
-const DisplayTrack = ({currentTrack, audioRef, setDuration, progressBarRef}) => {
+const DisplayTrack = ({
+  currentTrack, 
+  audioRef,
+  progressBarRef,
+  setDuration}) => {
 
     const onLoadedMetadata = () =>{
+      console.log("DURATION", audioRef.current.duration);
       const seconds = audioRef.current.duration;
       setDuration(seconds)
       progressBarRef.current.max=seconds;
@@ -17,7 +22,6 @@ const DisplayTrack = ({currentTrack, audioRef, setDuration, progressBarRef}) => 
 
   return (
     <div>
-        DisplayTrack
         <div className='playBlock'>
           <img 
           src={currentTrack.thumbnail || Template} 
@@ -26,11 +30,11 @@ const DisplayTrack = ({currentTrack, audioRef, setDuration, progressBarRef}) => 
         </div> 
 
         <p>{currentTrack.title}</p>
-        <p>{currentTrack.author}</p>
-        <audio src={currentTrack.src} 
-        controls 
-        ref={audioRef} 
-        onLoadedMetadata={onLoadedMetadata}/>
+
+        <audio 
+        src={currentTrack.src}  
+        ref={audioRef}
+        onCanPlay={onLoadedMetadata}/>
         
          {/* <Rating/> */}
 

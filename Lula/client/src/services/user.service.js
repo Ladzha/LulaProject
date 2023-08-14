@@ -26,6 +26,49 @@ export const UserService = {
         } catch (error) {
             console.log(error);
         }
+    },
+
+    async register(username, firstname, lastname, email, password ) {
+        try {
+        const response = await axios.post(`http://localhost:3001/api/users/register`, {
+            username,
+            firstname,
+            lastname,
+            email,
+            password
+        }, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        if(response && response.data){
+            return response.data;
+        }else{
+            console.log('Failed to register user');
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async login(username, password ) {
+        try {
+        const response = await axios.post(`http://localhost:3001/api/users/login`, {
+            username,
+            password
+
+        }, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        if(response.status === 200 && response.data){
+            return response.data;
+        }else{
+            console.log('Failed to login user');
+        }
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
-

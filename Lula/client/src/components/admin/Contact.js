@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Support = (props) => {
+const Contact = (props) => {
   const handleCommentSubmit = (event)=>{
     event.preventDefault()
 
@@ -20,4 +20,4 @@ const Support = (props) => {
   )
 }
 
-export default Support
+export default Contact

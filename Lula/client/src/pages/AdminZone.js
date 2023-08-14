@@ -1,8 +1,8 @@
 import React from 'react';
-import AllUsers from './AllUsers'
-import AllPending from './AllPending'
+import AllUsers from '../components/admin/AllUsers'
+import AllPending from '../components/admin/AllPending'
 
-const AdminZone = (props) => {
+const AdminZone = () => {
   return (
     <div  className='adminContainer'>
       {/* <p className='title'>Users list</p> */}

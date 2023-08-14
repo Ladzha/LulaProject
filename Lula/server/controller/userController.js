@@ -1,6 +1,19 @@
-import {getAllUsers, addUser, updateUser, deleteUser, getUser} from '../models/userModel.js'
+import {getAllUsers, register, login, updateUser, deleteUser, getUser} from '../models/userModel.js'
 import bcrypt from 'bcrypt';
-import jwt  from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+//Create token
+const generateAccessToken = (userid, username, role) => {
+
+    const payload = { userid, username, role}
+
+    return jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '24h'})
+
+}
+
 
 
 //GET ALL USERS
@@ -30,14 +43,13 @@ export const getUserController= async(request, response)=>{
         }
 }
 
-//ADD USER
-export const addUserController = async(request, response)=>{
+//REGISTER USER
+export const registerController = async(request, response)=>{
     const username = request.body.username;
     const firstname = request.body.firstname;
     const lastname = request.body.lastname;
     const email = request.body.email;
     const password = request.body.password +''; //to make it string
-    // const role = request.body.role; //get user role
     
     // const condidate = await getAllUsers({where: {username, email}})
     // if(condidate){
@@ -49,17 +61,48 @@ export const addUserController = async(request, response)=>{
     const hashPassword = bcrypt.hashSync(password, salt)
 
     try {
-        const rows = await addUser(username, firstname, lastname, email, hashPassword)
+        const rows = await register(username, firstname, lastname, email, hashPassword)
         response.json(rows)
-        console.log(rows.username);
-        //Create token
-        // const jwt = jwt.sign({userid:userid, email:email})
-            
+
         } catch (error) {
             console.log(error)
             response.status(404).json({msg: error.message})
         }
 }
+
+//LOGIN
+
+export const loginController = async(request, response)=>{
+    const {username, password}= request.body; //get username and password from request body
+
+    try {
+        const user = await login(username)
+
+        if(user.length === 0){
+            return response.status(404).json({msg: 'Username not found'})
+        }
+
+        //check password
+        const match = bcrypt.compareSync(password + "", user[0].password)
+
+        if(!match)return response.status(400).json({msg: 'Incorrect password'})
+
+                //Create token
+        const tocken=generateAccessToken(user.userid,user.username, user.role)
+        return response.json({tocken})
+        // response.status(200).json({ userinfo: { ...userInfo[0], password: "" } });
+
+        
+        } catch (error) {
+            console.log(error)
+            response.status(404).json({msg: "Something went wrong"})
+        }
+
+
+            
+}
+
+
 
 //UPDATE USER
 export const updateUserController = async(request, response)=>{
@@ -87,7 +130,7 @@ export const updateUserController = async(request, response)=>{
 export const deleteUserController = async(request, response)=>{
     const userid = request.params.userid;
     try {
-        await deleteUser(username);
+        await deleteUser(userid);
         response.json({ msg: 'User deleted successfully.'});
             
         } catch (error) {

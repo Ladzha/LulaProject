@@ -30,14 +30,26 @@ export const getUser = async (userid)=>{
 }
 
 //ADD NEW USER 
-export const addUser = async ( username, firstname, lastname, email, hash)=>{
+export const register = async ( username, firstname, lastname, email, hash)=>{
     try {
         const newUser = await db('users')
-        // .where('userid', userid)
         .insert({username, firstname, lastname, email, password: hash, created: new Date()})
         .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"]);
-        // console.log("New user", newUser);
         return newUser;      
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.message);    
+    }
+}
+
+//LOGIN 
+export const login = async ( username)=>{
+    try {
+        const user = await db('users')  
+        .select('*')
+        .where('username', username)
+        .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"]);
+        return user;      
     } catch (error) {
         console.log(error);
         throw new Error(error.message);    

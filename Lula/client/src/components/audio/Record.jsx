@@ -9,6 +9,7 @@ const Record = () => {
     audio.src = url;
     audio.controls = true;
     document.body.appendChild(audio);
+    console.log(audio.src);
   };
 
   return (
@@ -17,7 +18,9 @@ const Record = () => {
         onRecordingComplete={(blob) => addAudioElement(blob)}
         recorderControls={recorderControls}
       />
-      <button onClick={recorderControls.stopRecording}>Stop recording</button>
+      <button className='submitButton' onClick={recorderControls.stopRecording}>Stop recording</button>
+      <button className='submitButton'>Send to review</button>
+      <button className='submitButton'>Delete record</button>
     </div>
   )
 }

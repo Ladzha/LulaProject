@@ -20,9 +20,8 @@ const AudioPlayer  = () => {
   const [duration, setDuration]=useState(0); //to get duration of the audio
 
 
-  return (
-    <div className='audio-player'>AudioPlayer      
-    <div className='inner'>
+  return (    
+    <div className='innerd'>
       <DisplayTrack 
       currentTrack={currentTrack} 
       audioRef={audioRef}
@@ -46,8 +45,6 @@ const AudioPlayer  = () => {
       audioRef={audioRef} 
       duration ={duration} 
       timeProgress={timeProgress} />
-    </div>
-
     </div>
     
   )

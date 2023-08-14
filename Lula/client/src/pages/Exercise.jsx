@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AudioService } from '../../services/audio.service.js';
-import { ImgService } from '../../services/img.service.js';
+import { AudioService } from '../services/audio.service.js';
+import { ImgService } from '../services/img.service.js';
 
 import {useState, useEffect, useContext} from 'react';
-import AudioComponent from '../audio/AudioComponent.jsx';
+import AudioComponent from '../components/audio/AudioComponent.jsx';
 
 
-const ExerciseComponent = () => {
+const Exercise = () => {
 
 
       const [audios, setAudios]=useState([])
@@ -51,7 +51,7 @@ const ExerciseComponent = () => {
             {audios.length > 0 && audios.map((audio, index)=>{
                   return( 
                        <div key={index}>
-                          <AudioComponent id={audio.recordid}  duration={`${audio.duration.minutes}:${audio.duration.seconds}`} created={new Intl.DateTimeFormat('en-US', {
+                          <AudioComponent id={audio.recordid}  duration={`${0}:${0}`} created={new Intl.DateTimeFormat('en-US', {
                               year: 'numeric',
                               month: '2-digit',
                               day: '2-digit',
@@ -79,4 +79,4 @@ const ExerciseComponent = () => {
       )
 }
 
-export default ExerciseComponent
+export default Exercise

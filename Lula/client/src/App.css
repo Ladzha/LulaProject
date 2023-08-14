@@ -296,6 +296,11 @@ font-weight: bold;
   font-weight: 600;
   color: var(--secondary-text-color);
   margin: 0px;
+  cursor: pointer;
+}
+
+.hint:hover{
+  color: var(--main-text-color);
 }
 
 .boldLink{

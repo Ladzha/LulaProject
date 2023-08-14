@@ -1,8 +1,9 @@
 import React from 'react'
 
-const ProgressBar = ({ progressBarRef, audioRef, duration, timeProgress }) => {
+const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
 
   const handleProgressChange =()=>{
+    if(!audioRef.current) return;
     audioRef.current.currentTime=progressBarRef.current.value;
   }
 
@@ -17,7 +18,6 @@ const ProgressBar = ({ progressBarRef, audioRef, duration, timeProgress }) => {
     }
     return '00:00';
   };
-
 
 
   return (

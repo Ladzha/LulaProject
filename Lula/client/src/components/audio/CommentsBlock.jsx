@@ -10,6 +10,12 @@ const CommentsBlock = () => {
     const [commentForm, setCommentForm] = useState(false)
     const [comments, setComments]=useState([]);
 
+    const [currentUser, setCurrentUser] = useState({})
+
+    currentUser.username = 'Dona';
+    currentUser.avatar = avatar;
+    currentUser.avatar = avatar;
+
     const handleComment = ()=>{
         setCommentForm(!commentForm)
     }

@@ -17,23 +17,25 @@ const Controls = ({
   audioRef, 
   progressBarRef, 
   duration, 
-  setTimeProgress, 
-  tracks, 
-  trackIndex, 
+  setTimeProgress,  
   setTrackIndex, 
-  setCurrentTrack
+  setCurrentTrack,
+  tracks, 
+  trackIndex
 }) => {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const [volume, setVolume] = useState(60)
+  const [volume, setVolume] = useState(60) //For Volume slider
 
   const playAnimationRef = useRef(); //for animating progress
 
+  
   const repeat = useCallback(()=>{ //useCallback to cash function between rendering
     
-    const currentTime = audioRef.current.currentTime;
+    const currentTime = audioRef.current ? audioRef.current.currentTime : 0;
     setTimeProgress(currentTime);
+    if(!progressBarRef.current) return;
     progressBarRef.current.value = currentTime;
     progressBarRef.current.style.setProperty(
       '--range-progress',
@@ -42,88 +44,117 @@ const Controls = ({
 
     playAnimationRef.current=requestAnimationFrame(repeat);
  
-  
   }, [audioRef, progressBarRef, duration, setTimeProgress]);
 
   useEffect(()=>{
-    if(isPlaying){
+    if(isPlaying && audioRef.current){
       audioRef.current.play();
-      // playAnimationRef.current=requestAnimationFrame(repeat)
+      playAnimationRef.current=requestAnimationFrame(repeat)
     }else{
-      audioRef.current.pause();
-      // cancelAnimationFrame(playAnimationRef.current)
+      audioRef.current?.pause();
+      cancelAnimationFrame(playAnimationRef.current)
     }
+
+    audioRef.current.addEventListener('ended', () => {
+      setIsPlaying(false); // Change the button to PlayButton when track finishes
+      cancelAnimationFrame(playAnimationRef.current);
+    });
 
     playAnimationRef.current=requestAnimationFrame(repeat);
 
+
+
     return () => {
+      if(!audioRef.current) return;
+      audioRef.current.removeEventListener('ended', () => {
+        setIsPlaying(false);
+        cancelAnimationFrame(playAnimationRef.current);
+      });
+
       cancelAnimationFrame(playAnimationRef.current); //from chatGPT
     };
 
   }, [isPlaying, audioRef, repeat])
 
+  // useEffect(()=>{
+  //   if(audioRef.current.currentTime){
+  //     if(audioRef.current.currentTime===duration){
+  //       isPlaying =(false)
+  //     }
+  //   }
+
+  // }, [audioRef]);  //to change button in the and of a track. Does NOT  work?
+
   useEffect(()=>{
-    if(audioRef){
-      audioRef.current.volume = volume /100;
+    if(audioRef.current){
+      audioRef.current.volume = volume /100; 
     }
-  }, volume, audioRef)
+  }, [volume, audioRef]);
 
   const togglePlayPause =()=>{
     setIsPlaying(!isPlaying)
   }
 
   const handlePrevious =()=>{
-    if(trackIndex ===0){
+    console.log("PREVIOUS", trackIndex);
+    if(trackIndex === 0){
       let lastTrackIndex = tracks.length-1;
       setTrackIndex(lastTrackIndex);
       setCurrentTrack(tracks[lastTrackIndex]);
     }
     else{
-      setTrackIndex((prev) => prev -1);
+      setTrackIndex(trackIndex-1);
       setCurrentTrack(tracks[trackIndex - 1])
     } 
+    audioRef.current.play();
   };
 
   const handleNext =()=>{
+    console.log("NEXT", trackIndex);
     if(trackIndex >=tracks.length -1){
       setTrackIndex(0);
       setCurrentTrack(tracks[0]);
     }
     else{
-      setTrackIndex((prev) => prev +1);
+      setTrackIndex(trackIndex +1);
       setCurrentTrack(tracks[trackIndex +1])
     } 
+    audioRef.current.play();
   };
 
   return (
     <div className='plyerElement'>  
       <div className='line'>
 
-          {/* <div className='playBlock'>
+          <div className='playBlock'>
 
-          </div> */}
           <div className='playerButtonsBox'>
 
-            <button onCanPlay={handlePrevious}>
-              <img className='playerIcons' src={PrevButton} alt='Previous'/>
-            </button>
-            <button onClick={togglePlayPause}>
-              <img className='playerIcons' 
+              <img  onClick={handlePrevious} 
+              className='playerIcons' 
+              src={PrevButton} alt='Previous'/>
+  
+              <img onClick={togglePlayPause}
+              className='playerIcons' 
               src={isPlaying? PauseButton: PlayButton}
               alt={isPlaying ? 'Pause' : 'Play'}/>
-            </button> 
-            <button onCanPlay={handleNext}>
-              <img className='playerIcons' src={NextButton} alt='Next'/>
-            </button>
-               
-            <div className="volume">
 
-      <button><FaVolumeUp/></button>
-      <input style={{background: `linear-gradient(to right, #f50 ${volume}%, #ccc ${volume}%)`}} type="range" min={0} max={100} value={volume} onChange={(event)=>setVolume(event.target.value)}/>
 
-    </div>
+              <img onClick={handleNext}
+              className='playerIcons' 
+              src={NextButton} alt='Next'/>
+
+          </div> 
+
+          <div className="volume">
+             <FaVolumeUp className='icon-grey'/>
+             <input style={{background: `linear-gradient(to right, #FF363C ${volume}%, #FFE500 ${volume}%)`}} 
+             type="range" min={0} max={100} value={volume} 
+             onChange={(event)=>setVolume(event.target.value)}/>
+
           </div>
 
+          </div>
       </div>
     </div>
   )

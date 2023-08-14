@@ -69,30 +69,25 @@ const Profile = (props) => {
       </div>
 
       <div className='profileContainer'>
-
-
-      </div>
-      <div className='homeContainer'>
         <div className= 'box listRecord'>
         <AudioPlayer/>
         {audios.length > 0 && audios.map((audio, index)=>{
           return( 
                   <div key={index}>
-                      <AudioComponent id={audio.recordid}  duration={`${audio.duration.minutes}:${audio.duration.seconds}`} created={new Intl.DateTimeFormat('en-US', {
+                      <AudioComponent id={audio.recordid}  duration={`${0}:${0}`} created={new Intl.DateTimeFormat('en-US', {
                         year: 'numeric',
                         month: '2-digit',
                                       day: '2-digit',
                                       hour: '2-digit',
                                       minute: '2-digit',
                                   }).format(new Date(audio.created))}/>
-          
                               </div>
-                              )
+                            )
                          })
                       }   
                     </div>
-                  </div>                 
-         <div>
+                </div>                 
+            <div>
         </div>
     </div>
   )

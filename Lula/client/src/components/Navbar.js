@@ -23,7 +23,7 @@ const Navbar = () => {
           <NavLink to="/admin" className='link'>Admin</NavLink>
         </li>
         <li>
-          <NavLink to="/support" className='link'>Contact us</NavLink>
+          <NavLink to="/contact" className='link'>Contact us</NavLink>
         </li>
 
         <li>

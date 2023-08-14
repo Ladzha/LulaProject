@@ -1,7 +1,11 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import { Link } from 'react-router-dom';
+import { UserService } from '../../services/user.service.js';
+
 
 const Register = () => {
+
+  const formRef = useRef();
 
   const handleSubmit =async (event)=>{
     event.preventDefault()
@@ -13,30 +17,18 @@ const Register = () => {
     const password = event.target.inputPassword.value;
 
     try {
-      const registerResponse = await fetch('http://localhost:3001/api/users/register', {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({username, firstname, lastname, email, password})
-      })
-      const parseRegisterData = await registerResponse.json()
-      console.log("parseRegisterData=", parseRegisterData);
-
-    } catch (error) {
-        console.log(error)   
-    }
-
-    console.log(username, ' ', firstname, ' ', lastname, ' ', email, ' ', password)
-
+      const userData = await UserService.register(username, firstname, lastname, email, password);
+      console.log('User registered:', userData);
+      formRef.current.reset();  //clean inputs 
+      } catch (error) {
+          console.log(error)   
+      }
   }
-
-
 
   return (
     <div className='registerBox box'>
       <p className='title'>Create Account</p>
-      <form className='form' onSubmit={(event)=>handleSubmit(event)}>
+      <form className='form' onSubmit={(event)=>handleSubmit(event)} ref={formRef}>
         <input className="input" type='text'id="inputUsername" name="inputUsername" placeholder='Username' required/>
         <input className="input" type='text' id="inputFirstName" name="inputFirstName" placeholder='First Name' required/>
         <input className="input" type='text' id="inputLastName" name="inputLastName" placeholder='Last Name' required/>
@@ -45,7 +37,7 @@ const Register = () => {
         <input className="input" type='password' id="inputPasswordConfirm" name="inputPasswordConfirm" placeholder='Confirm Password' required/>
         <button className='submitButton' type="submit">Register</button>   
       </form>
-      <p className='hint'>Already have an account? <span className="boldLink"><Link to="login">Login</Link></span></p>
+      <p className='hint'>Already have an account? <span className="boldLink"><Link to="/login">Login</Link></span></p>
     </div>
   )
 }

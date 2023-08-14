@@ -1,7 +1,7 @@
 import React from 'react'
 import { ImgService } from '../services/img.service.js';
 import {useState, useEffect} from 'react';
-import ExercisePreview from './exercises/ExercisePreview.jsx';
+import ExercisePreview from '../components/exercises/ExercisePreview.jsx';
 
 
 const Home = () => {
