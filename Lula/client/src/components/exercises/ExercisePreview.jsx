@@ -26,7 +26,7 @@ const ExercisePreview = ({ id }) => {
                         console.log("img", sectionData);
                     }
 
-                    const languageData = await LanguageService.getById(1);
+                    const languageData = await LanguageService.getById(imgData[0].languageid);
                     setLanguage(languageData);
                     console.log("img", languageData);
 
@@ -42,11 +42,11 @@ const ExercisePreview = ({ id }) => {
     
       return (
         <div className='previewBox'>
-           <Link to="/exercise" ><img className='imgPreview' src={img[0].link}/></Link>
+          <Link to={`/exercise/${img[0].imgid}`} ><img className='imgPreview' src={img[0].link}/></Link>
           <div className='previewInfo'>
-          <p className='languageButton'>{language[0].language}</p>
-          <p className='sectionButton'>{section[0].name}</p>
-         
+          <Link to={'/'} ><p className='languageButton'>Back</p></Link>
+          <Link to={`/exercise/${img[0].imgid}`} ><p className='sectionButton'>Learn</p></Link>
+      
           </div>
         </div>
       )

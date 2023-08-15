@@ -42,7 +42,7 @@ html, body, #root{
 }
 
 .mainContainer{
-  margin: 50px;
+  margin: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,8 +52,15 @@ html, body, #root{
   flex: 1 1 auto;
 }
 
+.containerColumn{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .homeContainer{
-  margin-top: 100px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -63,7 +70,6 @@ html, body, #root{
 }
 
 .exerciseContainer{
-  margin-top: 100px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -72,7 +78,9 @@ html, body, #root{
   gap: 45px;
 }
 
-
+Link{
+  background-color: #6100f2;
+}
 .adminContainer{
 /* background-color: #BABABA;
 width: 100vw;
@@ -104,6 +112,37 @@ button {
   background: none;
 }
 
+a{
+  color: 'inherit';
+  outline: none;
+  text-decoration: none;
+}
+
+.titleHomeMain{
+  color: var(--white-color);
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.titleMain{
+  color: var(--white-color);
+  font-size: 2rem;
+  font-weight:400;
+  padding: 20px;
+  margin-bottom: 50px;
+  border-bottom: var(--border-container) var(--yellow-color);
+}
+
+.moto{
+  margin-top: -40px;
+  font-size: 1.2rem;
+  color: var(--white-color);
+  padding-bottom: 20px;
+  /* margin-bottom: 60px;
+  border-bottom: var(--border-container) var(--yellow-color); */
+}
+
 .link{
   text-decoration: none;
   color: var(--blue-color);
@@ -127,6 +166,10 @@ button {
   bottom: 0;
 }
 
+.loading{
+    color: var(--white-color);
+    font-weight: 400;
+}
 
 /*HOME PAGE*/
 /*ELEMENT PREVIEW*/
@@ -159,7 +202,7 @@ button {
   font-weight:500;
   color: aliceblue;
   cursor: pointer;
-  width: 45%;
+  width: 100px;
   height: 40px;
 }
 
@@ -271,10 +314,9 @@ font-weight: bold;
   font-size: 0.85rem;
   font-weight:600;
   height: 40px;
-  box-shadow: var(--shadow);
 }
 
-.submitButton:active{
+.submitButton:active, .sectionButton:active, .languageButton:active{
   background-color: var(--green-color);
   color: var(--white-color);
   font-family: 'Montserrat', sans-serif;
@@ -430,7 +472,7 @@ li{
   margin: 1px;
 }
 
-.icon-red, .icon-green, .icon-grey, .icon-more, .icon-heart, .icon-home, .submitButton, .playerIcons{
+.icon-red, .icon-green, .icon-grey, .icon-more, .icon-heart, .icon-home, .submitButton, .playerIcons, .sectionButton, .languageButton{
   cursor: pointer;
   transition: transform 0.3s;
 }
@@ -439,8 +481,9 @@ li{
   transform: scale(1.1);
 }
 
-.submitButton:hover{
+.submitButton:hover, .sectionButton:hover, .languageButton:hover {
   transform: scale(1.02);
+  box-shadow: var(--shadow);
 }
 
 

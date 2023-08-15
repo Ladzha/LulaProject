@@ -71,6 +71,7 @@ CREATE TABLE img(
 CREATE TABLE section(
     sectionid SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
+    preview VARCHAR(255),
 );
 
 

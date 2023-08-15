@@ -2,16 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AudioService } from '../services/audio.service.js';
 import { ImgService } from '../services/img.service.js';
+import {useParams} from 'react-router-dom';
 
 import {useState, useEffect, useContext} from 'react';
-import AudioComponent from '../components/audio/AudioComponent.jsx';
+import AudioComponent from '../components/audio/AudioComponent.js';
+import AllAudio from '../components/audio/AllAudio.js'
 
 
 const Exercise = () => {
 
-
-      const [audios, setAudios]=useState([])
-      const [img, setImg]=useState([{}]);
+    const { imgid } = useParams();
+    const [audios, setAudios]=useState([])
+    const [img, setImg]=useState([{}]);
   
       useEffect(() => {
         //   if (!id) return;
@@ -22,7 +24,7 @@ const Exercise = () => {
                 console.log(data);
                 setAudios(data);   
   
-                const imgData = await ImgService.getById(2);
+                const imgData = await ImgService.getById(imgid);
                 setImg(imgData);
                 console.log("img", imgData);
 
@@ -45,8 +47,13 @@ const Exercise = () => {
     //   }, [])
   
       return(
+        <div className='containerColumn'>
+
+          <p className='titleMain'> Listen to what they say about it </p>
+
           <div className='exerciseContainer'>
             <div className= 'box listRecord'>
+              <AllAudio/>
 
             {audios.length > 0 && audios.map((audio, index)=>{
                   return( 
@@ -65,17 +72,15 @@ const Exercise = () => {
               }
 
             </div>
-            <div>
-            <p className='title'>Exrsice 1: Speaking about nature.</p>
-            <img className='imgExercise' src={img[0].link}/>
-            <div className='sectionExercise'>
-            <Link to="/audio">Audio</Link>...
-            <Link to="/record">Record</Link>
-            </div>
-           
-
+              <div>
+              <img className='imgExercise' src={img[0].link}/>
+              <div className='sectionExercise'>
+              <Link to="/audio">Audio</Link>...
+              <Link to="/record">Record</Link>
+              </div>
             </div>
           </div>
+        </div>
       )
 }
 

@@ -1,5 +1,5 @@
 
-import {getAllPending, getPending, addPending, deletePending} from '../models/pendingModel.js'
+import {getAllPending, getPending, addPending, deletePending, getPendingWithUserInfo} from '../models/pendingModel.js'
 
 //GET ALL AUDIO
 export const getAllPendingController = async (request, response) => {
@@ -14,7 +14,7 @@ export const getAllPendingController = async (request, response) => {
 
 //GET PENDINGAUDIO BY ID
 export const getPendingController= async(request, response)=>{
-    const recordid = request.params.recordid ;
+    const recordid = request.params.recordid;
     try {
         const pendingAudio = await getPending(recordid);
         if(pendingAudio){
@@ -56,3 +56,16 @@ export const deletePendingController = async(request, response)=>{
             response.status(500).json({ msg: 'Failed to delete record.' });
         }
 }
+
+
+//GET ALL AUDIO WITH USER INFO
+export const getPendingWithUserInfoController = async (request, response) => {
+    const recordid = request.params.recordid;
+    try {
+        const pendingAudioList = await getPendingWithUserInfo(recordid);
+        response.json(pendingAudioList);
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({ msg: 'Failed to fetch pending audios.' });
+    }
+} 

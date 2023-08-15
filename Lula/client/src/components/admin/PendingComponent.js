@@ -4,33 +4,22 @@ import { UserService } from '../../services/user.service.js';
 import { PendingService } from '../../services/pending.service.js';
 import PendingInfoBox from '../elements/PendingInfoBox.js';
 
-const PendingComponent = ({id, duration, created}) => {
+const PendingComponent = ({recordid, created}) => {
 
     const [audio, setAudio]=useState([{}]);
-    const [user, setUser]=useState([{}]);
-    const [avatar, setAvatar]=useState([{}]);
+    // const [user, setUser]=useState([{}]);
+    // const [avatar, setAvatar]=useState([{}]);
     
-
+console.log("TEST RECORD ID", recordid);
     useEffect(() => {
-      if (!id) return;
+      if (!recordid) return;
       const fetchData = async () => {
           try {
 
-              const audioData = await PendingService.getById(id);
+              const audioData = await PendingService.getAudioWithUserInfo(recordid);
               setAudio(audioData);
-
-              if(audioData.userid){
-                const userData = await UserService.getById(audioData.userid);
-                setUser(userData);
-
-                if (userData.avatarid) {
-                    const avatarData = await AvatarService.getById(userData.avatarid);
-                    setAvatar(avatarData);
-                    console.log(userData.avatarid);
-                    console.log(avatarData);
-                    console.log(avatar[0].link);
-                }
-              }
+              console.log("AUDIO", audio[0].name);
+              console.log('AUDIO DATA', audioData);
 
           } catch (error) {
               console.log(error);
@@ -38,7 +27,7 @@ const PendingComponent = ({id, duration, created}) => {
       };
 
       fetchData();
-  }, [id]);
+  }, [recordid]);
 
     
     const handleApproval=()=>{
@@ -57,7 +46,7 @@ const PendingComponent = ({id, duration, created}) => {
         
         <p className='hint'>Upload: {created}</p>
 
-        <PendingInfoBox avatar={avatar[0].link} username ={user.username} info={duration}/>
+        <PendingInfoBox avatar={audio[0].creator_avatar_link} username ={audio[0].creator_username} info={`${0}:${0}`} audio={audio.link}/>
 
     </div>
     </div>
@@ -66,3 +55,17 @@ const PendingComponent = ({id, duration, created}) => {
 }
 
 export default PendingComponent
+
+
+              // if(audio.userid){
+              //   const userData = await UserService.getById(audio.userid);
+              //   setUser(userData);
+
+              //   if (userData.avatarid) {
+              //       const avatarData = await AvatarService.getById(userData.avatarid);
+              //       setAvatar(avatarData);
+              //       console.log(userData.avatarid);
+              //       console.log(avatarData);
+              //       console.log(avatar[0].link);
+              //   }
+              // }

@@ -1,27 +1,27 @@
 import React from 'react';
-import {PendingService} from '../../services/pending.service.js';
+import {AudioService} from '../../services/audio.service.js';
 
 import {useState, useEffect} from 'react';
-import PendingComponent from './PendingComponent.js';
+import AudioComponent from './AudioComponent.js';
 
-const AllPending =()=>{
+const AllAudio =()=>{
 
-    const [pendingAudios, setPendingAudios]=useState([])
+    const [audios, setAudios]=useState([])
 
     useEffect(()=>{
         const fetchData = async()=>{
-            const pendingData = await PendingService.getAll()
-            setPendingAudios(pendingData)        
+            const audioData = await AudioService.getAll()
+            setAudios(audioData)        
         }
         fetchData()
     }, [])
 
     return(
         <div className= 'box listRecord'>
-            {pendingAudios.length > 0 && pendingAudios.map((audio, index)=>{
+            {audios.length > 0 && audios.map((audio, index)=>{
                 return( 
                      <div key={index}>
-                        <PendingComponent 
+                        <AudioComponent 
                         recordid={audio.recordid} 
                         created={new Intl.DateTimeFormat('en-US', {
                             year: 'numeric',
@@ -30,6 +30,7 @@ const AllPending =()=>{
                             hour: '2-digit',
                             minute: '2-digit',
                         }).format(new Date(audio.created))}/>
+                        <p>ldkjgsldkgjdokgj</p>
                     </div>
                     )
                 })
@@ -37,4 +38,4 @@ const AllPending =()=>{
         </div>
     )
 }
-export default AllPending
+export default AllAudio

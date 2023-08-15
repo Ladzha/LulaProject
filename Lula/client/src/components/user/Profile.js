@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import avatar from '../../img/avatar13.jpg';
 import {useState, useEffect, useContext} from 'react';
-import AudioComponent from '../audio/AudioComponent.jsx';    
+import AudioComponent from '../audio/AudioComponent.js';    
 import { AudioService } from '../../services/audio.service.js';
 import { ImgService } from '../../services/img.service.js';
         
@@ -10,13 +10,10 @@ import AudioPlayer from '../audio/audioPlayer/AudioPlayer'
 
 const Profile = (props) => {
 
-
   const [audios, setAudios]=useState([])
   const [img, setImg]=useState([{}]);  
   
   
-
-
       useEffect(() => {
         const fetchData = async () => {
                       try {
@@ -37,35 +34,19 @@ const Profile = (props) => {
                   fetchData();
               }, []);
         
-
-  // const handleUpdate= async (username)=>{
-  //   try {
-  //     const registerResponse = await fetch(`http://localhost:3001/api/users/${username}`, {
-  //         method: "UPDATE",
-  //     })
-  //     const parseRegisterData = await registerResponse.json()
-  //     console.log("parseRegisterData=", parseRegisterData);
-
-  //   } catch (error) {
-  //       console.log(error)   
-  //   }
-
-  // }
-
-  
-
-  const handleDelete=()=>{
-    
-  }
-
   return (
-    <div className='homeContainer'>
+
+    <div className='containerColumn'>
+
+    <p className='titleMain'> Profile </p>
       <div className='profileContainer'>
         <img className='userIconInComment' src={props.img}></img>
         <p>My name is: {props.username}</p>
         <p>Some information about me: {props.about}</p>
+
         {/* <button onClick={handleUpdate}>Edit information</button>
         <button onClick={handleDelete}>Delete Account</button> */}
+
       </div>
 
       <div className='profileContainer'>

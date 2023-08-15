@@ -3,7 +3,7 @@ import { AvatarService } from '../../services/avatar.service.js';
 import { UserService } from '../../services/user.service.js';
 import { AudioService } from '../../services/audio.service.js';
 import ActiveInfoBox from '../elements/ActiveInfoBox.js'
-import CommentsBlock from '../audio/CommentsBlock'
+import CommentsBlock from './CommentsBlock.jsx'
 
 
 const AudioComponent = ({id, duration, created, classname}) => {
@@ -32,9 +32,6 @@ const AudioComponent = ({id, duration, created, classname}) => {
                 if (userData.avatarid) {
                     const avatarData = await AvatarService.getById(userData.avatarid);
                     setAvatar(avatarData);
-                    console.log(userData.avatarid);
-                    console.log(avatarData);
-                    console.log(avatar[0].link);
                 }
               }
 

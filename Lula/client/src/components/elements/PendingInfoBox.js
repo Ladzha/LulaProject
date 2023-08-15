@@ -4,6 +4,8 @@ import PendingIconBox from './PendingIconBox.js';
 
 const PendingInfoBox = (props) => {
 
+  const audio =props.audio
+
   return (
     <div className='pendingInfoBox'>
   

@@ -33,7 +33,7 @@ export const getSection = async (sectionid)=>{
 export const addSection = ({name}) => {
     return db('section')
     .insert ({name})
-    .returning(["sectionid", "name"])
+    .returning(["sectionid", "name", "preview"])
   }
 
 //UPDATE SECTION
@@ -41,7 +41,7 @@ export const updateSection = ({name}, sectionid) => {
     return db('section')
     .update({name})
     .where('sectionid', sectionid)
-    .returning(["sectionid", "name"])
+    .returning(["sectionid", "name", "preview"])
   }
   
   //DELETE SECTION
@@ -49,5 +49,5 @@ export const updateSection = ({name}, sectionid) => {
     return db('section')
     .where('sectionid', sectionid)
     .del()
-    .returning(["sectionid", "name"])
+    .returning(["sectionid", "name", "preview"])
   }

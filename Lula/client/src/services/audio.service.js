@@ -41,12 +41,13 @@ export const AudioService = {
         }
     },
 
-    async postAudio(userid, recordid, text) { ///Change for audio now it is from component
+    async postAudio(userid, name, link, imgid) { 
         try {
-        const response = await axios.post(`http://localhost:3001/api/comment/post`, {
+        const response = await axios.post(`http://localhost:3001/api/audio/post`, {
             userid, 
-            recordid,
-            text
+            name,
+            link,
+            imgid
         }) 
         if(response){
             return response.data;

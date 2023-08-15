@@ -1,35 +1,47 @@
 import React from 'react'
-import { ImgService } from '../services/img.service.js';
-import {useState, useEffect} from 'react';
-import ExercisePreview from '../components/exercises/ExercisePreview.jsx';
+import { SectionService } from '../services/section.service.js';
 
+import {useState, useEffect} from 'react';
+import SectionPreview from '../components/exercises/SectionPreview.js'
 
 const Home = () => {
 
-      const [previews, setPreviews]=useState([])
-  
+      const [sectionPreviews, setSectionPreviews]=useState([])
+
+    //Get all sections
       useEffect(()=>{
-          const fetchData = async()=>{
-              const data = await ImgService.getAll()
-              console.log(data);
-              setPreviews(data)        
-          }
-          fetchData()
-      }, [])
+        const fetchData = async()=>{
+            const data = await SectionService.getAll()
+            setSectionPreviews(data)        
+        }
+        fetchData()
+    }, [])
+
+        if (!sectionPreviews) {
+        return <div className='loading'>Loading...</div>;
+      }
   
       return(
-          <div className='homeContainer'>
-           
-              {previews.length > 0 && previews.map((preview, index)=>{
-                  return( 
-                       <div key={index}>
-                          <ExercisePreview id={preview.imgid}/>
-                      </div>
-                      )
-                  })
-              }
+        <div className='containerColumn'>
 
-          </div>
+            <p className='titleHomeMain'> Listen Up and Learn with Lula </p>
+            <p className='moto'>Your Language Learning Journey Begins Here."</p>
+
+                <div className='homeContainer'>
+                
+                {sectionPreviews.length > 0 && sectionPreviews.map((preview, index)=>{
+                    return( 
+                            <div key={index}>
+                            <SectionPreview sectionid={preview.sectionid}/>
+                        </div>
+                        )
+                    })
+                }
+
+            </div>
+        </div>
+        
+
       )
   }
 export default Home

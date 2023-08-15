@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 
 import avatar from './img/avatar13.jpg'
 import Exercise from './pages/Exercise.jsx'
+import Section from './pages/Section'
 
 
 import Login from './components/user/Login';
@@ -40,7 +41,7 @@ function AppRouter() {
       <div className="mainContainer">
 
       <Routes>
-      <Route path='/' element={<Home/>}/>
+      <Route path='/' element={<Home/>}/> /*shows all sections*/
       <Route path='/profile/:username' element={<Profile username='Dzha' about='Cool' img={avatar}/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
@@ -51,7 +52,10 @@ function AppRouter() {
       
       <Route path='/admin' element={authContext.isAdmin?<AdminZone/>:<Home/>}/>
       <Route path='/contact' element={<Contact/>}/>
-      <Route path='/exercise' element={<Exercise/>}/>
+
+      <Route path='/section/:sectionid' element={<Section/>}/> /*shows details about one section and all exercises*/
+      <Route path='/exercise/:imgid' element={<Exercise/>}/> /*shows one exercise*/
+      {/* <Route path='/exercise' element={<Exercise/>}/> */}
       </Routes>
 
       </div>

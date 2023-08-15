@@ -13,6 +13,7 @@ export const getAllPending = async () => {
     }
 }
 
+
 //GET RECORD FROM DATABASE BY ID
 export const getPending = async (recordid)=>{
     try {
@@ -43,3 +44,35 @@ export const addPending = ({userid, name, link, duration}) => {
     .del()
     .returning(["recordid", "userid", "name", "link", "created"])
   }
+
+
+//GET ALL AUDIO WITH USER INFO
+export const getPendingWithUserInfo = async (recordid) => {
+    try {
+      const pendingList = await db('pending')
+        .select([
+          'pending.*',
+          'users.username as creator_username',
+          'avatars.link as creator_avatar_link'
+        ])
+        .where('recordid', recordid)
+        .leftJoin('users', 'pending.userid', 'users.userid')
+        .leftJoin('avatars', 'users.avatarid', 'avatars.avatarid')
+        .returning([
+          'pending.recordid',
+          'pending.userid',
+          'pending.name',
+          'pending.link',
+          'pending.created',
+          'pending.rating',
+          'pending.likes',
+          'pending.dislikes',
+          'creator_username',
+          'creator_avatar_link'
+        ]);
+      return pendingList;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  

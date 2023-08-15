@@ -1,6 +1,6 @@
 import express from 'express';
 import { getAllAudiosController, getAudioController, getUserAudioController, addAudioController, updateAudioController, deleteAudioController} from '../controller/audioController.js';
-import { getAllPendingController, getPendingController, addPendingController, deletePendingController } from '../controller/pendingController.js';
+import { getAllPendingController, getPendingController, addPendingController, deletePendingController, getPendingWithUserInfoController } from '../controller/pendingController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { roleMiddleware } from '../middleware/roleMiddleware.js';
 
@@ -17,6 +17,9 @@ audioRouter.put('/audio/update/:recordid', updateAudioController);
 audioRouter.delete('/audio/delete/:recordid', deleteAudioController);  // roleMiddleware(['admin']), only for ADMIN
 
 audioRouter.get('/pending', getAllPendingController); //only for ADMIN
+
+audioRouter.get('/pending/info/userinfo/:recordid', getPendingWithUserInfoController); //only for ADMIN
+
 audioRouter.get('/pending/:recordid', getPendingController); //only for ADMIN
 audioRouter.post('/pending/post', addPendingController); //only for logged in users and admin
 audioRouter.delete('/pending/delete/:recordid', deletePendingController); //only for ADMIN
