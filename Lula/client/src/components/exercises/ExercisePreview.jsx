@@ -15,7 +15,7 @@ const ExercisePreview = ({ id }) => {
             if (!id) return;
             const fetchData = async () => {
                 try {
-    
+
                     const imgData = await ImgService.getById(id);
                     setImg(imgData);
                     console.log("img", imgData);

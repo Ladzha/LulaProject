@@ -30,7 +30,6 @@ const AllAudio =()=>{
                             hour: '2-digit',
                             minute: '2-digit',
                         }).format(new Date(audio.created))}/>
-                        <p>ldkjgsldkgjdokgj</p>
                     </div>
                     )
                 })

@@ -29,7 +29,6 @@ export const getImg = async (imgid)=>{
 }
 
 
-
 //GET ALL IMG BY SECTIONID
 export const getImgBySectionId = async (sectionid)=>{
     try {
@@ -84,21 +83,106 @@ export const updateImg = ({name, sectionid}, imgid) => {
   }
 
 
-  export const getAudioAndCommentsByImgId=(id)=>{
 
-    return db.raw(`SELECT
-        audios.*,
-        users.*,
-        avatars.*
+//GET IMG BY ID AND ALL INFO
+export const getImgInfo = async (imgid)=>{
+  try {
+      const img = await db('img')
+      .select('*')
+      .where('imgid', imgid)
+      .first();
+      if(!img){
+        return null; 
+      }
+
+      const audios = await db('audios')
+      .select('*')
+      .where('imgid', imgid)
+
+      if(!audios){
+        return img;
+      }
+
+      const audioIds = audios.map((audio) => audio.recordid);
       
-      FROM
-        audios 
-      JOIN
-        users ON audios.userid = users.userid
-      LEFT JOIN
-        avatars ON users.avatarid = avatars.avatarid
-      WHERE
-        audios.imgid = ${id};`)
+      const users = await db('users')
+      .select('*')
+      .whereIn('userid', audios.map((audio) => audio.userid));
 
+      const avatars = await db('avatars')
+      .select('*')
+      .whereIn('avatarid', users.map((user) => user.avatarid));
+
+      const comments = await db('comments')
+      .select('*')
+      .whereIn('recordid', audioIds);
+
+      if(!comments){
+        return {
+          image,
+          audios,
+          users,
+          avatars
+        };
+      }
+
+
+      // const commentUsersAvatars = await db('avatars')
+      // .select('*')
+      // .whereIn('avatarid', commentUsersAvatars.map((user) => user.avatarid));
+
+      const commentUsers = await db('users')
+      .select('*')
+      .whereIn('userid', comments.map((comment) => comment.userid));
+
+
+        return {
+          img,
+          audios,
+          users,
+          avatars,
+          comments,
+          commentUsers
+          // commentUsersAvatars   
+        };
+
+  } catch (error) {
+      console.log(error); 
+      throw new Error(error.message);    
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // export const getAudioAndCommentsByImgId=(id)=>{
+
+  //   return db.raw(`SELECT
+  //       audios.*,
+  //       users.*,
+  //       avatars.*
+      
+  //     FROM
+  //       audios 
+  //     JOIN
+  //       users ON audios.userid = users.userid
+  //     LEFT JOIN
+  //       avatars ON users.avatarid = avatars.avatarid
+  //     WHERE
+  //       audios.imgid = ${id};`)
+
+  // }
 

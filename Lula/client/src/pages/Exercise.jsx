@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AudioService } from '../services/audio.service.js';
 import { ImgService } from '../services/img.service.js';
+import { AudioService } from '../services/audio.service.js';
+import { UserService } from '../services/user.service.js';
+import { AvatarService } from '../services/avatar.service.js';
+import { CommentService } from '../services/comment.service.js';
+
+
 import {useParams} from 'react-router-dom';
 
 import {useState, useEffect, useContext} from 'react';
@@ -12,21 +17,52 @@ import AllAudio from '../components/audio/AllAudio.js'
 const Exercise = () => {
 
     const { imgid } = useParams();
-    const [audios, setAudios]=useState([])
+    
     const [img, setImg]=useState([{}]);
-  
-      useEffect(() => {
-        //   if (!id) return;
-          const fetchData = async () => {
+    const [audios, setAudios]=useState([]);
+    const [comments, setComments]=useState([]);
+    const [userCreator, setUserCreator]=useState([{}]);
+    const [user, setUser]=useState([{}]);
+    const [avatar, setAvatar]=useState([{}]);
+
+
+    const [imgInfo, setImgInfo]=useState({});
+
+    useEffect(() => {
+      if (!imgid) return;
+
+      const fetchData = async () => {
               try {
 
-                const data = await AudioService.getAll()
-                console.log(data);
-                setAudios(data);   
-  
-                const imgData = await ImgService.getById(imgid);
+                const imgData = await ImgService.getById(imgid); //IMG BY ID
                 setImg(imgData);
-                console.log("img", imgData);
+
+                if(!imgData) return;
+
+                const audiosData = await AudioService.getByImageId(imgid) //GET LIST OF AUDIO BY IMG ID
+                console.log(audiosData);
+                setAudios(audiosData); 
+
+                // if(!audiosData) return;
+                
+                // const uaerCreatorData = await UserService.getById(audiosData.recordid) // GET USER AUTHOR OF AUDIO BY AUDIO ID
+                // console.log(uaerCreatorData);
+                // setUserCreator(uaerCreatorData);  
+                
+                // const commentsData = await CommentService.getByAudioId(audiosData.recordid)  //GET LIST OF COMMENTS BY AUDIO ID
+                // console.log(commentsData);
+                // setComments(commentsData);   
+
+                // if(!commentsData) return;
+
+
+
+
+
+                // const imgInfoData = await ImgService.getByIdInfo(imgid); //INFO ABOUT IMG
+                // setImgInfo(imgInfoData);
+                // console.log("imgINFO", imgInfoData);
+
 
               } catch (error) {
                   console.log(error);
@@ -34,17 +70,7 @@ const Exercise = () => {
           };
     
           fetchData();
-      }, []);
-
-    //   useEffect(()=>{
-    //       const fetchData = async()=>{
-    //           const data = await AudioService.getAll()
-    //           console.log(data);
-    //           setAudios(data)     
-                 
-    //       }
-    //       fetchData()
-    //   }, [])
+      }, [imgid]);
   
       return(
         <div className='containerColumn'>
@@ -52,32 +78,35 @@ const Exercise = () => {
           <p className='titleMain'> Listen to what they say about it </p>
 
           <div className='exerciseContainer'>
-            <div className= 'box listRecord'>
-              <AllAudio/>
-
-            {audios.length > 0 && audios.map((audio, index)=>{
-                  return( 
-                       <div key={index}>
-                          <AudioComponent id={audio.recordid}  duration={`${0}:${0}`} created={new Intl.DateTimeFormat('en-US', {
-                              year: 'numeric',
-                              month: '2-digit',
-                              day: '2-digit',
-                              hour: '2-digit',
-                              minute: '2-digit',
-                          }).format(new Date(audio.created))}/>
-  
+            {audios &&
+                        <div className= 'box listRecord'>
+                        {/* <AllAudio/> */}
+          
+                      {audios.length > 0 && audios.map((audio, index)=>{
+                            return( 
+                                 <div key={index}>
+                                    <AudioComponent id={audio.recordid}  duration={`${0}:${0}`} created={new Intl.DateTimeFormat('en-US', {
+                                        year: 'numeric',
+                                        month: '2-digit',
+                                        day: '2-digit',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                    }).format(new Date(audio.created))}/>
+            
+                                </div>
+                                )
+                           })
+                        }
                       </div>
-                      )
-                 })
-              }
+            }
 
-            </div>
+
               <div>
-              <img className='imgExercise' src={img[0].link}/>
-              <div className='sectionExercise'>
-              <Link to="/audio">Audio</Link>...
-              <Link to="/record">Record</Link>
-              </div>
+                <img className='imgExercise' src={img[0].link}/>
+                <div className='sectionExercise'>
+                <Link to="/audio">Audio</Link>...
+                <Link to="/record">Record</Link>
+                </div>
             </div>
           </div>
         </div>

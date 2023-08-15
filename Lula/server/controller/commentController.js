@@ -1,4 +1,4 @@
-import {getAllComments, getComment, getCommentByUserId, addComment, updateComment, deleteComment} from '../models/commentModel.js'
+import {getAllComments, getComment, getCommentByUserId, getCommentByAudioId, addComment, updateComment, deleteComment} from '../models/commentModel.js'
 
 //GET ALL COMMENTS
 export const getAllCommentController = async(request, response)=>{
@@ -27,6 +27,7 @@ export const getCommentController= async(request, response)=>{
         }
 }
 
+
 //GET LIST OF COMMENTS BY USERID
 export const getUserCommentController= async(request, response)=>{
     const userid = request.params.userid;
@@ -43,6 +44,23 @@ export const getUserCommentController= async(request, response)=>{
         }
 }
 
+
+
+//GET LIST OF COMMENTS BY USERID
+export const getCommentByAudioIdController= async(request, response)=>{
+    const recordid = request.params.recordid;
+    try {
+        const comments = await getCommentByAudioId(recordid);
+        if(comments){
+            response.json(comments);
+        }else{
+            response.status(404).json({ msg: 'Comment not found.' });
+        }               
+        } catch (error) {
+            console.log(error)
+            response.status(500).json({ msg: 'Failed to fetch comment.'})
+        }
+}
 
 //GET COMMENT BY AUDIO ID
 export const getAudioCommentController= async(request, response)=>{

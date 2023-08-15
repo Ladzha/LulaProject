@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllCommentController, getCommentController, getUserCommentController,  addCommentController, updateCommentController, deleteCommentController } from '../controller/commentController.js';
+import { getAllCommentController, getCommentController, getUserCommentController, getCommentByAudioIdController,  addCommentController, updateCommentController, deleteCommentController } from '../controller/commentController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { roleMiddleware } from '../middleware/roleMiddleware.js';
 
@@ -9,6 +9,8 @@ commentRouter.get('/comment', getAllCommentController);
 commentRouter.get('/comment/:commentid', getCommentController);
 
 commentRouter.get('/comment/user/:userid', getUserCommentController);
+
+commentRouter.get('/comment/audio/:recordid', getCommentByAudioIdController);
 
 commentRouter.post('/comment/post', authMiddleware, addCommentController); //only for logged in users
 commentRouter.put('/comment/update/:commentid', authMiddleware, updateCommentController); //only for logged in users

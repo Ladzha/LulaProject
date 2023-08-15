@@ -40,11 +40,25 @@ export const CommentService = {
             console.log(error);
         }
     },
-
+    
 
     async getByUserId(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/comment/${id}`)
+        const response = await axios.get(`http://localhost:3001/api/comment/user/${id}`)
+        if(response){
+            return response.data;
+        }else{
+            console.log('Failed to find comment');
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    
+    async getByAudioId(id) { 
+        try {
+        const response = await axios.get(`http://localhost:3001/api/comment/audio/${id}`)
         if(response){
             return response.data;
         }else{

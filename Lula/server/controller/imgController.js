@@ -1,4 +1,4 @@
-import { getAllImg, getImg, getImgBySectionId, getImgByLanguageId, addImg, updateImg, deleteImg, getAudioAndCommentsByImgId } from '../models/imgModel.js';
+import { getAllImg, getImg, getImgBySectionId, getImgByLanguageId, addImg, updateImg, deleteImg, getImgInfo } from '../models/imgModel.js';
 //GET ALL IMAGES
 export const getAllImgController = async(request, response)=>{
     try {
@@ -57,6 +57,24 @@ export const getImgLanguageController= async(request, response)=>{
             response.status(500).json({ msg: 'Failed to fetch img.'})
         }
 }
+
+
+//GET IMG BY ID AND ALL INFO
+export const getImgInfoController= async(request, response)=>{
+    const imgid = request.params.imgid;
+    try {
+        const imageDetails = await getImgInfo(imgid);
+        if(imageDetails){
+            response.json(imageDetails);
+        }else{
+            response.status(404).json({ msg: 'Image not found.' });
+        }               
+        } catch (error) {
+            console.log(error)
+            response.status(500).json({ msg: 'Failed to fetch image.'})
+        }
+}
+
 
 
 //ADD IMAGE

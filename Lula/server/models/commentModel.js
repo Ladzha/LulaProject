@@ -44,6 +44,22 @@ export const getCommentByUserId = async (userid)=>{
     }
 }
 
+//GET ALL COMMENTS RECORDS FROM DATABASE BY RECORDID
+export const getCommentByAudioId = async (recordid)=>{
+    try {
+        const commentList = await db('comments')
+        .select('*')
+        .where('recordid', recordid)
+        .returning(["commentid", "userid", "recordid", "text", "created", "updated"])
+        console.log("commentList=>",  commentList)
+        return commentList;       
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.message);    
+    }
+}
+
+
 //ADD COMMENT
 export const addComment = ({userid, recordid, text}) => {
     return db('comments')
