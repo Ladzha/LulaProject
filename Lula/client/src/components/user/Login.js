@@ -1,13 +1,11 @@
 import React, {useRef, useState, useContext} from 'react'
 import {NavLink, Link, useLocation, useNavigate  } from 'react-router-dom';
 import { UserService } from '../../services/user.service.js';
-// import { AuthContext } from '../AuthProvider';
 
 import { AppContext } from "../../App.js";
 
 const Login = () => {
 
-    //  const authContext=useContext(AuthContext);
    const formRef = useRef();
 
    const [msg, setMsg] = useState('');

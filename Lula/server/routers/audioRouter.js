@@ -16,7 +16,7 @@ audioRouter.post('/audio/post', addAudioController); //only for ADMIN
 audioRouter.put('/audio/update/:recordid', updateAudioController);  
 audioRouter.delete('/audio/delete/:recordid', deleteAudioController);  // roleMiddleware(['admin']), only for ADMIN
 
-audioRouter.get('/pending', getAllPendingController); //only for ADMIN  authMiddleware,
+audioRouter.get('/pending', authMiddleware, getAllPendingController); //only for ADMIN  authMiddleware,
 
 audioRouter.get('/pending/info/userinfo/:recordid', getPendingWithUserInfoController); //only for ADMIN
 

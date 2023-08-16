@@ -1,18 +1,20 @@
 import React from 'react';
 import {PendingService} from '../../services/pending.service.js';
 
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import PendingComponent from './PendingComponent.js';
 import AudioPlayer from '../audio/audioPlayer/AudioPlayer'
-
+import { AppContext } from '../../App.js';
 const AllPending =()=>{
+    const { token } = useContext(AppContext);
 
     const [pendingAudios, setPendingAudios]=useState([])
     const [zaglushka, setZaglushka,]=useState(false)
 
     useEffect(()=>{
         const fetchData = async()=>{
-            const pendingData = await PendingService.getAll()
+            const pendingData = await PendingService.getAll(token)
+            console.log("PENDING DATA", pendingData);
             setPendingAudios(pendingData)
             setZaglushka(true)        
 

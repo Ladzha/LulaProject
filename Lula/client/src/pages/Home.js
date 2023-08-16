@@ -3,6 +3,7 @@ import { SectionService } from '../services/section.service.js';
 
 import {useState, useEffect} from 'react';
 import SectionPreview from '../components/exercises/SectionPreview.js'
+import Test from '../img/Test.js'
 
 const Home = () => {
 
@@ -28,10 +29,10 @@ const Home = () => {
             <p className='moto'>Your Language Learning Journey Begins Here."</p>
 
                 <div className='homeContainer'>
-                
                 {sectionPreviews.length > 0 && sectionPreviews.map((preview, index)=>{
                     return( 
                             <div key={index}>
+                             
                             <SectionPreview sectionid={preview.sectionid}/>
                         </div>
                         )

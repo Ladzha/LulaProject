@@ -2,10 +2,10 @@ import axios from 'axios';
 
 export const PendingService = {
 
-    async getAll() {
+    async getAll(token) {
         console.log('pending');
         try {
-        const response = await axios.get('http://localhost:3001/api/pending')
+        const response = await axios.get('http://localhost:3001/api/pending',{headers: {'x-access-token': token}})
         if(response){
             console.log(response.data);
             return response.data;

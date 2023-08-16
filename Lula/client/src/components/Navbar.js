@@ -1,15 +1,33 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AiFillHome } from "react-icons/ai";
-// import { AuthContext } from './AuthProvider';
 import { UserService } from '../services/user.service.js';
+import { AppContext } from '../App.js';
+import jwtDecode from 'jwt-decode';
+
 
 
 const Navbar = () => {
 
-  // const authContext=useContext(AuthContext);
-
   const navigate = useNavigate ();
+  const { token } = useContext(AppContext);
+  const [username, setUsername] = useState('');
+
+  useEffect(()=>{
+    if(token){
+      console.log("TOKEN", token);
+      const decodedToken = jwtDecode(token); // Decode the token
+      setUsername(decodedToken.username);
+
+
+    }else{
+      console.log("NET TTOKENA");
+
+    }
+
+}, [])
+
+
 
   const logout = async () => {
     try {
