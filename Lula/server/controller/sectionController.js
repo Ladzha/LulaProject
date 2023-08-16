@@ -44,7 +44,6 @@ export const addSectionController = async(request, response)=>{
 //UPDATE SECTION
 export const updateSectionController = async(request, response)=>{
     const sectionid = request.params.sectionid;
-
     const name = request.body.name;
 
     try {

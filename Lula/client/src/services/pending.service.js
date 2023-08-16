@@ -3,9 +3,11 @@ import axios from 'axios';
 export const PendingService = {
 
     async getAll() {
+        console.log('pending');
         try {
         const response = await axios.get('http://localhost:3001/api/pending')
         if(response){
+            console.log(response.data);
             return response.data;
         }else{
             console.log('Failed to find audio');

@@ -32,7 +32,7 @@ const DisplayTrack = ({
         <p>{currentTrack.title}</p>
 
         <audio 
-        src={currentTrack.src}  
+        src={currentTrack.link}  
         ref={audioRef}
         onCanPlay={onLoadedMetadata}/>
         

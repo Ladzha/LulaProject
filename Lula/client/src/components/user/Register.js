@@ -1,11 +1,14 @@
-import React, {useRef} from 'react'
-import { Link } from 'react-router-dom';
+import React, {useRef, useState} from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import { UserService } from '../../services/user.service.js';
 
 
 const Register = () => {
 
+const navigate = useNavigate();
+
   const formRef = useRef();
+  const [msg, setMsg] = useState('');
 
   const handleSubmit =async (event)=>{
     event.preventDefault()
@@ -20,7 +23,9 @@ const Register = () => {
       const userData = await UserService.register(username, firstname, lastname, email, password);
       console.log('User registered:', userData);
       formRef.current.reset();  //clean inputs 
-      } catch (error) {
+      navigate('/login')
+      
+    } catch (error) {
           console.log(error)   
       }
   }
@@ -34,7 +39,7 @@ const Register = () => {
         <input className="input" type='text' id="inputLastName" name="inputLastName" placeholder='Last Name' required/>
         <input className="input" type='email' id="inputEmail" name="inputEmail" placeholder='Email' required/>
         <input className="input" type='password' id="inputPassword" name="inputPassword" placeholder='Password' required/>
-        <input className="input" type='password' id="inputPasswordConfirm" name="inputPasswordConfirm" placeholder='Confirm Password' required/>
+        {/* <input className="input" type='password' id="inputPasswordConfirm" name="inputPasswordConfirm" placeholder='Confirm Password' required/> */}
         <button className='submitButton' type="submit">Register</button>   
       </form>
       <p className='hint'>Already have an account? <span className="boldLink"><Link to="/login">Login</Link></span></p>

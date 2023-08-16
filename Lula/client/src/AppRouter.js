@@ -22,21 +22,16 @@ import Record from './components/audio/Record';
 import Home from './pages/Home';
 import AdminZone from './pages/AdminZone';
 import Contact from './components/admin/Contact';
-import {AuthContext} from './components/AuthProvider'
+// import {AuthContext} from './components/AuthProvider'
 import Auth from './pages/Auth';
 
 
 
 function AppRouter() {
 
-    const authContext = useContext(AuthContext)
-
-    console.log("AUTHHHHH", authContext);
-
-    let isAdmin = true;
-
   return (
     <div className="App">
+      <Auth>
       <Navbar/>
       <div className="mainContainer">
 
@@ -48,18 +43,19 @@ function AppRouter() {
       <Route path='/record' element={<Record/>}/>
       {/* <Route path='/audio' element={<AudioPlayer/>}/> */}
       <Route path='/account' element={<Account username="Sara" about="I am soo cool" img={avatar}/>}/>
-      
-      
-      <Route path='/admin' element={authContext.isAdmin?<AdminZone/>:<Home/>}/>
+         
+      <Route path='/admin' element={1?<AdminZone/>:<Home/>}/>
       <Route path='/contact' element={<Contact/>}/>
 
       <Route path='/section/:sectionid' element={<Section/>}/> /*shows details about one section and all exercises*/
       <Route path='/exercise/:imgid' element={<Exercise/>}/> /*shows one exercise*/
       {/* <Route path='/exercise' element={<Exercise/>}/> */}
       </Routes>
-
+      
       </div>
       <Footer/>
+      
+      </Auth>
     </div>
   );
 }

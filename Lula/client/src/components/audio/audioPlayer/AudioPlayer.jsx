@@ -9,7 +9,7 @@ import Controls from './Controls'
 
 /*Because we will need the audio data in multiple children components, we will import the playlist file in the AudioPlayer parent component. */
 
-const AudioPlayer  = () => {
+const AudioPlayer = (props) => {
 
   const audioRef = useRef(); //to get audio tag in html
   const progressBarRef = useRef(); //to get input range tag in html
@@ -34,7 +34,7 @@ const AudioPlayer  = () => {
       duration ={duration}
       setTimeProgress={setTimeProgress}
       
-      tracks={tracks}
+      tracks={props.playlist}
       trackIndex={trackIndex}
       setTrackIndex = {setTrackIndex}
       setCurrentTrack={setCurrentTrack}

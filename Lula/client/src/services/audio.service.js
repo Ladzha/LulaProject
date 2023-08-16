@@ -30,9 +30,9 @@ export const AudioService = {
 
     async getByImageId(id) { //not done
         try {
-        const response = await axios.get(`http://localhost:3001/api/audio/${id}`)
+        const response = await axios.get(`http://localhost:3001/api/audio/exercise/records/${id}`)
         if(response){
-            return response.data;
+            return response.data; 
         }else{
             console.log('Failed to find audio');
         }
@@ -43,7 +43,7 @@ export const AudioService = {
 
     async postAudio(userid, name, link, imgid) { 
         try {
-        const response = await axios.post(`http://localhost:3001/api/audio/post`, {
+        const response = await axios.post('http://localhost:3001/api/audio/post', {
             userid, 
             name,
             link,

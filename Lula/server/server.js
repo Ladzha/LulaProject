@@ -2,6 +2,7 @@ import  express  from "express";
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 
 import { audioRouter } from './routers/audioRouter.js';
 import { avatarRouter} from './routers/avatarRouter.js';
@@ -17,7 +18,7 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json()) //for work with json 
-
+app.use(cookieParser());
 
 app.use('/api', audioRouter);
 app.use('/api', avatarRouter);

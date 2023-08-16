@@ -6,11 +6,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 //Create token
-const generateAccessToken = (userid, username, role) => {
+const generateAccessToken = async (userid, username, role) => {
 
     const payload = { userid, username, role}
 
-    return jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '24h'})
+    return jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '1d'})
 
 }
 
@@ -50,11 +50,6 @@ export const registerController = async(request, response)=>{
     const lastname = request.body.lastname;
     const email = request.body.email;
     const password = request.body.password +''; //to make it string
-    
-    // const condidate = await getAllUsers({where: {username, email}})
-    // if(condidate){
-    //     return next(ApiError.badRequest('Username already exist'))
-    // }    
 
     //hide password
     const salt = bcrypt.genSaltSync(5)
@@ -66,12 +61,11 @@ export const registerController = async(request, response)=>{
 
         } catch (error) {
             console.log(error)
-            response.status(404).json({msg: error.message})
+            response.status(404).json({msg: 'User already exist!'})
         }
 }
 
 //LOGIN
-
 export const loginController = async(request, response)=>{
     const {username, password}= request.body; //get username and password from request body
 
@@ -87,21 +81,27 @@ export const loginController = async(request, response)=>{
 
         if(!match)return response.status(400).json({msg: 'Incorrect password'})
 
-                //Create token
-        const tocken=generateAccessToken(user.userid,user.username, user.role)
-        return response.json({tocken})
-        // response.status(200).json({ userinfo: { ...userInfo[0], password: "" } });
-
+        //Create token
+        const accessToken=await generateAccessToken(user.userid, user.username, user.role)
+        
+        //send to cookie
+        response.cookie('token', accessToken, {httpOnly: true, maxAge: 60 * 1000 * 60 * 24})
+        
+        return response.json({token:accessToken})
         
         } catch (error) {
             console.log(error)
             response.status(404).json({msg: "Something went wrong"})
-        }
-
-
-            
+        }       
 }
 
+// Clearing the token
+export const logoutController = (request, response) => {
+    request.headers['x-access-token'] = null;
+    response.clearCookie('token');
+    return response.sendStatus(200);
+};
+    
 
 
 //UPDATE USER

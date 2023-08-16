@@ -3,22 +3,31 @@ import {PendingService} from '../../services/pending.service.js';
 
 import {useState, useEffect} from 'react';
 import PendingComponent from './PendingComponent.js';
+import AudioPlayer from '../audio/audioPlayer/AudioPlayer'
 
 const AllPending =()=>{
 
     const [pendingAudios, setPendingAudios]=useState([])
+    const [zaglushka, setZaglushka,]=useState(false)
 
     useEffect(()=>{
         const fetchData = async()=>{
             const pendingData = await PendingService.getAll()
-            setPendingAudios(pendingData)        
+            setPendingAudios(pendingData)
+            setZaglushka(true)        
+
         }
         fetchData()
-    }, [])
-
+    }, [zaglushka])
+    // const [pendingAudios, setPendingAudios]=useState([])
+    console.log("PENDING AUDIO LIST", pendingAudios);
     return(
         <div className= 'box listRecord'>
-            {pendingAudios.length > 0 && pendingAudios.map((audio, index)=>{
+            <AudioPlayer playlist={pendingAudios}/>
+
+            {pendingAudios ?(
+                
+            pendingAudios.length > 0 && pendingAudios.map((audio, index)=>{
                 return( 
                      <div key={index}>
                         <PendingComponent 
@@ -32,8 +41,10 @@ const AllPending =()=>{
                         }).format(new Date(audio.created))}/>
                     </div>
                     )
-                })
-            }
+                }
+                
+                )
+            ):(<p>There are no pending audios</p>)}
         </div>
     )
 }

@@ -15,12 +15,10 @@ console.log("TEST RECORD ID", recordid);
       if (!recordid) return;
       const fetchData = async () => {
           try {
-
               const audioData = await PendingService.getAudioWithUserInfo(recordid);
               setAudio(audioData);
               console.log("AUDIO", audio[0].name);
               console.log('AUDIO DATA', audioData);
-
           } catch (error) {
               console.log(error);
           }
@@ -29,14 +27,6 @@ console.log("TEST RECORD ID", recordid);
       fetchData();
   }, [recordid]);
 
-    
-    const handleApproval=()=>{
-        console.log('Record Approved');
-    }
-
-    const handleRejection=()=>{
-        console.log('Record Rejected');
-    }
 
   return (
 
@@ -46,7 +36,7 @@ console.log("TEST RECORD ID", recordid);
         
         <p className='hint'>Upload: {created}</p>
 
-        <PendingInfoBox avatar={audio[0].creator_avatar_link} username ={audio[0].creator_username} info={`${0}:${0}`} audio={audio.link}/>
+        <PendingInfoBox avatar={audio[0].creator_avatar_link} username ={audio[0].creator_username} info={`${0}:${0}`} audio={audio.link} recordid={recordid}/>
 
     </div>
     </div>

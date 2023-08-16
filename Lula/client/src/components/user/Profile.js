@@ -12,16 +12,21 @@ const Profile = (props) => {
 
   const [audios, setAudios]=useState([])
   const [img, setImg]=useState([{}]);  
+  const [zaglushka, setZaglushka,]=useState(false)
   
   
       useEffect(() => {
         const fetchData = async () => {
                       try {
-        
-                        const data = await AudioService.getAll()
+                        // const data = await AudioService.getAll()
+                        // console.log(data);
+
+                        const data = await AudioService.getByImageId(1)
                         console.log(data);
+                        
+
                         setAudios(data);   
-          
+                        setZaglushka(true)
                         const imgData = await ImgService.getById(2);
                         setImg(imgData);
                         console.log("img", imgData);
@@ -30,14 +35,14 @@ const Profile = (props) => {
                           console.log(error);
                       }
                   };
-            
+            console.log("AUDIO", audios);
                   fetchData();
-              }, []);
+              }, [zaglushka]);
         
   return (
 
     <div className='containerColumn'>
-
+{/* <p>{audios}</p> */}
     <p className='titleMain'> Profile </p>
       <div className='profileContainer'>
         <img className='userIconInComment' src={props.img}></img>
@@ -51,7 +56,7 @@ const Profile = (props) => {
 
       <div className='profileContainer'>
         <div className= 'box listRecord'>
-        <AudioPlayer/>
+        <AudioPlayer playlist={audios}/>
         {audios.length > 0 && audios.map((audio, index)=>{
           return( 
                   <div key={index}>

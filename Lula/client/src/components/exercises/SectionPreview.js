@@ -44,7 +44,7 @@ const SectionPreview = ({sectionid}) => { // put id from parent component in loo
       <div className='previewBox'>
           <Link to={`/section/${sectionid}`}><img className='imgPreview'src={section[0].preview}/></Link>
           <div className='previewInfo'>
-          <Link to={`/language/${section[0].languageid}`}><p className='sectionButton'>{language[0].language}</p></Link>
+          <Link to={`exercise/language/${section[0].languageid}`}><p className='sectionButton'>{language[0].language}</p></Link>
           <Link to={`/section/${sectionid}`}><p className='sectionButton'>{section[0].name}</p></Link>
         
         </div>

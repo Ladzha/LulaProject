@@ -53,7 +53,7 @@ export const UserService = {
 
     async login(username, password ) {
         try {
-        const response = await axios.post(`http://localhost:3001/api/users/login`, {
+        const response = await axios.post('http://localhost:3001/api/users/login', {
             username,
             password
 
@@ -69,6 +69,16 @@ export const UserService = {
         }
         } catch (error) {
             console.log(error);
+        }
+    },
+
+    async logout() {
+        try {
+        const response = await axios.delete('http://localhost:3001/api/users/logout');
+        if (response.status === 200) {
+        }
+        } catch(error) {
+        console.log(error);
         }
     }
 }

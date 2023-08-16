@@ -4,7 +4,7 @@ export const getAllPending = async () => {
     try {
         const pendingAudioList = await db('pending')
             .select('*')
-            .returning(["recordid", "userid", "name", "link", "created"]);
+            .returning(["recordid", "userid", "name", "link", "created", "imgid"]);
         console.log("pendingAudioList =>", pendingAudioList);
         return pendingAudioList;
     } catch (error) {
@@ -34,7 +34,7 @@ export const getPending = async (recordid)=>{
 export const addPending = ({userid, name, link, duration}) => {
     return db('pending')
     .insert ({userid, name, link, duration})
-    .returning(["recordid", "userid", "name", "link", "created"])
+    .returning(["recordid", "userid", "name", "link", "created", "imgid"])
   }
 
   //DELETE PENDING AUDIO
@@ -42,7 +42,7 @@ export const addPending = ({userid, name, link, duration}) => {
     return db('pending')
     .where('recordid', recordid)
     .del()
-    .returning(["recordid", "userid", "name", "link", "created"])
+    .returning(["recordid", "userid", "name", "link", "created", "imgid"])
   }
 
 
@@ -64,9 +64,7 @@ export const getPendingWithUserInfo = async (recordid) => {
           'pending.name',
           'pending.link',
           'pending.created',
-          'pending.rating',
-          'pending.likes',
-          'pending.dislikes',
+          'pending.imgid',
           'creator_username',
           'creator_avatar_link'
         ]);

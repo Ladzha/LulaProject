@@ -1,4 +1,4 @@
-import {getAllAudios, getAudio, getAudioByUserId, addAudio, updateAudio, deleteAudio} from '../models/audioModel.js'
+import {getAllAudios, getAudio, getAudioByUserId, getAudioByImgId, addAudio, updateAudio, deleteAudio} from '../models/audioModel.js'
 
 //GET ALL AUDIOS
 export const getAllAudiosController = async(request, response)=>{
@@ -43,9 +43,9 @@ export const getUserAudioController= async(request, response)=>{
         }
 }
 
-//GET LIST OF AUDIOS BY INGID
+//GET LIST OF AUDIOS BY IMGID
 export const getAudioByImgIdController= async(request, response)=>{
-    const userid = request.params.userid;
+    const imgid = request.params.imgid;
     try {
         const audios = await getAudioByImgId(imgid);
         if(audios){
@@ -64,9 +64,9 @@ export const addAudioController = async(request, response)=>{
     const userid = request.body.userid ;
     const name = request.body.name;
     const link = request.body.link ;
-    const duration = request.body.duration;
+    const imgid = request.body.imgid;
     try {
-        const audio = await addAudio({userid, name, link, duration})
+        const audio = await addAudio({userid, name, link, imgid})
         response.json(audio)
             
         } catch (error) {
