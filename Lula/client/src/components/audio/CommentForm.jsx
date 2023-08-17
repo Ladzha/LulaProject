@@ -1,10 +1,35 @@
 import React, {useRef} from 'react'
+import {useState, useEffect} from 'react';
 import UserBox from '../elements/UserBox.js'
 import { CommentService } from '../../services/comment.service.js';
+import { UserService } from '../../services/user.service.js';
+import { AvatarService } from '../../services/avatar.service.js';
 
-const CommentForm = (props) => {
+const CommentForm = ({recordid, userid}) => {
 
   const formRef = useRef();
+
+  const [user, setUser]=useState([{}]);
+  const [avatar, setAvatar]=useState([{}]);
+  
+  useEffect(() => {
+    if (!userid) return;
+    const fetchData = async () => {
+      try {
+        const userData = await UserService.getById(userid);
+        setUser(userData);
+
+        if (userData.avatarid) {
+          const avatarData = await AvatarService.getById(userData.avatarid);
+          setAvatar(avatarData);
+          }
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    fetchData();
+}, [recordid, userid]);
 
 
   const handleCommentSubmit = async (event)=>{
@@ -12,7 +37,7 @@ const CommentForm = (props) => {
     const userComment = event.target.commentInput.value;
 
     try {
-      const commentData = await CommentService.postComment(1, 1, userComment);
+      const commentData = await CommentService.postComment(userid, recordid, userComment);
       console.log('Comment posted:', commentData);
 
       event.target.commentInput.value = ''; // Clear the textarea
@@ -27,11 +52,8 @@ const CommentForm = (props) => {
     formRef.current.commentInput.value = ''; // Clear the textarea
   }
   return (
-
       <div className='newCommentBlock'>
-
-      <UserBox avatar={props.avatar} username ={props.username} info={props.about}/>
-
+      <UserBox avatar={avatar[0].link} username ={user.username} info={user.about}/>
       <form 
       className='newComment' 
       onSubmit={(event)=>handleCommentSubmit(event)}

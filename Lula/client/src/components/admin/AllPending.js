@@ -12,9 +12,8 @@ const AllPending =()=>{
 
   useEffect(()=>{
     const fetchData = async()=>{
-        const pendingData = await PendingService.getAll()//token
-        console.log("PENDING DATA", pendingData);
-        setPendingAudios(pendingData)
+      const pendingData = await PendingService.getAll()//token
+      setPendingAudios(pendingData)
     }
     fetchData()
   }, [pendingAudios])
@@ -30,14 +29,13 @@ const AllPending =()=>{
             <PendingComponent 
             recordid={audio.recordid} 
             created={new Intl.DateTimeFormat('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
             }).format(new Date(audio.created))}/>
         </div>)})):(<p>There are no pending audios</p>)}
-      </div>
-    )
+      </div>)
 }
 export default AllPending

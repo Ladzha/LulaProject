@@ -12,7 +12,7 @@ commentRouter.get('/comment/user/:userid', getUserCommentController);
 
 commentRouter.get('/comment/audio/:recordid', getCommentByAudioIdController);
 
-commentRouter.post('/comment/post', authMiddleware, addCommentController); //only for logged in users
+commentRouter.post('/comment/post', addCommentController); //only for logged in users
 commentRouter.put('/comment/update/:commentid', authMiddleware, updateCommentController); //only for logged in users
 commentRouter.delete('/comment/delete/:commentid', authMiddleware, deleteCommentController); //only for logged in users and admin
 

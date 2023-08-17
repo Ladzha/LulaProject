@@ -51,7 +51,7 @@ function AppRouter() {
 
       <Route path='/section/:sectionid' element={<Section/>}/> /*shows details about one section and all exercises*/
       <Route path='/exercise/:imgid' element={<Exercise/>}/> /*shows one exercise*/
-      <Route path='/language/:language' element={<Language/>}/> /*shows all exercise in one language*/
+      <Route path='/language/:languageid' element={<Language/>}/> /*shows all exercise in one language*/
       {/* <Route path='/exercise' element={<Exercise/>}/> */}
       </Routes>
       

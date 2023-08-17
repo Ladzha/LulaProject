@@ -1,21 +1,21 @@
 import React from 'react'
 import { useState, useRef, useEffect } from 'react'
-import{tracks} from './tracks.js'
 
 import DisplayTrack from './DisplayTrack'
 import ProgressBar from './ProgressBar'
 import Controls from './Controls'
 
+/*Because we will need the audio data in multiple children 
+components, we will import the playlist file in the 
+AudioPlayer parent component. */
 
-/*Because we will need the audio data in multiple children components, we will import the playlist file in the AudioPlayer parent component. */
-
-const AudioPlayer = (props) => {
+const AudioPlayer = ({playlist}) => {
 
   const audioRef = useRef(); //to get audio tag in html
   const progressBarRef = useRef(); //to get input range tag in html
 
-  const [trackIndex, setTrackIndex] = useState(0);
-  const [currentTrack, setCurrentTrack]=useState(tracks[trackIndex]); //Track is plying now
+  const [trackIndex, setTrackIndex] = useState(1);
+  const [currentTrack, setCurrentTrack]=useState(playlist[trackIndex]); //Track is plying now
   const [timeProgress, setTimeProgress]=useState(0); //to get current time of audio
   const [duration, setDuration]=useState(0); //to get duration of the audio
 
@@ -34,7 +34,7 @@ const AudioPlayer = (props) => {
       duration ={duration}
       setTimeProgress={setTimeProgress}
       
-      tracks={props.playlist}
+      tracks={playlist}
       trackIndex={trackIndex}
       setTrackIndex = {setTrackIndex}
       setCurrentTrack={setCurrentTrack}
@@ -45,8 +45,7 @@ const AudioPlayer = (props) => {
       audioRef={audioRef} 
       duration ={duration} 
       timeProgress={timeProgress} />
-    </div>
-    
+    </div> 
   )
 }
 

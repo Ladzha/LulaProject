@@ -6,7 +6,7 @@ import ActiveInfoBox from '../elements/ActiveInfoBox.js'
 import CommentsBlock from './CommentsBlock.jsx'
 
 
-const AudioComponent = ({id, duration, created, classname}) => {
+const AudioComponent = ({id, duration, created, classname, commentsList, commentsUsers, commentsAvatars}) => {
 
     const [audio, setAudio]=useState([{}]);
     const [user, setUser]=useState([{}]);
@@ -20,45 +20,38 @@ const AudioComponent = ({id, duration, created, classname}) => {
     useEffect(() => {
       if (!id) return;
       const fetchData = async () => {
-          try {
+        try {
+          const audioData = await AudioService.getById(id);
+          setAudio(audioData);
 
-              const audioData = await AudioService.getById(id);
-              setAudio(audioData);
+          if(audioData.userid){
+            const userData = await UserService.getById(audioData.userid);
+            setUser(userData);
 
-              if(audioData.userid){
-                const userData = await UserService.getById(audioData.userid);
-                setUser(userData);
-
-                if (userData.avatarid) {
-                    const avatarData = await AvatarService.getById(userData.avatarid);
-                    setAvatar(avatarData);
-                }
-              }
+          if (userData.avatarid) {
+            const avatarData = await AvatarService.getById(userData.avatarid);
+            setAvatar(avatarData);
+            }
+          }
 
           } catch (error) {
               console.log(error);
           }
       };
-
       fetchData();
   }, [id]);
-
-    
+ 
+  
   return (
-
     <div className='toApprovalBox'>
     <div className='listBox'>
-  
         <div className='infoBlock'>        
             <ActiveInfoBox avatar={avatar[0].link} username ={user.username} info={duration} toggleComments={toggleComments}/>
-            {commentBlock && <CommentsBlock/>}
-            
+            {/* <p>Audio id {audio.recordid}</p> */}
+            {commentBlock && <CommentsBlock recordid={audio.recordid}/>}    
         </div>
-
+      </div>
     </div>
-
-    </div>
-
   )
 }
 

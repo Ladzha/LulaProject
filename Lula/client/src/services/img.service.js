@@ -55,7 +55,7 @@ export const ImgService = {
 
     async getByIdInfo(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/img/${id}/details`)
+        const response = await axios.get(`http://localhost:3001/api/img/details/${id}`)
         if(response){
             return response.data;
         }else{

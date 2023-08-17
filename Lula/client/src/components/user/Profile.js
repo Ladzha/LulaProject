@@ -4,77 +4,37 @@ import avatar from '../../img/avatar13.jpg';
 import {useState, useEffect, useContext} from 'react';
 import AudioComponent from '../audio/AudioComponent.js';    
 import { AudioService } from '../../services/audio.service.js';
-import { ImgService } from '../../services/img.service.js';
-        
+       
 import AudioPlayer from '../audio/audioPlayer/AudioPlayer'
+import AllAudio from '../audio/AllAudio.js';
 
 const Profile = (props) => {
-
   const [audios, setAudios]=useState([])
   const [img, setImg]=useState([{}]);  
-  const [zaglushka, setZaglushka,]=useState(false)
-  
-  
-      useEffect(() => {
-        const fetchData = async () => {
-           try {
-            // const data = await AudioService.getAll()
-              // console.log(data);
 
-              const data = await AudioService.getByImageId(1)
-              console.log(data);
-                        
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await AudioService.getByUserId(1)
+        setAudios(data);   
 
-              setAudios(data);   
-              setZaglushka(true)
-              const imgData = await ImgService.getById(2);
-              setImg(imgData);
-              console.log("img", imgData);
-        
-              } catch (error) {
-                  console.log(error);
-              }
-          };
-    console.log("AUDIO", audios);
-          fetchData();
-      }, []);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    fetchData();
+  }, []);
         
   return (
-
     <div className='containerColumn'>
-{/* <p>{audios}</p> */}
     <p className='titleMain'> Profile </p>
       <div className='profileContainer'>
         <img className='userIconInComment' src={props.img}></img>
         <p>My name is: {props.username}</p>
         <p>Some information about me: {props.about}</p>
-
-        {/* <button onClick={handleUpdate}>Edit information</button>
-        <button onClick={handleDelete}>Delete Account</button> */}
-
       </div>
-
       <div className='profileContainer'>
-        <div className= 'box listRecord'>
-        <AudioPlayer playlist={audios}/>
-        {audios.length > 0 && audios.map((audio, index)=>{
-          return( 
-                  <div key={index}>
-                      <AudioComponent id={audio.recordid}  duration={`${'00'}:${'00'}`} created={new Intl.DateTimeFormat('en-US', {
-                        year: 'numeric',
-                        month: '2-digit',
-                                      day: '2-digit',
-                                      hour: '2-digit',
-                                      minute: '2-digit',
-                                  }).format(new Date(audio.created))}/>
-                              </div>
-                            )
-                         })
-                      }   
-                    </div>
-                </div>                 
-            <div>
-        </div>
+      </div>
     </div>
   )
 }

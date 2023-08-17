@@ -1,11 +1,5 @@
 import React from 'react';
-import CommentsBlock from '../CommentsBlock';
-import Rating from '../Rating';
-
 import Template from '../../../img/template.svg';
-
-
-
 
 const DisplayTrack = ({
   currentTrack, 
@@ -22,21 +16,19 @@ const DisplayTrack = ({
 
   return (
     <div>
-        <div className='playBlock'>
-          <img 
-          src={currentTrack.avatar || Template} 
-          className='activeRecordAvatar'
-          alt='User avatar'/>  
-        </div> 
+      <div className='playBlock'>
+        <img 
+        src={currentTrack.avatar || Template} 
+        className='activeRecordAvatar'
+        alt='User avatar'/>  
+      </div> 
 
-        <p>{currentTrack.title}</p>
+      <p>{currentTrack.name}</p>
 
-        <audio 
-        src={currentTrack.link}  
-        ref={audioRef}
-        onCanPlay={onLoadedMetadata}/>
-        
-         {/* <Rating/> */}
+      <audio 
+      src={currentTrack.link}  
+      ref={audioRef}
+      onCanPlay={onLoadedMetadata}/>  
 
     </div>
   )

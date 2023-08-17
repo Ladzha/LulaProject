@@ -14,18 +14,16 @@ const Section = () => {
     const [previews, setPreviews]=useState([])
 
     try {
-        useEffect(()=>{
-            const fetchData = async()=>{
-                const sectionData = await SectionService.getById(sectionid) //Get section by id
-                setSection(sectionData);  
-                
-                const imgData = await ImgService.getAllBySectionId(sectionid) //Get all imgs in this section
-                setPreviews(imgData)   
-            }
-            fetchData()
-        }, [sectionid])
-
-     
+      useEffect(()=>{
+        const fetchData = async()=>{
+            const sectionData = await SectionService.getById(sectionid) //Get section by id
+            setSection(sectionData);  
+            
+            const imgData = await ImgService.getAllBySectionId(sectionid) //Get all imgs in this section
+            setPreviews(imgData)   
+        }
+        fetchData()
+    }, [sectionid])
 
       if (!section) {
         return <div className='loading'>Loading...</div>;
@@ -34,22 +32,17 @@ const Section = () => {
     } catch (error) {
         console.log(error);
     }
-
       return(
         <div className='containerColumn'>
-            <p className='titleMain'> Let's talk about "{section[0].name}"</p>
-                <div className='homeContainer'>
-              {previews.length > 0 && previews.map((preview, index)=>{
-                  return( 
-                       <div key={index}>
-                          <ExercisePreview id={preview.imgid}/>
-                      </div>
-                      )
-                  })
-              }
+          <p className='titleMain'> Let's talk about "{section[0].name}"</p>
+              <div className='homeContainer'>
+            {previews.length > 0 && previews.map((preview, index)=>{
+              return( 
+                <div key={index}>
+                  <ExercisePreview id={preview.imgid}/>
+                </div>)})}
           </div>
         </div>
-
       )
   }
 export default Section
