@@ -127,23 +127,23 @@ export const getImgInfo = async (imgid)=>{
       }
 
 
-      // const commentUsersAvatars = await db('avatars')
-      // .select('*')
-      // .whereIn('avatarid', commentUsersAvatars.map((user) => user.avatarid));
-
       const commentUsers = await db('users')
       .select('*')
       .whereIn('userid', comments.map((comment) => comment.userid));
 
+      const commentUsersAvatars = await db('avatars')
+      .select('*')
+      .whereIn('avatarid', commentUsers.map((user) => user.avatarid));
 
+      
         return {
           img,
           audios,
           users,
           avatars,
           comments,
-          commentUsers
-          // commentUsersAvatars   
+          commentUsers,
+          commentUsersAvatars   
         };
 
   } catch (error) {

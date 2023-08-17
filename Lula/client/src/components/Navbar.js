@@ -33,7 +33,7 @@ const Navbar = () => {
     try {
       const response = await UserService.logout();
     if (response.status === 200) {
-      navigate('/login');
+      navigate('/');
     }
     } catch(error) {
     console.log(error);
@@ -47,12 +47,12 @@ const Navbar = () => {
         <li>
           <NavLink to="/"><AiFillHome className='icon-grey icon-home'/></NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/contact" className='link'>Contact us</NavLink>
-        </li>
+        </li> */}
 
         <li>
-          <NavLink to="/exercise" className='link'>Exercise</NavLink>
+          <NavLink to="/exercise/1" className='link'>Exercise</NavLink>
         </li>
 
         <li>

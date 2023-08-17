@@ -82,6 +82,7 @@ export const addImgController = async(request, response)=>{
     const name = request.body.name;
     const link = request.body.link;
     const sectionid = request.body.sectionid;
+    const languageid = request.body.sectionid;
     try {
         const img = await addImg({name, link, sectionid})
         response.json(img)
@@ -99,9 +100,10 @@ export const updateImgController = async(request, response)=>{
     const name = request.body.name;
     const link = request.body.link;
     const sectionid = request.body.sectionid;
+    const languageid = request.body.sectionid;
 
     try {
-        const img = await updateImg({imgid, name, link, sectionid})
+        const img = await updateImg({imgid, name, link, sectionid,languageid})
         response.json(img)
             
         } catch (error) {
@@ -123,9 +125,10 @@ export const deleteImgController = async(request, response)=>{
         }
 }
 
-export const getAudioAndCommentsByImgIdController = async(request, response)=>{
-    console.log(request.body);
-    const data = await getAudioAndCommentsByImgId(request.body.imgid)
-    response.json(data.rows)
+// export const getAudioAndCommentsByImgIdController = async(request, response)=>{
+//     const imgid = request.params.imgid;
+//     console.log(request.body);
+//     const data = await getAudioAndCommentsByImgId(imgid)
+//     response.json(data.rows)
 
-}
+// }

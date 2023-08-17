@@ -24,7 +24,7 @@ const DisplayTrack = ({
     <div>
         <div className='playBlock'>
           <img 
-          src={currentTrack.thumbnail || Template} 
+          src={currentTrack.avatar || Template} 
           className='activeRecordAvatar'
           alt='User avatar'/>  
         </div> 

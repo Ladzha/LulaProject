@@ -399,6 +399,10 @@ li{
   height: 45px;
 }
 
+.pendingInfoBox:active{
+  background-color: var(--yellow-color);
+}
+
 .activeInfoBox {
   border: var(--border-elements) var(--red-color);
   border-radius: var(--border-elements-radius);
@@ -447,6 +451,7 @@ li{
 
 .userIcon{
   border-radius: 50px;
+  border: var(--border-elements) var(--red-color);
   width:60px;
   height:60px;
   z-index: 1;
@@ -472,16 +477,21 @@ li{
   margin: 1px;
 }
 
-.icon-red, .icon-green, .icon-grey, .icon-more, .icon-heart, .icon-home, .submitButton, .playerIcons, .sectionButton, .languageButton{
+.icon-red, .icon-green, .icon-grey, .icon-more, .icon-heart, .icon-home, .likeCircle, .userIcon, .submitButton, .playerIcons, .sectionButton, .languageButton{
   cursor: pointer;
   transition: transform 0.3s;
 }
 
-.icon-red:hover, .icon-green:hover, .icon-grey:hover, .icon-more:hover, .icon-heart:hover, .icon-home:hover,  .playerIcons:hover{
+.icon-red:hover, .icon-green:hover, .icon-grey:hover, .icon-more:hover, .icon-heart:hover, .icon-home:hover,  .playerIcons:hover, .likeCircle:hover, .userIcon:hover{
   transform: scale(1.1);
+  
 }
 
-.submitButton:hover, .sectionButton:hover, .languageButton:hover {
+.icon-red:active, .icon-green:active{
+color:#9747FF
+}
+
+.submitButton:hover, .sectionButton:hover, .languageButton:hover, .pendingInfoBox:hover {
   transform: scale(1.02);
   box-shadow: var(--shadow);
 }
@@ -534,16 +544,19 @@ li{
   border-radius: 50px;
   width:55px;
   height:55px;
-  box-shadow: var(--shadow);
   z-index: 1;
 }
+
+.likeCircle:hover, .userIcon:hover{
+  box-shadow: var(--shadow);
+}
+
 
 /*PLAYER COMPONENT*/
 .playerButtonsBox{
   display: flex;
   justify-content: center;
   gap: 20px;
-
 }
 
 .playBlock{
@@ -558,12 +571,9 @@ li{
   width: 50%;
 }
 
-
-
-
-.audio-player {
+/* .audio-player {
   background: #c1b6bc;
-}
+} */
 
 .inner {
   max-width: 1200px;
@@ -600,7 +610,7 @@ li{
 }
 
 .audio-image {
-  width: 300px;
+  width: 200px;
   height: 300px;
   background: #1e1e1e; 
 }

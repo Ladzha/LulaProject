@@ -49,19 +49,6 @@ app.post('/api/save-image-link', async (req, res) => {
   }
 });
 
-// // Get image links from the database
-// app.get('/api/get-image-links', async (req, res) => {
-//   try {
-//     const imageLinks = await db('images').select('link');
-//     res.status(200).json(imageLinks);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
-
-
-
 
 app.listen(process.env.PORT, ()=>{
     console.log('I am listening') 

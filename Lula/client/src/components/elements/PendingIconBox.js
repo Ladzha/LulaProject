@@ -6,47 +6,35 @@ import { AudioService } from '../../services/audio.service.js';
 const PendingIconBox = ({recordid}) => {
 
   const [audio, setAudio]=useState([{}]);
-  const [status, setStatus]=useState('pending');
 
   const handleRejection=()=>{
     if (!recordid) return;
       const fetchData = async () => {
         try {
-            const pendingData = await PendingService.deleteById(recordid);
-            setAudio(pendingData);
-            // setStatus('rejected')
+          const pendingData = await PendingService.deleteById(recordid);
+          setAudio(pendingData);
         } catch (error) {
-                console.log(error);
+          console.log(error);
         }
       };
       fetchData();
-    console.log('Record Rejected')
   };
 
-    const handleApproval=()=>{
-      if (!recordid) return;
+  const handleApproval=()=>{
+    if (!recordid) return;
       const fetchData = async () => {
-          try {
-              const pendingData = await PendingService.getById(recordid);
-              if (!pendingData) return;
-              const audioData = await AudioService.postAudio(pendingData.userid, pendingData.name, pendingData.link, pendingData.imgid);
-              console.log('PENDING DATA', pendingData);
-              console.log('AUDIO DATA', audioData);
-              setAudio(audioData);
-              // setStatus('approved')
-              handleRejection();
-          } catch (error) {
-              console.log(error);
-          }
+        try {
+          const pendingData = await PendingService.getById(recordid);
+          if (!pendingData) return;
+          const audioData = await AudioService.postAudio(pendingData.userid, pendingData.name, pendingData.link, pendingData.imgid);
+          setAudio(audioData);
+          handleRejection();
+        } catch (error) {
+          console.log(error);
+        }
       };
-
       fetchData();
-    console.log('Record Approved')};
-
-
-    useEffect(() => { }
-
-    , [status]);
+  };
 
   return (
     <div className='pendingIconBox'>

@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import avatar from './img/avatar13.jpg'
 import Exercise from './pages/Exercise.jsx'
 import Section from './pages/Section'
+import Language from './pages/Language'
 
 
 import Login from './components/user/Login';
@@ -46,9 +47,11 @@ function AppRouter() {
          
       <Route path='/admin' element={1?<AdminZone/>:<Home/>}/>
       <Route path='/contact' element={<Contact/>}/>
+      
 
       <Route path='/section/:sectionid' element={<Section/>}/> /*shows details about one section and all exercises*/
       <Route path='/exercise/:imgid' element={<Exercise/>}/> /*shows one exercise*/
+      <Route path='/language/:language' element={<Language/>}/> /*shows all exercise in one language*/
       {/* <Route path='/exercise' element={<Exercise/>}/> */}
       </Routes>
       

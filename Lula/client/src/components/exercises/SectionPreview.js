@@ -19,15 +19,14 @@ const SectionPreview = ({sectionid}) => { // put id from parent component in loo
 
             const sectionData = await SectionService.getById(sectionid); //Get data of one section by id
             setSection(sectionData);      
-            console.log("TEST", section[0].name);
+            console.log("TEST", sectionData);
             
             
           if(sectionData){
-            const languageData = await LanguageService.getById(1); //Get data of one img by id        
+            const languageData = await LanguageService.getById(2); //Get data of one img by id        
             setLanguage(languageData);
           }
           else{
-            section[0].languageid=1
             const languageData = await LanguageService.getById(1); //Get data of one img by id        
             setLanguage(languageData);
           }
@@ -38,13 +37,14 @@ const SectionPreview = ({sectionid}) => { // put id from parent component in loo
     };
 
     fetchData();
-}, [sectionid]);
+}, []);
+
   return (
 
       <div className='previewBox'>
           <Link to={`/section/${sectionid}`}><img className='imgPreview'src={section[0].preview}/></Link>
           <div className='previewInfo'>
-          <Link to={`exercise/language/${section[0].languageid}`}><p className='sectionButton'>{language[0].language}</p></Link>
+          <Link to={`/language/${language[0].languageid}`}><p className='sectionButton'>{language[0].language}</p></Link>
           <Link to={`/section/${sectionid}`}><p className='sectionButton'>{section[0].name}</p></Link>
         
         </div>

@@ -17,27 +17,27 @@ const Profile = (props) => {
   
       useEffect(() => {
         const fetchData = async () => {
-                      try {
-                        // const data = await AudioService.getAll()
-                        // console.log(data);
+           try {
+            // const data = await AudioService.getAll()
+              // console.log(data);
 
-                        const data = await AudioService.getByImageId(1)
-                        console.log(data);
+              const data = await AudioService.getByImageId(1)
+              console.log(data);
                         
 
-                        setAudios(data);   
-                        setZaglushka(true)
-                        const imgData = await ImgService.getById(2);
-                        setImg(imgData);
-                        console.log("img", imgData);
+              setAudios(data);   
+              setZaglushka(true)
+              const imgData = await ImgService.getById(2);
+              setImg(imgData);
+              console.log("img", imgData);
         
-                      } catch (error) {
-                          console.log(error);
-                      }
-                  };
-            console.log("AUDIO", audios);
-                  fetchData();
-              }, [zaglushka]);
+              } catch (error) {
+                  console.log(error);
+              }
+          };
+    console.log("AUDIO", audios);
+          fetchData();
+      }, []);
         
   return (
 
@@ -60,7 +60,7 @@ const Profile = (props) => {
         {audios.length > 0 && audios.map((audio, index)=>{
           return( 
                   <div key={index}>
-                      <AudioComponent id={audio.recordid}  duration={`${0}:${0}`} created={new Intl.DateTimeFormat('en-US', {
+                      <AudioComponent id={audio.recordid}  duration={`${'00'}:${'00'}`} created={new Intl.DateTimeFormat('en-US', {
                         year: 'numeric',
                         month: '2-digit',
                                       day: '2-digit',

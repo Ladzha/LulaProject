@@ -8,26 +8,28 @@ import ExercisePreview from '../components/exercises/ExercisePreview.jsx';
 
 const Language = () => {
 
-    const { languageid } = useParams();
-    const [language, setLanguage] =useState(null)
+  const { languageid } = useParams();
+  const [language, setLanguage]=useState(null)
 
-    const [previews, setPreviews]=useState([])
+  const [previews, setPreviews]=useState([])
 
-    try {
+  try {
         useEffect(()=>{
             const fetchData = async()=>{
                 const languageData = await LanguageService.getById(languageid) //Get section by id
                 setLanguage(languageData);  
+                console.log(languageid);
+                console.log("LANGUADE DATA", languageData);
                 
                 const imgData = await ImgService.getAllByLanguageId(languageid) //Get all imgs in this section
                 setPreviews(imgData)   
             }
             fetchData()
-        }, [languageid])
+    }, [languageid])
 
      
 
-      if (!languageid) {
+      if (!language) {
         return <div className='loading'>Loading...</div>;
       }
         
