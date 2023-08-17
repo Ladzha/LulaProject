@@ -22,7 +22,7 @@ const Controls = ({
   setCurrentTrack,
   tracks, 
   trackIndex
-}) => {
+}) => { 
 
   const [isPlaying, setIsPlaying] = useState(false);
 

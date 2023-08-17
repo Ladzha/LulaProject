@@ -44,27 +44,6 @@ const Exercise = () => {
         console.log(audiosData);
         setAudios(audiosData); 
 
-      // if(!audiosData) return;
-      
-      // const uaerCreatorData = await UserService.getById(audiosData.recordid) // GET USER AUTHOR OF AUDIO BY AUDIO ID
-      // console.log(uaerCreatorData);
-      // setUserCreator(uaerCreatorData);  
-      
-      // const commentsData = await CommentService.getByAudioId(audiosData.recordid)  //GET LIST OF COMMENTS BY AUDIO ID
-      // console.log(commentsData);
-      // setComments(commentsData);   
-
-      // if(!commentsData) return;
-
-
-
-
-
-      // const imgInfoData = await ImgService.getByIdInfo(imgid); //INFO ABOUT IMG
-      // setImgInfo(imgInfoData);
-      // console.log("imgINFO", imgInfoData);
-
-
           } catch (error) {
               console.log(error);
           }
@@ -75,12 +54,16 @@ const Exercise = () => {
 
   return(
     <div className='containerColumn'>
-
     <p className='titleMain'> Listen to what they say about it </p>
-
+    <div>
+        <img className='imgExercise' src={img[0].link}/>
+        <div className='sectionExercise'>
+        <Link to="/audio">Audio</Link>...
+        <Link to="/record">Record</Link>
+      </div>
       <div className='exerciseContainer'>
         {audios && <div className= 'box listRecord'>
-          <AudioPlayer playlist={audios}/> 
+          {/* <AudioPlayer playlist={audios}/>  */}
           {audios.length > 0 && audios.map((audio, index)=>{
             return( 
               <div key={index}>
@@ -93,12 +76,6 @@ const Exercise = () => {
                 }).format(new Date(audio.created))}/>
               </div>)})}
           </div>}
-        <div>
-          <img className='imgExercise' src={img[0].link}/>
-          <div className='sectionExercise'>
-          <Link to="/audio">Audio</Link>...
-          <Link to="/record">Record</Link>
-        </div>
 
         </div>
       </div>
