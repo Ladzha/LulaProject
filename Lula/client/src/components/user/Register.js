@@ -23,7 +23,7 @@ const navigate = useNavigate();
       const userData = await UserService.register(username, firstname, lastname, email, password);
       console.log('User registered:', userData);
       formRef.current.reset();  //clean inputs 
-      navigate('/login')
+      navigate('/')
       
     } catch (error) {
           console.log(error)   

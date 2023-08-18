@@ -18,7 +18,7 @@ const Auth = (props) => {
     //   navigate("/login");
     } catch (error) {
       setRedirect(true);
-      navigate("/login");
+      navigate("/");
     }
   };
   return redirect ? props.children : null;

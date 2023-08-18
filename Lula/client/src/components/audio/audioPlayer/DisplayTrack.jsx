@@ -17,13 +17,15 @@ const DisplayTrack = ({
   return (
     <div>
       <div className='playBlock'>
+
+        
         <img 
-        src={currentTrack.avatar || Template} 
+        // src={currentTrack.avatar || Template} 
         className='activeRecordAvatar'
         alt='User avatar'/>  
       </div> 
 
-      <p>{currentTrack.name}</p>
+      {/* <p>{currentTrack.name}</p> */}
 
       <audio 
       src={currentTrack.link}  

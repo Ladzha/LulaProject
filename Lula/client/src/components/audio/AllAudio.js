@@ -45,7 +45,7 @@ const AllAudio = () => {
     <p className='titleMain'> Listen to what they say about it </p>
       <div className='exerciseContainer'>
         {audios && <div className= 'box listRecord'>
-          {/* <AudioPlayer playlist={audios}/>  */}
+          <AudioPlayer playlist={audios}/> 
           {audios.length > 0 && audios.map((audio, index)=>{
             return( 
               <div key={index}>

@@ -58,12 +58,11 @@ const Exercise = () => {
     <div>
         <img className='imgExercise' src={img[0].link}/>
         <div className='sectionExercise'>
-        <Link to="/audio">Audio</Link>...
         <Link to="/record">Record</Link>
       </div>
       <div className='exerciseContainer'>
         {audios && <div className= 'box listRecord'>
-          {/* <AudioPlayer playlist={audios}/>  */}
+          <AudioPlayer playlist={audios}/> 
           {audios.length > 0 && audios.map((audio, index)=>{
             return( 
               <div key={index}>

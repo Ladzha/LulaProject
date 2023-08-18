@@ -17,6 +17,7 @@ const AllPending =()=>{
     }
     fetchData()
   }, [pendingAudios])
+  console.log(pendingAudios);
 
   return(
     <div className= 'box listRecord'>

@@ -13,14 +13,14 @@ import { FaVolumeUp } from "react-icons/fa";
 import Template from '../../../img/template.svg';
 
 
-const Controls = ({
+const AudioControls  = ({
   audioRef, 
   progressBarRef, 
   duration, 
   setTimeProgress,  
   setTrackIndex, 
   setCurrentTrack,
-  tracks, 
+  playlist, 
   trackIndex
 }) => { 
 
@@ -98,26 +98,26 @@ const Controls = ({
   const handlePrevious =()=>{
     console.log("PREVIOUS", trackIndex);
     if(trackIndex === 0){
-      let lastTrackIndex = tracks.length-1;
+      let lastTrackIndex = playlist.length-1;
       setTrackIndex(lastTrackIndex);
-      setCurrentTrack(tracks[lastTrackIndex]);
+      setCurrentTrack(playlist[lastTrackIndex]);
     }
     else{
       setTrackIndex(trackIndex-1);
-      setCurrentTrack(tracks[trackIndex - 1])
+      setCurrentTrack(playlist[trackIndex - 1])
     } 
     audioRef.current.play();
   };
 
   const handleNext =()=>{
     console.log("NEXT", trackIndex);
-    if(trackIndex >=tracks.length -1){
+    if(trackIndex >=playlist.length -1){
       setTrackIndex(0);
-      setCurrentTrack(tracks[0]);
+      setCurrentTrack(playlist[0]);
     }
     else{
       setTrackIndex(trackIndex +1);
-      setCurrentTrack(tracks[trackIndex +1])
+      setCurrentTrack(playlist[trackIndex +1])
     } 
     audioRef.current.play();
   };
@@ -125,6 +125,13 @@ const Controls = ({
   return (
     <div className='plyerElement'>  
       <div className='line'>
+        
+      {playlist ?(playlist.length > 0 && playlist.map((audio, index)=>{
+        return( 
+          <div key={index}> 
+          INSIDE CONTROLS
+          <p>{audio.link}</p>
+          </div>)})):(null)}
 
           <div className='playBlock'>
 
@@ -160,4 +167,4 @@ const Controls = ({
   )
 }
 
-export default Controls
+export default AudioControls 
