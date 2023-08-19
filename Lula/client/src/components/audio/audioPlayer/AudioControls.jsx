@@ -10,7 +10,7 @@ import { FaVolumeUp } from "react-icons/fa";
 
 
 
-import Template from '../../../img/template.svg';
+import Template from '../../../img/template.svg'; 
 
 
 const AudioControls  = ({
@@ -21,10 +21,12 @@ const AudioControls  = ({
   setTrackIndex, 
   setCurrentTrack,
   playlist, 
-  trackIndex
+  trackIndex,
+  isPlaying,
+  setIsPlaying,
 }) => { 
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
 
   const [volume, setVolume] = useState(60) //For Volume slider
 
@@ -33,6 +35,14 @@ const AudioControls  = ({
   
   const repeat = useCallback(()=>{ //useCallback to cash function between rendering
     
+
+
+    const handlePlayPause  = () => {
+      setIsPlaying(!isPlaying);
+    };
+
+
+
     const currentTime = audioRef.current ? audioRef.current.currentTime : 0;
     setTimeProgress(currentTime);
     if(!progressBarRef.current) return;
@@ -91,12 +101,13 @@ const AudioControls  = ({
     }
   }, [volume, audioRef]);
 
-  const togglePlayPause =()=>{
+  const handlePlayPause =()=>{
     setIsPlaying(!isPlaying)
   }
 
   const handlePrevious =()=>{
     console.log("PREVIOUS", trackIndex);
+    
     if(trackIndex === 0){
       let lastTrackIndex = playlist.length-1;
       setTrackIndex(lastTrackIndex);
@@ -125,14 +136,7 @@ const AudioControls  = ({
   return (
     <div className='plyerElement'>  
       <div className='line'>
-        
-      {playlist ?(playlist.length > 0 && playlist.map((audio, index)=>{
-        return( 
-          <div key={index}> 
-          INSIDE CONTROLS
-          <p>{audio.link}</p>
-          </div>)})):(null)}
-
+      
           <div className='playBlock'>
 
           <div className='playerButtonsBox'>
@@ -141,11 +145,10 @@ const AudioControls  = ({
               className='playerIcons' 
               src={PrevButton} alt='Previous'/>
   
-              <img onClick={togglePlayPause}
+              <img onClick={handlePlayPause}
               className='playerIcons' 
               src={isPlaying? PauseButton: PlayButton}
               alt={isPlaying ? 'Pause' : 'Play'}/>
-
 
               <img onClick={handleNext}
               className='playerIcons' 
@@ -156,7 +159,10 @@ const AudioControls  = ({
           <div className="volume">
              <FaVolumeUp className='icon-grey'/>
              <input style={{background: `linear-gradient(to right, #FF363C ${volume}%, #FFE500 ${volume}%)`}} 
-             type="range" min={0} max={100} value={volume} 
+             type="range"
+             min={0} 
+             max={100} 
+             value={volume} 
              onChange={(event)=>setVolume(event.target.value)}/>
 
           </div>

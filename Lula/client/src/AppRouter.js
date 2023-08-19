@@ -25,15 +25,18 @@ import AdminZone from './pages/AdminZone';
 import Contact from './components/admin/Contact';
 // import {AuthContext} from './components/AuthProvider'
 import Auth from './pages/Auth';
+import { AppContext } from './App';
 
 
 
 function AppRouter() {
 
+  const {token} = useContext(AppContext)
+
   return (
     <div className="App">
       <Auth>
-      <Navbar/>
+      <Navbar token ={token}/>
       <div className="mainContainer">
 
       <Routes>

@@ -48,7 +48,7 @@ html, body, #root{
   align-items: center;
   text-align: center;
   font-size: 1.3rem;
-  background-color: #58DC00;
+  /* background-color: var(--red-color); */
   flex: 1 1 auto;
 }
 
@@ -218,9 +218,10 @@ textarea{
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   gap: 10px;
   width: 250px;
+  margin-top: 10px;
 }
 
 .newCommentBlock {
@@ -406,7 +407,7 @@ li{
 .activeInfoBox {
   border: var(--border-elements) var(--red-color);
   border-radius: var(--border-elements-radius);
-  background-color: var(--yellow-color);
+  /* background-color: var(--yellow-color); */
   display: flex;
   flex-direction: row;
   justify-content:space-between;
@@ -414,6 +415,12 @@ li{
   width: 250px;
   height: 45px;
   position: relative;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: var(--yellow-color);
 }
 
 .pendingIconBox{
@@ -569,6 +576,15 @@ color:#9747FF
 
 .activeRecordAvatar{
   width: 45%;
+}
+
+.recorderBox{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding: 15px;
+  border: 0px solid;
 }
 
 /* .audio-player {

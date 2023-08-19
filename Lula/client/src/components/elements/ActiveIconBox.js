@@ -19,7 +19,7 @@ const handleMore=()=>{
   return (
     <div className='activeIconBox'>
 
-    <img src={IconMore} className='icon-more' onClick={handleMore}/>
+    {/* <img src={IconMore} className='icon-more' onClick={handleMore}/> */}
     
     <div className='likeCircle' onClick={handleMore}>
         <AiFillHeart className="icon-heart" onClick={handleLike}/>

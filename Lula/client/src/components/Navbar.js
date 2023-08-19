@@ -16,7 +16,8 @@ const Navbar = () => {
   useEffect(()=>{
     if(token){
       console.log("TOKEN", token);
-      const decodedToken = jwtDecode(token); // Decode the token
+      const decodedToken = jwtDecode(token); 
+      console.log("DECODER TOKEN NAV", decodedToken);// Decode the token
       setUsername(decodedToken.username);
 
 

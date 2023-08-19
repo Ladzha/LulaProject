@@ -9,8 +9,7 @@ input[type="range"] {
     -webkit-appearance: none;
     position: relative;
     background:#FFE500;
-    /* border: 5px solid #FF363C; */
-    width: 100%;
+    width: 80%;
     height: 8px;
     border-radius: 10px;
     cursor: pointer;
@@ -20,7 +19,7 @@ input[type="range"] {
   input[type="range"]::-moz-range-track {
     position: relative;
     background:#ffffff;
-    width: 100%;
+    width: 80%;
     height: 8px;
     border-radius: 5px;
     cursor: pointer;

@@ -7,7 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 
 import AppRouter from './AppRouter';
 
-export const AppContext = createContext(null);
+// export const AppContext = createContext(null);
+export const AppContext = createContext();
 
 function App() {
   const [token, setToken] = useState(null);

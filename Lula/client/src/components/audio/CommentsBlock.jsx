@@ -45,7 +45,7 @@ const CommentsBlock = ({recordid}) => {
 
     <button className='submitButton addButton' onClick={handleComment}>
     {commentForm? 'Hide form' : 'Leave a comment'}</button>
-    {commentForm && <CommentForm recordid={recordid} userid={1}/>}
+    {commentForm && <CommentForm recordid={recordid} userid={1} setCommentForm={setCommentForm}/>}
 
     </div>
   )

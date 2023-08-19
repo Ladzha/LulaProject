@@ -4,7 +4,7 @@ const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
 
   const handleProgressChange =()=>{
     if(!audioRef.current) return;
-    audioRef.current.currentTime=progressBarRef.current.value;
+    audioRef.current.currentTime=progressBarRef.current.value; 
   }
 
 //Function to convert time format

@@ -33,17 +33,3 @@ const PendingComponent = ({recordid, created}) => {
 }
 
 export default PendingComponent
-
-
-              // if(audio.userid){
-              //   const userData = await UserService.getById(audio.userid);
-              //   setUser(userData);
-
-              //   if (userData.avatarid) {
-              //       const avatarData = await AvatarService.getById(userData.avatarid);
-              //       setAvatar(avatarData);
-              //       console.log(userData.avatarid);
-              //       console.log(avatarData);
-              //       console.log(avatar[0].link);
-              //   }
-              // }

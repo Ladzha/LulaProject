@@ -5,7 +5,7 @@ import { CommentService } from '../../services/comment.service.js';
 import { UserService } from '../../services/user.service.js';
 import { AvatarService } from '../../services/avatar.service.js';
 
-const CommentForm = ({recordid, userid}) => {
+const CommentForm = ({recordid, userid, setCommentForm}) => {
 
   const formRef = useRef();
 
@@ -36,16 +36,22 @@ const CommentForm = ({recordid, userid}) => {
     event.preventDefault()
     const userComment = event.target.commentInput.value;
 
-    try {
-      const commentData = await CommentService.postComment(userid, recordid, userComment);
-      console.log('Comment posted:', commentData);
-
-      event.target.commentInput.value = ''; // Clear the textarea
-
-    } catch (error) {
-      console.log(error);
+    if(userComment !=""){
+      try {
+        const commentData = await CommentService.postComment(userid, recordid, userComment);
+        console.log('Comment posted:', commentData);
+  
+        event.target.commentInput.value = ''; // Clear the textarea
+  
+      } catch (error) {
+        console.log(error);
+      }
+      setCommentForm(false)
+      console.log(userComment);
     }
-    console.log(userComment);
+    else{
+      event.target.commentInput.placeholder="Empty comment"
+    }
   }
 
   const handleCleanComment  = ()=>{

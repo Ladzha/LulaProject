@@ -5,7 +5,7 @@ import ActiveIconBox from './ActiveIconBox.js';
 const ActoveInfoBox = (props) => {
 
   return (
-    <div className='activeInfoBox'>
+    <div className={`activeInfoBox ${props.isPlaying ?'selected' : ''}`} >
         <UserBox avatar={props.avatar} username ={props.username} info={props.info}/>
         <ActiveIconBox toggleComments={props.toggleComments}/>
     </div>

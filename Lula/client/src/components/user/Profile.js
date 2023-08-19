@@ -8,6 +8,8 @@ import { AudioService } from '../../services/audio.service.js';
 import AudioPlayer from '../audio/audioPlayer/AudioPlayer'
 import AllAudio from '../audio/AllAudio.js';
 
+import TextPlayer from '../audio/audioPlayer/player/TextPlayer'
+
 const Profile = (props) => {
   const [audios, setAudios]=useState([])
   const [img, setImg]=useState([{}]);  
@@ -32,6 +34,7 @@ const Profile = (props) => {
         <img className='userIconInComment' src={props.img}></img>
         <p>My name is: {props.username}</p>
         <p>Some information about me: {props.about}</p>
+        <TextPlayer/>
       </div>
       <div className='profileContainer'>
       </div>

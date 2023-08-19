@@ -11,7 +11,7 @@ const DisplayTrack = ({
       console.log("DURATION", audioRef.current.duration);
       const seconds = audioRef.current.duration;
       setDuration(seconds)
-      progressBarRef.current.max=seconds;
+      progressBarRef.current.max=seconds; 
     }
 
   return (

@@ -5,18 +5,18 @@ import { AudioService } from '../../services/audio.service.js';
 import ActiveInfoBox from '../elements/ActiveInfoBox.js'
 import CommentsBlock from './CommentsBlock.jsx'
 
-
-const AudioComponent = ({id, duration, created, classname, commentsList, commentsUsers, commentsAvatars}) => {
+const AudioComponent = ({id, duration, created,  classname, onPlayClick, isPlaying  }) => {
 
     const [audio, setAudio]=useState([{}]);
     const [user, setUser]=useState([{}]);
     const [avatar, setAvatar]=useState([{}]);
     const [commentBlock, setCommentBlock] =useState(false)
-    
+    const [showRecord, setShowRecord] =useState(false)
+
     const toggleComments = () => {
         setCommentBlock(!commentBlock);
       };
-    
+
     useEffect(() => {
       if (!id) return;
       const fetchData = async () => {
@@ -44,11 +44,19 @@ const AudioComponent = ({id, duration, created, classname, commentsList, comment
   
   return (
     <div className='toApprovalBox'>
-    <div className='listBox'>
-        <div className='infoBlock'>        
-            <ActiveInfoBox avatar={avatar[0].link} username ={user.username} info={duration} toggleComments={toggleComments}/>
-            {/* <p>Audio id {audio.recordid}</p> */}
-            {commentBlock && <CommentsBlock recordid={audio.recordid}/>}    
+      <div className='listBox'>
+        <div className='infoBlock'>  
+
+          <div onClick={onPlayClick}>
+        
+              <ActiveInfoBox avatar={avatar[0].link} 
+              username ={user.username} 
+              info={created} toggleComments={toggleComments} 
+              classname={classname}
+              isPlaying={isPlaying}/>
+
+              {commentBlock && <CommentsBlock recordid={audio.recordid}/>}   
+          </div>
         </div>
       </div>
     </div>

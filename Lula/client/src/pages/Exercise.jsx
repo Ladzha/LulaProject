@@ -2,32 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ImgService } from '../services/img.service.js';
 import { AudioService } from '../services/audio.service.js';
-import { UserService } from '../services/user.service.js';
-import { AvatarService } from '../services/avatar.service.js';
-import { CommentService } from '../services/comment.service.js';
-
 
 import {useParams} from 'react-router-dom';
 
-import {useState, useEffect, useContext} from 'react';
-import AudioComponent from '../components/audio/AudioComponent.js';
-import AllAudio from '../components/audio/AllAudio.js'
+import {useState, useEffect} from 'react';
 import AudioPlayer from '../components/audio/audioPlayer/AudioPlayer'
 
 
 const Exercise = () => {
 
   const { imgid } = useParams();
-  
   const [img, setImg]=useState([{}]);
   const [audios, setAudios]=useState([]);
-  const [comments, setComments]=useState([]);
-  const [userCreator, setUserCreator]=useState([{}]);
-  const [user, setUser]=useState([{}]);
-  const [avatar, setAvatar]=useState([{}]);
+  const [showRecord, setShowRecord] =useState(false)
+    
+  const handleShowRecord = () => {
+    setShowRecord(!showRecord);
+    };
 
-
-  const [imgInfo, setImgInfo]=useState({});
 
   useEffect(() => {
     if (!imgid) return;
@@ -58,24 +50,18 @@ const Exercise = () => {
     <div>
         <img className='imgExercise' src={img[0].link}/>
         <div className='sectionExercise'>
-        <Link to="/record">Record</Link>
       </div>
       <div className='exerciseContainer'>
-        {audios && <div className= 'box listRecord'>
-          <AudioPlayer playlist={audios}/> 
-          {audios.length > 0 && audios.map((audio, index)=>{
-            return( 
-              <div key={index}>
-                <AudioComponent id={audio.recordid}  duration={`${0}:${0}`} created={new Intl.DateTimeFormat('en-US', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                }).format(new Date(audio.created))}/>
-              </div>)})}
-          </div>}
+<div className= 'box listRecord'>
+          <AudioPlayer playlist={audios}/>       
+          </div>
 
+        {/* {audios.length > 0 ? (<>
+          {audios && <div className= 'box listRecord'>
+          <AudioPlayer playlist={audios}/>       
+          </div>}
+        </>):<div className='box listRecord'>
+       <p className='hint' onClick={handleShowRecord}>There are no audio recordings here yet, do you want to be the first</p> </div>} */}
         </div>
       </div>
     </div>

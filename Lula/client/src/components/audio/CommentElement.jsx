@@ -9,6 +9,7 @@ const CommentElement = ({ id, userid, text, created}) => {
     const [user, setUser]=useState([{}]);
     const [avatar, setAvatar]=useState([{}]);
 
+
     useEffect(() => {
       if (!id) return;
       const fetchData = async () => {
