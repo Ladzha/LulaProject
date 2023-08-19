@@ -4,9 +4,10 @@ import { UserService } from '../../services/user.service.js';
 import { PendingService } from '../../services/pending.service.js';
 import PendingInfoBox from '../elements/PendingInfoBox.js';
 
-const PendingComponent = ({recordid, created}) => {
+const PendingComponent = ({recordid, created, classname, onPlayClick, isPlaying }) => {
 
     const [audio, setAudio]=useState([{}]);
+
     useEffect(() => {
       if (!recordid) return;
       const fetchData = async () => {
@@ -25,7 +26,15 @@ const PendingComponent = ({recordid, created}) => {
     <div className='listBox'>   
     <div className='infoBlock'>      
         <p className='hint'>Upload: {created}</p>
-        <PendingInfoBox avatar={audio[0].creator_avatar_link} username ={audio[0].creator_username} info={`${0}:${0}`} audio={audio.link} recordid={recordid}/>
+        <PendingInfoBox 
+        avatar={audio[0].creator_avatar_link} 
+        username ={audio[0].creator_username} 
+        info={`${0}:${0}`} 
+        audio={audio.link} 
+        recordid={recordid}
+        classname={classname}
+        isPlaying={isPlaying}
+        onPlayClick={onPlayClick}/>
     </div>
     </div>
 

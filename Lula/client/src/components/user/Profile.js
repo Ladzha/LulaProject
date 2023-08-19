@@ -1,42 +1,94 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import avatar from '../../img/avatar13.jpg';
+
 import {useState, useEffect, useContext} from 'react';
-import AudioComponent from '../audio/AudioComponent.js';    
+import {useParams} from 'react-router-dom';    
 import { AudioService } from '../../services/audio.service.js';
+import { CommentService } from '../../services/comment.service.js';
+import { UserService } from '../../services/user.service.js';
+import { AvatarService } from '../../services/avatar.service.js';
        
 import AudioPlayer from '../audio/audioPlayer/AudioPlayer'
-import AllAudio from '../audio/AllAudio.js';
+import UserBox from '../elements/UserBox.js';
 
-import TextPlayer from '../audio/audioPlayer/player/TextPlayer'
 
-const Profile = (props) => {
-  const [audios, setAudios]=useState([])
-  const [img, setImg]=useState([{}]);  
+
+
+const Profile = () => {
+
+  const { userid } = useParams();
+
+  const [audios, setAudios]=useState([]);
+  const [comments, setComments]=useState([]);
+  const [user, setUser]=useState([{}]);
+  const [avatar, setAvatar]=useState([{}]);
+
+  console.log("COMMENT", comments);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await AudioService.getByUserId(1)
-        setAudios(data);   
+
+        if(userid) {
+          const userData = await UserService.getById(userid)
+          setUser(userData);  
+          
+          if(!userData) return;
+  
+          if(userData.avatarid){
+            const avatarData = await AvatarService.getById(userData.avatarid)
+            setAvatar(avatarData);
+
+            const audioData = await AudioService.getByUserId(userid)
+            setAudios(audioData);   
+
+          }
+
+          const commentData = await CommentService.getByUserId(userid)
+          setComments(commentData);   
+
+  
+
+        }
 
         } catch (error) {
             console.log(error);
         }
     };
     fetchData();
-  }, []);
+  }, [userid]);
         
   return (
     <div className='containerColumn'>
-    <p className='titleMain'> Profile </p>
+    <p className='titleMain'> Profile by {user.username} </p>
       <div className='profileContainer'>
-        <img className='userIconInComment' src={props.img}></img>
-        <p>My name is: {props.username}</p>
-        <p>Some information about me: {props.about}</p>
-        <TextPlayer/>
+
+        <img className='userIconInComment' src={avatar[0].link}></img>
+        <p className="loading">My name is: {user.firstname}</p>
+        <p className="loading">Something about me: {user.about}</p>
+
+
+
+
+        <div className='profileColumn'>
+
+        {audios.length > 0 && <div className= 'box listRecord'>
+        <AudioPlayer playlist={audios}/>    
+        </div>}
+
+        {comments.length > 0 && <div className= 'box listRecord'>
+          {comments.map((comment, index)=>{
+            return(
+              <div className='commentBlock'>
+              <UserBox avatar={avatar[0].link} username ={user.username} info={""}/>
+              <div className='commentBox'>{comment.text}</div> 
+              </div>
+              
+            )})}
+
+          </div>}
+
       </div>
-      <div className='profileContainer'>
+      
       </div>
     </div>
   )

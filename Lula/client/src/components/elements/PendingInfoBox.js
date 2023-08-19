@@ -5,17 +5,9 @@ import PendingIconBox from './PendingIconBox.js';
 
 const PendingInfoBox = (props) => {
 
-  const [active, setActive] = useState(false);
-  
-  const handleActive = () => {
-    setActive(true)
-  }
-
-
-  const audioLink =props.audio;
 
   return (
-    <div className='pendingInfoBox' onClick={handleActive}>
+    <div className={`pendingInfoBox ${props.isPlaying ?'selected' : ''}`} onClick={props.onPlayClick}>
         <UserBox avatar={props.avatar} username ={props.username} info={props.info}/>
         <PendingIconBox recordid={props.recordid}/>
     </div>

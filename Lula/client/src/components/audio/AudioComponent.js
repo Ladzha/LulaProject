@@ -11,8 +11,7 @@ const AudioComponent = ({id, duration, created,  classname, onPlayClick, isPlayi
     const [user, setUser]=useState([{}]);
     const [avatar, setAvatar]=useState([{}]);
     const [commentBlock, setCommentBlock] =useState(false)
-    const [showRecord, setShowRecord] =useState(false)
-
+    
     const toggleComments = () => {
         setCommentBlock(!commentBlock);
       };
@@ -43,21 +42,20 @@ const AudioComponent = ({id, duration, created,  classname, onPlayClick, isPlayi
  
   
   return (
-    <div className='toApprovalBox'>
+    // <div className='toApprovalBox'>
       <div className='listBox'>
-        <div className='infoBlock'>  
-
-          <div onClick={onPlayClick}>
-        
+        <div className='infoBlock'>   
               <ActiveInfoBox avatar={avatar[0].link} 
               username ={user.username} 
+              userid ={user.userid} 
               info={created} toggleComments={toggleComments} 
               classname={classname}
-              isPlaying={isPlaying}/>
+              isPlaying={isPlaying}
+              onPlayClick={onPlayClick}/>
 
               {commentBlock && <CommentsBlock recordid={audio.recordid}/>}   
-          </div>
-        </div>
+
+        {/* </div> */}
       </div>
     </div>
   )

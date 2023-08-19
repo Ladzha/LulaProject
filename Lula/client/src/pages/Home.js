@@ -18,7 +18,7 @@ const Home = () => {
     return(
       <div className='containerColumn'>
         <p className='titleHomeMain'> Listen Up and Learn with Lula </p>
-        <p className='moto'>Your Language Learning Journey Begins Here."</p>
+        <p className='moto'>Learn real language from real people</p>
           <div className='homeContainer'>
           {sectionPreviews.length > 0 && sectionPreviews.map((preview, index)=>{
             return( 

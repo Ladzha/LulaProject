@@ -41,7 +41,7 @@ function AppRouter() {
 
       <Routes>
       <Route path='/' element={<Home/>}/> /*shows all sections*/
-      <Route path='/profile/:username' element={<Profile username='Dzha' about='Cool' img={avatar}/>}/>
+      <Route path='/profile/:userid' element={<Profile/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/record' element={<Record/>}/>

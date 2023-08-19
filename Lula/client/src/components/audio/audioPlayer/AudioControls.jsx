@@ -56,6 +56,7 @@ const AudioControls  = ({
  
   }, [audioRef, progressBarRef, duration, setTimeProgress]);
 
+
   useEffect(()=>{
     if(isPlaying && audioRef.current){
       audioRef.current.play();
@@ -106,17 +107,18 @@ const AudioControls  = ({
   }
 
   const handlePrevious =()=>{
-    console.log("PREVIOUS", trackIndex);
-    
-    if(trackIndex === 0){
+  
+    if(trackIndex === 0){ //if it is the first track in the playlist to loop to the last one
       let lastTrackIndex = playlist.length-1;
       setTrackIndex(lastTrackIndex);
       setCurrentTrack(playlist[lastTrackIndex]);
     }
-    else{
+    else{     
       setTrackIndex(trackIndex-1);
       setCurrentTrack(playlist[trackIndex - 1])
     } 
+    setIsPlaying(true); //new line
+
     audioRef.current.play();
   };
 
@@ -130,6 +132,8 @@ const AudioControls  = ({
       setTrackIndex(trackIndex +1);
       setCurrentTrack(playlist[trackIndex +1])
     } 
+    
+    setIsPlaying(true); //new line
     audioRef.current.play();
   };
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ImgService } from '../services/img.service.js';
 import { AudioService } from '../services/audio.service.js';
+import { Link } from 'react-router-dom';
 
 import {useParams} from 'react-router-dom';
 
@@ -40,7 +40,6 @@ const Exercise = () => {
               console.log(error);
           }
       };
-
       fetchData();
   }, [imgid]);
 
@@ -48,21 +47,16 @@ const Exercise = () => {
     <div className='containerColumn'>
     <p className='titleMain'> Listen to what they say about it </p>
     <div>
-        <img className='imgExercise' src={img[0].link}/>
-        <div className='sectionExercise'>
-      </div>
-      <div className='exerciseContainer'>
-<div className= 'box listRecord'>
-          <AudioPlayer playlist={audios}/>       
-          </div>
+        
 
-        {/* {audios.length > 0 ? (<>
-          {audios && <div className= 'box listRecord'>
-          <AudioPlayer playlist={audios}/>       
-          </div>}
-        </>):<div className='box listRecord'>
-       <p className='hint' onClick={handleShowRecord}>There are no audio recordings here yet, do you want to be the first</p> </div>} */}
+        <div className='exerciseContainer'>
+        <img className='imgExercise' src={img[0].link}/>
+            <div className= 'box listRecord'>
+              <AudioPlayer playlist={audios}/>
+              <Link to={`/section/${img[0].sectionid}`} ><p className='languageButton'>Back</p></Link>       
+            </div>
         </div>
+
       </div>
     </div>
   )

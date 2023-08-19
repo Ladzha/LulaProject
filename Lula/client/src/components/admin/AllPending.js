@@ -3,11 +3,11 @@ import {PendingService} from '../../services/pending.service.js';
 
 import {useState, useEffect, useContext} from 'react';
 import PendingComponent from './PendingComponent.js';
-import AudioPlayer from '../audio/audioPlayer/AudioPlayer'
+import AudioPlayerPending from './AudioPlayerPending'
 import { AppContext } from '../../App.js';
 
 const AllPending =()=>{
-  const { token } = useContext(AppContext);
+  // const { token } = useContext(AppContext);
   const [pendingAudios, setPendingAudios]=useState([])
 
   useEffect(()=>{
@@ -22,21 +22,8 @@ const AllPending =()=>{
   return(
     <div className= 'box listRecord'>
 
-      <AudioPlayer playlist={pendingAudios}/>
-
-      {pendingAudios ?(pendingAudios.length > 0 && pendingAudios.map((audio, index)=>{
-        return( 
-          <div key={index}>
-            <PendingComponent 
-            recordid={audio.recordid} 
-            created={new Intl.DateTimeFormat('en-US', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-              hour: '2-digit',
-              minute: '2-digit',
-            }).format(new Date(audio.created))}/>
-        </div>)})):(<p>There are no pending audios</p>)}
+      <AudioPlayerPending playlist={pendingAudios}/>
+      
       </div>)
 }
 export default AllPending

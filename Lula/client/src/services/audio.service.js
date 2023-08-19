@@ -28,9 +28,22 @@ export const AudioService = {
         }
     },
 
-    async getByImageId(id) { //not done
+    async getByImageId(id) { 
         try {
         const response = await axios.get(`http://localhost:3001/api/audio/exercise/records/${id}`)
+        if(response){
+            return response.data; 
+        }else{
+            console.log('Failed to find audio');
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async getByUserId(id) { 
+        try {
+        const response = await axios.get(`http://localhost:3001/api/audio/records/${id}`)
         if(response){
             return response.data; 
         }else{

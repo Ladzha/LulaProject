@@ -52,18 +52,13 @@ const Navbar = () => {
           <NavLink to="/contact" className='link'>Contact us</NavLink>
         </li> */}
 
-        <li>
+        {/* <li>
           <NavLink to="/exercise/1" className='link'>Exercise</NavLink>
-        </li>
+        </li> */}
 
-        <li>
-            <NavLink to='/profile/:username' className="link">
-              Profile
-            {/* {authContext.user.username} */}
-            </NavLink>
-          </li>
-
-        {false ? (
+      </ul>
+<ul>
+{false ? (
           <>
 
           <li>
@@ -72,12 +67,19 @@ const Navbar = () => {
             {/* <NavLink to={`/profile/${userid}`} className='link'>Profile</NavLink> */}
           </li>
           </>):(<>
+
             <li><NavLink to="/login" className='link'>Login</NavLink>
             </li>
           
+            <li className='divider'>  |  </li>
+
             <li>
-              <NavLink to='/register' className='link'>Register</NavLink>
+              <NavLink to='/register' className='link'> Register</NavLink>
             </li>
+
+            <li className='divider'>  |  </li>
+
+
           </>)
 
         }
@@ -85,8 +87,11 @@ const Navbar = () => {
         <li>
           <NavLink to="/admin" className='link'>Admin</NavLink>
         </li>
+  
+</ul>
+
         
-      </ul>
+
     </div>
   )
 }
