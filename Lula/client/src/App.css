@@ -263,7 +263,7 @@ font-weight: bold;
   flex-direction: column;
   align-items: center;
   background-color: var(--white-color);
-  border: var(--border-container) var(--red-color);
+  border: var(--border-container) var(--white-color);
   border-radius: var(--border-container-radius);
 }
 
@@ -402,13 +402,26 @@ li{
   gap: 10px;
 
 }
+/* .audio-recorder{
+  color: var(--white-color);
+  background-color: var(--red-color);
+  width: 150px;
+} */
+.audio-recorder-mic{
+  color: rgb(255, 255, 255);
+  background-color: var(--red-color);
+  width: 150px;
+}
 
+/* .rav-recorder .rav-recorder-icon-microphone {
+  color: rgb(255, 255, 255); 
 
+} */
 
 /*INFO BLOCK: COMMENT, AUDIO INFO, PENDING AUDIO ELEMENTS*/
 
 .pendingInfoBox {
-  border: var(--border-elements) var(--secondary-text-color);
+  border: var(--border-elements) var(--green-color);
   border-radius: var(--border-elements-radius);
   display: flex;
   flex-direction: row;

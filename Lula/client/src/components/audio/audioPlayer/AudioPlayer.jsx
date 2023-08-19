@@ -85,7 +85,7 @@ const formatTime = (time)=>{
     const url = URL.createObjectURL(blob);
     const newAudio = document.createElement("audio");
     newAudio.src = url;
-    newAudio.controls = true;
+    newAudio.controls = false;
     document.body.appendChild(newAudio);
     console.log(newAudio.src);
   };

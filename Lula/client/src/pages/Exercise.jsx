@@ -48,7 +48,6 @@ const Exercise = () => {
     <p className='titleMain'> Listen to what they say about it </p>
     <div>
         
-
         <div className='exerciseContainer'>
         <img className='imgExercise' src={img[0].link}/>
             <div className= 'box listRecord'>

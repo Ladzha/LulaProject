@@ -7,6 +7,7 @@ import PendingInfoBox from '../elements/PendingInfoBox.js';
 const PendingComponent = ({recordid, created, classname, onPlayClick, isPlaying }) => {
 
     const [audio, setAudio]=useState([{}]);
+    const [duration, setDuration] = useState(0);
 
     useEffect(() => {
       if (!recordid) return;
@@ -14,6 +15,17 @@ const PendingComponent = ({recordid, created, classname, onPlayClick, isPlaying 
           try {
               const audioData = await PendingService.getAudioWithUserInfo(recordid);
               setAudio(audioData);
+
+            // Retrieve duration from audio element's metadata
+            const audioElement = new Audio(audioData.link);
+            audioElement.addEventListener('loadedmetadata', () => {
+            setDuration(audioElement.duration);
+            }); //Doesn't work
+
+            console.log('duration', duration);
+
+
+
           } catch (error) {
               console.log(error);
           }
@@ -29,7 +41,7 @@ const PendingComponent = ({recordid, created, classname, onPlayClick, isPlaying 
         <PendingInfoBox 
         avatar={audio[0].creator_avatar_link} 
         username ={audio[0].creator_username} 
-        info={`${0}:${0}`} 
+        info={`Exercise № ${audio[0].imgid}`} 
         audio={audio.link} 
         recordid={recordid}
         classname={classname}
