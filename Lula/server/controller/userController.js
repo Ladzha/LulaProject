@@ -9,11 +9,11 @@ dotenv.config();
 const generateAccessToken = async (userid, username, role) => {
 
     const payload = { userid, username, role}
+    console.log('payload from userController', payload);
 
-    return jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '1d'})
+    return jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '1d'}) //Token expires in 1 day
 
 }
-
 
 
 //GET ALL USERS
@@ -82,7 +82,7 @@ export const loginController = async(request, response)=>{
         if(!match)return response.status(400).json({msg: 'Incorrect password'})
 
         //Create token
-        const accessToken=await generateAccessToken(user.userid, user.username, user.role)
+        const accessToken=await generateAccessToken(user[0].userid, user[0].username, user[0].role)
         
         //send to cookie
         response.cookie('token', accessToken, {httpOnly: true, maxAge: 60 * 1000 * 60 * 24})
@@ -102,22 +102,20 @@ export const logoutController = (request, response) => {
     return response.sendStatus(200);
 };
     
-
-
 //UPDATE USER
 export const updateUserController = async(request, response)=>{
     const userid = request.params.userid
     const username = request.body.username;
     const firstname = request.body.firstname;
     const lastname = request.body.lastname;
-    const email = request.body.email;
     const password = request.body.password +''; //to make it string
+    const about = request.body.about;
     //hide password
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(password, salt);
 
-    try {
-        const user = await updateUser(userid, username, firstname, lastname, email, hashPassword)
+    try { 
+        const user = await updateUser(userid, username, firstname, lastname, hashPassword, about)
         response.json(user)
             
         } catch (error) {

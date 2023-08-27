@@ -23,6 +23,7 @@ const Login = () => {
       const userData = await UserService.login(username, password);
       setToken(userData.token); //set token in App.js
       // console.log('token', userData.token);
+      console.log('userData', userData)
       formRef.current.reset();  //clean inputs
       setMsg('Login successful')
       navigate('/');

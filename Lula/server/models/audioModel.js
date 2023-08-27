@@ -4,9 +4,8 @@ import {db} from '../config/db.js';
 export const getAllAudios  = async ()=>{
     try {
         const audioList = await db('audios')
-        .select('*')
-        .returning(["recordid", "userid", "name", "link", "created", "rating", "likes", "dislikes","imgid"])
-        console.log("audioList=>",  audioList)
+        .select("audios.recordid", "audios.userid", "audios.created", "audios.likes", "audios.imgid",'uploads.location as link')
+        .leftJoin('uploads', 'audios.link', '=', 'uploads.id')
         return audioList;       
     } catch (error) {
         console.log(error);
@@ -18,9 +17,9 @@ export const getAllAudios  = async ()=>{
 export const getAudio = async (recordid)=>{
     try {
         const audio = await db('audios')
-        .select('*')
-        .where('recordid', recordid)
-        .first()
+        .select("audios.recordid", "audios.userid", "created", "likes", "imgid",'uploads.location as link')
+        .leftJoin('uploads', 'link', '=', 'uploads.id')
+        .where('audios.recordid', recordid)
         return audio;      
 
     } catch (error) {
@@ -34,9 +33,9 @@ export const getAudio = async (recordid)=>{
 export const getAudioByUserId = async (userid)=>{
     try {
         const audioList = await db('audios')
-        .select('*')
-        .where('userid', userid)
-        .returning(["recordid", "userid", "name", "link", "created", "rating", "likes", "dislikes", "imgid"])
+        .select("audios.recordid", "audios.userid", "created", "likes", "imgid",'uploads.location as link')
+        .leftJoin('uploads', 'link', '=', 'uploads.id')
+        .where('audios.userid', userid)
         console.log("audioList=>",  audioList)
         return audioList;       
     } catch (error) {
@@ -48,11 +47,10 @@ export const getAudioByUserId = async (userid)=>{
 export const getAudioByImgId = async (imgid)=>{
     try {
         const audioList = await db('audios')
-        .select('*')
-        .where('imgid', imgid)
-        .returning(["recordid", "userid", "name", "link", "created", "rating", "likes", "dislikes", "imgid"])
-        console.log("audioList=>",  audioList)
-        return audioList;       
+        .select("audios.recordid", "audios.userid", "audios.created", "audios.likes", "audios.imgid",'uploads.location as link')
+        .leftJoin('uploads', 'audios.link', '=', 'uploads.id')
+        .where('audios.imgid', imgid)
+          return audioList;       
     } catch (error) {
         console.log(error);
         throw new Error(error.message);    
@@ -60,18 +58,18 @@ export const getAudioByImgId = async (imgid)=>{
 }
 
 //ADD AUDIO
-export const addAudio = ({userid, name, link, imgid}) => {
+export const addAudio = ({userid, link, imgid}) => {
     return db('audios')
-    .insert ({userid, name, link, imgid})
-    .returning(["recordid", "userid", "name", "link", "created", "rating", "likes", "dislikes", "imgid"])
+    .insert ({userid, link, imgid})
+    .returning(["recordid", "userid", "link", "created", "likes", "imgid"])
 }
 
 //UPDATE AUDIO
-export const updateAudio = ({name, likes, dislikes, rating}, recordid) => {
+export const updateAudio = ({likes}, recordid) => {
     return db('audios')
     .where('recordid', recordid)
-    .update({name, likes, dislikes, rating})
-    .returning(["recordid", "userid", "name", "link", "created", "rating", "likes", "dislikes", "imgid"])
+    .update({likes})
+    .returning(["recordid", "userid", "link", "created", "likes", "imgid"])
 }
   
   //DELETE AUDIO
@@ -79,5 +77,4 @@ export const updateAudio = ({name, likes, dislikes, rating}, recordid) => {
     return db('audios')
     .where('recordid', recordid)
     .del()
-    .returning(["recordid", "userid", "name", "link", "created", "rating", "likes", "dislikes", "imgid"])
   }

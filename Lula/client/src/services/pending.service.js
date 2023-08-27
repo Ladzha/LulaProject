@@ -46,6 +46,22 @@ export const PendingService = {
     }
   },
 
+
+  async uploadRecord(blob) { 
+    try {
+    const response = await axios.post('http://localhost:3001/api/pending/upload-single', {
+      blob
+    }) 
+    if(response){
+        return response.data;
+    }else{
+        console.log('Failed to upload record');
+    }
+    } catch (error) {
+        console.log(error);
+    }
+  },
+
   async getAudioWithUserInfo(recordid) {
     try {
       const response = await axios.get(`http://localhost:3001/api/pending/info/userinfo/${recordid}`);

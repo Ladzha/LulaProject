@@ -70,6 +70,11 @@ export const AudioService = {
         } catch (error) {
             console.log(error);
         }
-    }
+    },
+
+
+    //HOW TO SEND TO AWS
+
+
 
 }

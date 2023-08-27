@@ -1,6 +1,6 @@
 body{
   font-family: 'Montserrat', sans-serif;
-  background-color: var(--green-color);
+  background-color: var(--red-color);
   box-sizing: border-box;
 
 }
@@ -25,13 +25,16 @@ html, body, #root{
   --border-elements: 3px solid;
   --border-elements-radius: 25px;
   --shadow: 0 2px 6px rgba(255, 54, 60, 0.4);
+  --text-main: 1.1em;
+  --text-element: 0.8em;
+  --text-title: 1.5em;
 
 }
 
 /*Main css*/
 .App {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: var(--text-main);
   font-weight: 400;
   margin: 0px;
   padding: 0px;
@@ -47,7 +50,7 @@ html, body, #root{
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 1.3rem;
+  font-size: var(--text-main);
   /* background-color: var(--red-color); */
   flex: 1 1 auto;
 }
@@ -124,14 +127,14 @@ a{
 
 .titleHomeMain{
   color: var(--white-color);
-  font-size: 2rem;
+  font-size: var(--text-title);
   font-weight: bold;
   padding: 20px;
 }
 
 .titleMain{
   color: var(--white-color);
-  font-size: 2rem;
+  font-size: var(--text-title);
   font-weight:400;
   padding: 20px;
   margin-bottom: 50px;
@@ -140,7 +143,7 @@ a{
 
 .moto{
   margin-top: -40px;
-  font-size: 1.2rem;
+  font-size: var(--text-main);
   color: var(--white-color);
   padding-bottom: 20px;
   /* margin-bottom: 60px;
@@ -166,17 +169,25 @@ a{
   background-color: var(--white-color);
   padding: 15px;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: var(--text-element);
   bottom: 0;
 }
 
 .loading{
     color: var(--white-color);
-    font-weight: 500;
+    font-weight: 400;
+}
+
+.bold{
+  font-weight: 600;
 }
 
 .profileUser{
   /* border: var(--border-container) var(--yellow-color); */
+}
+
+.userIconInProfile{
+  width: 60%;
 }
 
 /*HOME PAGE*/
@@ -207,7 +218,7 @@ a{
   align-items: center;
   background-color: var(--red-color);
   border-radius: var(--border-elements-radius);
-  font-size: 0.9rem;
+  font-size: var(--text-element);
   font-weight:500;
   color: aliceblue;
   cursor: pointer;
@@ -242,7 +253,7 @@ textarea{
 }
 
 .commentBox {
-  font-size: 0.8rem;
+  font-size: var(--text-element);
   text-align: left;
   padding: 15px;
   background-color: var(--white-color);
@@ -328,7 +339,8 @@ font-weight: bold;
   background-color: var(--red-color);
   color: var(--white-color);
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.85rem;
+  font-size: var(--text-element);
+  padding-left: 0px;
   font-weight:600;
   height: 40px;
 }
@@ -337,7 +349,7 @@ font-weight: bold;
   background-color: var(--green-color);
   color: var(--white-color);
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.85rem;
+  font-size: var(--text-element);
   font-weight:600;
   height: 40px;
 }
@@ -347,11 +359,11 @@ font-weight: bold;
 }
 ::placeholder {
   color: var(--placeholder-text-color);
-  font-size: 0.9rem;
+  font-size: var(--text-element)
 }
 
 .hint, .boldLink{
-  font-size: 0.8rem;
+  font-size: var(--text-element);
   font-weight: 600;
   color: var(--secondary-text-color);
   margin: 0px;
@@ -402,21 +414,32 @@ li{
   gap: 10px;
 
 }
-/* .audio-recorder{
-  color: var(--white-color);
-  background-color: var(--red-color);
-  width: 150px;
-} */
+
+
 .audio-recorder-mic{
   color: rgb(255, 255, 255);
-  background-color: var(--red-color);
-  width: 150px;
+  background-color: var(--white-color);
 }
 
-/* .rav-recorder .rav-recorder-icon-microphone {
-  color: rgb(255, 255, 255); 
+.audio-recorder, .recorder {
+  background-color: var(--withe-color);
+  color: rgb(255, 255, 255);
+  box-shadow: none;
 
-} */
+}
+
+.audio-recorder-options{
+  background-color: var(--white-color);
+  color: rgb(255, 255, 255);
+  box-shadow: none;
+
+}
+
+.rav-recorder .rav-recorder-icon-microphone {
+  color: var(--withe-color); 
+  box-shadow: none;
+
+}
 
 /*INFO BLOCK: COMMENT, AUDIO INFO, PENDING AUDIO ELEMENTS*/
 
@@ -501,13 +524,13 @@ li{
 }
 
 .infoName{
-  font-size: 0.9rem;
+  font-size: var(--text-element);
   font-weight: bold;
   margin: 1px;
 }
 
 .infoText{
-  font-size: 0.8rem;
+  font-size: var(--text-element);
   margin: 1px;
 }
 
@@ -558,7 +581,7 @@ color:#9747FF
 
 .icon-home{
   margin-bottom: -3.5px;
-  color: var(--blue-color)
+  color: var(--purple-color)
 }
 
 .imgExercise{
@@ -634,16 +657,6 @@ color:#9747FF
   color: #f50;
 }
 
-/* .title {
-  color: #fff;
-  font-weight: 100;
-  font-size: 32px;
-  margin-bottom: 0;
-  padding: 2px;
-  line-height: 37px;
-  background-color: rgba(0,0,0,.8);
-} */
-
 /* audio image */
 .icon-wrapper {
   display: flex;
@@ -715,7 +728,7 @@ button svg {
 /* time */
 .time {
   color: var(--red-color);
-  font-size: 0.9rem;
+  font-size: var(--text-element);
   line-height: 46px;
 }
 

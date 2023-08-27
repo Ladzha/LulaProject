@@ -6,7 +6,7 @@ export const getAllUsers  = async ()=>{
         const usersList = await db('users')
         .select(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"])
         .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"])
-        console.log("user=>",  usersList)
+        // console.log("user=>",  usersList)
         return usersList;      
     } catch (error) {
         console.log(error);
@@ -57,11 +57,11 @@ export const login = async ( username)=>{
 }
 
 //UPDATE NEW USER 
-export const updateUser = async (userid, username, firstname, lastname, email, hashPassword)=>{
+export const updateUser = async (userid, username, firstname, lastname, hashPassword, about,)=>{
     try {
         const updatedUser = await db('users')
         .where('userid', userid)
-        .update({username, firstname, lastname, password:hashPassword},["*"]);
+        .update({username, firstname, lastname, password:hashPassword, about},["*"]);
         return updatedUser;     
 
     } catch (error) {

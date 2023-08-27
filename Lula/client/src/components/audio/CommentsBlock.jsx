@@ -1,15 +1,18 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
-import avatar from '../../img/avatar13.jpg';
+import {useState, useEffect, useContext} from 'react';
 import CommentForm from './CommentForm';
 import CommentElement from './CommentElement';
 import { CommentService } from '../../services/comment.service.js';
+import { AppContext } from '../../App.js';
+import jwtDecode from 'jwt-decode';
 
 
 const CommentsBlock = ({recordid}) => {
 
     const [commentForm, setCommentForm] = useState(false)
     const [comments, setComments]=useState([]);
+    const { token } = useContext(AppContext);
+    const [userid, setUserid] = useState('');
 
 
     useEffect(() => {
@@ -23,6 +26,15 @@ const CommentsBlock = ({recordid}) => {
       };
             fetchData();
     }, []);
+
+    useEffect(()=>{
+      if(token){
+        const decodedToken = jwtDecode(token); 
+        setUserid(decodedToken.userid);
+      }else{
+        console.log("There is no token");
+      }
+  }, [token])
 
     const handleComment = ()=>{
         setCommentForm(!commentForm)
@@ -43,9 +55,11 @@ const CommentsBlock = ({recordid}) => {
       }).format(new Date(comment.created))}/>
         </div>)})}      
 
-    <button className='submitButton addButton' onClick={handleComment}>
-    {commentForm? 'Hide form' : 'Leave a comment'}</button>
-    {commentForm && <CommentForm recordid={recordid} userid={1} setCommentForm={setCommentForm}/>}
+      { token&& <>
+        <button className='submitButton addButton' onClick={handleComment}>
+        {commentForm? 'Hide form' : 'Leave a comment'}</button>
+        {commentForm && <CommentForm recordid={recordid} userid={userid} setCommentForm={setCommentForm}/>}</> 
+      }
 
     </div>
   )

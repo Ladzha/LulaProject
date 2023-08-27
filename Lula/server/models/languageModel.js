@@ -5,7 +5,7 @@ export const getAllLanguage  = async ()=>{
         const languageList = await db('language')
         .select('*')
         .returning(["languageid", "language"])
-        console.log("languageList=>",  languageList)
+        // console.log("languageList=>",  languageList)
         return languageList;
         
     } catch (error) {

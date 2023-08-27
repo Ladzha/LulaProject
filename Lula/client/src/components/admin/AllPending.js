@@ -2,7 +2,7 @@ import React from 'react';
 import {PendingService} from '../../services/pending.service.js';
 
 import {useState, useEffect, useContext} from 'react';
-import PendingComponent from './PendingComponent.js';
+// import PendingComponent from './PendingComponent.js';
 import AudioPlayerPending from './AudioPlayerPending'
 import { AppContext } from '../../App.js';
 
@@ -16,7 +16,7 @@ const AllPending =()=>{
       setPendingAudios(pendingData)
     }
     fetchData()
-  }, [pendingAudios])
+  }, []) ///???? pendingAudios
 
   return(
     <div className= 'box listRecord'>

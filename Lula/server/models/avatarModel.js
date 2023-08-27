@@ -5,7 +5,7 @@ export const getAllAvatars  = async ()=>{
         const avatarList = await db('avatars')
         .select('*')
         .returning(["avatarid", "name", "link"])
-        console.log("avatarList=>",  avatarList)
+        // console.log("avatarList=>",  avatarList)
         return avatarList;
         
     } catch (error) {

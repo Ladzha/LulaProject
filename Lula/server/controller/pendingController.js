@@ -1,5 +1,5 @@
 
-import {getAllPending, getPending, addPending, deletePending, getPendingWithUserInfo} from '../models/pendingModel.js'
+import {getAllPending, getPending, addPending, deletePending, getPendingWithUserInfo, uploadSingle} from '../models/pendingModel.js'
 
 //GET ALL AUDIO
 export const getAllPendingController = async (request, response) => {
@@ -30,12 +30,11 @@ export const getPendingController= async(request, response)=>{
 
 //ADD AUDIO
 export const addPendingController = async(request, response)=>{
-    const userid = request.body.userid ;
-    const name = request.body.name;
-    const link = request.body.link ;
-    const duration = request.body.duration;
+    const imgid = request.body.imgid;
+    const userid = request.body.userid;
+    const link = request.body.link;
     try {
-        const audio = await addPending({userid, name, link, duration})
+        const audio = await addPending({userid, link, imgid})
         response.json(audio)
             
         } catch (error) {
@@ -69,3 +68,15 @@ export const getPendingWithUserInfoController = async (request, response) => {
         response.status(500).json({ msg: 'Failed to fetch pending audios.' });
     }
 } 
+
+export const _uploadSingle = async (req, res) => {
+    const imgid = req.body.imgid ;
+    const userid = req.body.userid ;
+    try {
+      const row = await uploadSingle(req.file, imgid, userid);
+      
+      res.json(row);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+};

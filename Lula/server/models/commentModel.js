@@ -6,7 +6,7 @@ export const getAllComments  = async ()=>{
         const commentList = await db('comments')
         .select('*')
         .returning(["commentid", "userid", "recordid", "text", "created", "updated"])
-        console.log("commentList=>",  commentList)
+        // console.log("commentList=>",  commentList)
         return commentList;
         
     } catch (error) {
@@ -36,7 +36,7 @@ export const getCommentByUserId = async (userid)=>{
         .select('*')
         .where('userid', userid)
         .returning(["commentid", "userid", "recordid", "text", "created", "updated"])
-        console.log("commentList=>",  commentList)
+        // console.log("commentList=>",  commentList)
         return commentList;       
     } catch (error) {
         console.log(error);
@@ -51,7 +51,7 @@ export const getCommentByAudioId = async (recordid)=>{
         .select('*')
         .where('recordid', recordid)
         .returning(["commentid", "userid", "recordid", "text", "created", "updated"])
-        console.log("commentList=>",  commentList)
+        // console.log("commentList=>",  commentList)
         return commentList;       
     } catch (error) {
         console.log(error);

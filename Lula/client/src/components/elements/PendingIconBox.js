@@ -26,7 +26,7 @@ const PendingIconBox = ({recordid}) => {
         try {
           const pendingData = await PendingService.getById(recordid);
           if (!pendingData) return;
-          const audioData = await AudioService.postAudio(pendingData.userid, pendingData.name, pendingData.link, pendingData.imgid);
+          const audioData = await AudioService.postAudio(pendingData.userid, pendingData.link, pendingData.imgid);
           setAudio(audioData);
           handleRejection();
         } catch (error) {

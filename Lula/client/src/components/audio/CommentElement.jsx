@@ -35,7 +35,7 @@ const CommentElement = ({ id, userid, text, created}) => {
 
   return (
     <div className='commentBlock'>
-     <UserBox avatar={avatar[0].link} username ={user.username} info={created}/>
+     <UserBox avatar={avatar[0].link} userid={user.userid} username ={user.username} info={created}/>
     <div className='commentBox'>{text}</div>
     </div>
   )

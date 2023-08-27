@@ -6,7 +6,7 @@ export const getAllSection  = async ()=>{
         const sectionList = await db('section')
         .select('*')
         .returning(["sectionid", "name"])
-        console.log("sectionList=>",  sectionList)
+        // console.log("sectionList=>",  sectionList)
         return sectionList;
         
     } catch (error) {

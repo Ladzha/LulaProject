@@ -67,7 +67,7 @@ const CommentForm = ({recordid, userid, setCommentForm}) => {
 
         <textarea 
         className='newCommentText' type='text' 
-        maxLength={200} rows={5} cols={40}
+        maxLength={300} rows={7} cols={40}
         name='commentInput' placeholder="Remember to be polite"/>
 
         <button className='submitButton addButton' type="submit">Submit</button>

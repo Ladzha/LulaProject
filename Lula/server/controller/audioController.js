@@ -62,11 +62,10 @@ export const getAudioByImgIdController= async(request, response)=>{
 //ADD AUDIO
 export const addAudioController = async(request, response)=>{
     const userid = request.body.userid ;
-    const name = request.body.name;
     const link = request.body.link ;
     const imgid = request.body.imgid;
     try {
-        const audio = await addAudio({userid, name, link, imgid})
+        const audio = await addAudio({userid, link, imgid})
         response.json(audio)
             
         } catch (error) {
@@ -78,14 +77,10 @@ export const addAudioController = async(request, response)=>{
 //UPDATE AUDIO
 export const updateAudioController = async(request, response)=>{
     const recordid = request.params.recordid
-
-    const name = request.body.name;
-    const rating = request.body.rating;
     const likes = request.body.likes;
-    const dislikes = request.body.dislikes;
 
     try {
-        const audio = await updateAudio({name, likes, dislikes, rating}, recordid)
+        const audio = await updateAudio({likes}, recordid)
         response.json(audio)
             
         } catch (error) {

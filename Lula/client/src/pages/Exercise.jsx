@@ -14,13 +14,7 @@ const Exercise = () => {
   const { imgid } = useParams();
   const [img, setImg]=useState([{}]);
   const [audios, setAudios]=useState([]);
-  const [showRecord, setShowRecord] =useState(false)
     
-  const handleShowRecord = () => {
-    setShowRecord(!showRecord);
-    };
-
-
   useEffect(() => {
     if (!imgid) return;
 
@@ -33,7 +27,9 @@ const Exercise = () => {
         if(!imgData) return;
 
         const audiosData = await AudioService.getByImageId(imgid) //GET LIST OF AUDIO BY IMG ID
-        console.log(audiosData);
+        // console.log(audiosData);
+        if(!audiosData) return;
+        
         setAudios(audiosData); 
 
           } catch (error) {
@@ -45,7 +41,7 @@ const Exercise = () => {
 
   return(
     <div className='containerColumn'>
-    <p className='titleMain'> Listen to what they say about it </p>
+    <p className='titleMain'> Listen to what they say about this photo </p>
     <div>
         
         <div className='exerciseContainer'>

@@ -80,5 +80,18 @@ export const UserService = {
         } catch(error) {
         console.log(error);
         }
-    }
+    },
+
+    async updateById(id) {
+        try {
+        const response = await axios.put(`http://localhost:3001/api/users/update/${id}`)
+        if(response){
+            return response.data;
+        }else{
+            console.log('Failed to update user');
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    },
 }

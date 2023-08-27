@@ -23,20 +23,15 @@ import Record from './components/audio/Record';
 import Home from './pages/Home';
 import AdminZone from './pages/AdminZone';
 import Contact from './components/admin/Contact';
-// import {AuthContext} from './components/AuthProvider'
 import Auth from './pages/Auth';
-import { AppContext } from './App';
-
 
 
 function AppRouter() {
 
-  const {token} = useContext(AppContext)
-
   return (
     <div className="App">
       <Auth>
-      <Navbar token ={token}/>
+      <Navbar/>
       <div className="mainContainer">
 
       <Routes>
@@ -45,17 +40,17 @@ function AppRouter() {
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/record' element={<Record/>}/>
+
       {/* <Route path='/audio' element={<AudioPlayer/>}/> */}
-      <Route path='/account' element={<Account username="Sara" about="I am soo cool" img={avatar}/>}/>
+      {/* <Route path='/account' element={<Account username="Sara" about="I am soo cool" img={avatar}/>}/> */}
          
-      <Route path='/admin' element={1?<AdminZone/>:<Home/>}/>
+      <Route path='/admin' element={<AdminZone/>}/>
       <Route path='/contact' element={<Contact/>}/>
       
 
       <Route path='/section/:sectionid' element={<Section/>}/> /*shows details about one section and all exercises*/
       <Route path='/exercise/:imgid' element={<Exercise/>}/> /*shows one exercise*/
       <Route path='/language/:languageid' element={<Language/>}/> /*shows all exercise in one language*/
-      {/* <Route path='/exercise' element={<Exercise/>}/> */}
       </Routes>
       
       </div>

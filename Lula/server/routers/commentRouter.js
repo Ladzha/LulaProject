@@ -1,7 +1,6 @@
 import express from 'express';
 import { getAllCommentController, getCommentController, getUserCommentController, getCommentByAudioIdController,  addCommentController, updateCommentController, deleteCommentController } from '../controller/commentController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
-import { roleMiddleware } from '../middleware/roleMiddleware.js';
 
 export const commentRouter = express.Router();
 

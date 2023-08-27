@@ -8,7 +8,7 @@ const PendingInfoBox = (props) => {
 
   return (
     <div className={`pendingInfoBox ${props.isPlaying ?'selected' : ''}`} onClick={props.onPlayClick}>
-        <UserBox avatar={props.avatar} username ={props.username} info={props.info}/>
+        <UserBox avatar={props.avatar} username ={props.username} userid={props.userid} info={props.info}/>
         <PendingIconBox recordid={props.recordid}/>
     </div>
   )

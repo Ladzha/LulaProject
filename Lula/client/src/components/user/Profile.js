@@ -11,8 +11,6 @@ import AudioPlayer from '../audio/audioPlayer/AudioPlayer'
 import UserBox from '../elements/UserBox.js';
 
 
-
-
 const Profile = () => {
 
   const { userid } = useParams();
@@ -22,7 +20,7 @@ const Profile = () => {
   const [user, setUser]=useState([{}]);
   const [avatar, setAvatar]=useState([{}]);
 
-  console.log("COMMENT", comments);
+  // console.log("COMMENT", comments);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,13 +60,11 @@ const Profile = () => {
     <p className='titleMain'> Profile by {user.username} </p>
       <div className='profileContainer'>
 
-        <img className='userIconInComment' src={avatar[0].link}></img>
-        <p className="loading">My name is: {user.firstname}</p>
-        <p className="loading">Something about me: {user.about}</p>
+        <img className='userIconInProfile' src={avatar[0].link}></img>
+        <p className="loading">My name is: <span className='bold'>{user.firstname}</span> </p>
+        <p className="loading">Something about me: <span className='bold'>{user.about}</span></p>
 
-
-
-
+        {audios?(
         <div className='profileColumn'>
 
         {audios.length > 0 && <div className= 'box listRecord'>
@@ -78,8 +74,13 @@ const Profile = () => {
         {comments.length > 0 && <div className= 'box listRecord'>
           {comments.map((comment, index)=>{
             return(
-              <div className='commentBlock'>
-              <UserBox avatar={avatar[0].link} username ={user.username} info={""}/>
+              <div className='commentBlock' key={index}>
+              <UserBox avatar={avatar[0].link} username ={user.username} userid={user.userid}
+              info={new Intl.DateTimeFormat('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                }).format(new Date(comment.created))}/>
               <div className='commentBox'>{comment.text}</div> 
               </div>
               
@@ -87,14 +88,12 @@ const Profile = () => {
 
           </div>}
 
-      </div>
+      </div>):(<p className="loading">I published nothing yet</p>)}
       
       </div>
     </div>
   )
 }
-
-
 
 export default Profile
 

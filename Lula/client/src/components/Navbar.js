@@ -10,29 +10,27 @@ import jwtDecode from 'jwt-decode';
 const Navbar = () => {
 
   const navigate = useNavigate ();
-  const { token } = useContext(AppContext);
+  const { token, handleLogout  } = useContext(AppContext);
   const [username, setUsername] = useState('');
+  const [userid, setUserid] = useState('');
+  const [role, setRole] = useState('');
 
   useEffect(()=>{
     if(token){
-      console.log("TOKEN", token);
       const decodedToken = jwtDecode(token); 
-      console.log("DECODER TOKEN NAV", decodedToken);// Decode the token
       setUsername(decodedToken.username);
-
-
+      setUserid(decodedToken.userid);
+      setRole(decodedToken.role);
     }else{
-      console.log("NET TTOKENA");
-
+      console.log("There is no token");
     }
 
-}, [])
-
-
+}, [token])
 
   const logout = async () => {
     try {
       const response = await UserService.logout();
+      handleLogout();
     if (response.status === 200) {
       navigate('/');
     }
@@ -45,53 +43,32 @@ const Navbar = () => {
   return (
     <div className='navbar'>
       <ul>
-        <li>
-          <NavLink to="/"><AiFillHome className='icon-grey icon-home'/></NavLink>
-        </li>
-        {/* <li>
-          <NavLink to="/contact" className='link'>Contact us</NavLink>
-        </li> */}
-
-        {/* <li>
-          <NavLink to="/exercise/1" className='link'>Exercise</NavLink>
-        </li> */}
-
+        <li><NavLink to="/"><AiFillHome className='icon-grey icon-home'/></NavLink></li>
       </ul>
-<ul>
-{false ? (
+
+      <ul>
+      {token ? (
+        <>
+        <li className="link"><NavLink to={`/profile/${userid}`} className='link'>{username}</NavLink></li>
+        <li className='divider'>  |  </li>
+        <li><NavLink to="/login" className="link" onClick={logout}>Logout</NavLink></li>      
+        {role==='admin'? (
           <>
+          <li className='divider'>  |  </li>
+          <li className='link'><NavLink to='/admin'>Admin Zone</NavLink></li>
+          </>):(<></>)}
+        
+        </>):(<>
 
-          <li>
-           <NavLink to="/logout" className="link" onClick={logout}>Logout
-           </NavLink>
-            {/* <NavLink to={`/profile/${userid}`} className='link'>Profile</NavLink> */}
-          </li>
-          </>):(<>
-
-            <li><NavLink to="/login" className='link'>Login</NavLink>
-            </li>
-          
-            <li className='divider'>  |  </li>
-
-            <li>
-              <NavLink to='/register' className='link'> Register</NavLink>
-            </li>
-
-            <li className='divider'>  |  </li>
-
-
-          </>)
+        <li><NavLink to="/login" className='link'>Login</NavLink></li>
+        
+        <li className='divider'>  |  </li>
+        <li><NavLink to='/register' className='link'>Register</NavLink></li>
+        {/* <li><NavLink to="/contact" className='link'>Contact us</NavLink></li> */}
+        </>)
 
         }
-
-        <li>
-          <NavLink to="/admin" className='link'>Admin</NavLink>
-        </li>
-  
-</ul>
-
-        
-
+        </ul>
     </div>
   )
 }

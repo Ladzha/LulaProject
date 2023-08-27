@@ -5,7 +5,7 @@ import { AudioService } from '../../services/audio.service.js';
 import ActiveInfoBox from '../elements/ActiveInfoBox.js'
 import CommentsBlock from './CommentsBlock.jsx'
 
-const AudioComponent = ({id, duration, created,  classname, onPlayClick, isPlaying  }) => {
+const AudioComponent = ({id, created,  classname, onPlayClick, isPlaying  }) => {
 
     const [audio, setAudio]=useState([{}]);
     const [user, setUser]=useState([{}]);
@@ -42,7 +42,6 @@ const AudioComponent = ({id, duration, created,  classname, onPlayClick, isPlayi
  
   
   return (
-    // <div className='toApprovalBox'>
       <div className='listBox'>
         <div className='infoBlock'>   
               <ActiveInfoBox avatar={avatar[0].link} 
@@ -54,8 +53,7 @@ const AudioComponent = ({id, duration, created,  classname, onPlayClick, isPlayi
               onPlayClick={onPlayClick}/>
 
               {commentBlock && <CommentsBlock recordid={audio.recordid}/>}   
-
-        {/* </div> */}
+              
       </div>
     </div>
   )

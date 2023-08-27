@@ -1,11 +1,14 @@
 import React from 'react'
-import { useState, useRef, useEffect } from 'react'
-
+import { useState, useRef, useEffect, useContext } from 'react'
+import {useParams} from 'react-router-dom';
+import axios from 'axios';
 import ProgressBar from './ProgressBar'
 import AudioControls from './AudioControls'
 import AudioComponent from '../AudioComponent'
+import { AudioRecorder} from 'react-audio-voice-recorder';
 
-import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
+import { AppContext } from '../../../App.js';
+import jwtDecode from 'jwt-decode';
 
 /*Because we will need the audio data in multiple children 
 components, we will import the playlist file in the 
@@ -26,6 +29,12 @@ const AudioPlayer = ({playlist}) => {
   // const [volume, setVolume]=useState(60)
 
   const [showRecord, setShowRecord] =useState(false)
+  const { imgid } = useParams();
+
+  //token and userid
+  const { token } = useContext(AppContext);
+  const [userid, setUserid] = useState('');
+
 
   const handleShowRecord = () => {
     setShowRecord(!showRecord);
@@ -33,19 +42,28 @@ const AudioPlayer = ({playlist}) => {
 
 
 
-const formatTime = (time)=>{
-  const minutes = Math.floor(time/60);
-  const seconds = Math.floor(time/60);
-  return `${minutes}:${seconds.toString().padStart(2,'0')}`;
-};
+// const formatTime = (time)=>{
+//   const minutes = Math.floor(time/60);
+//   const seconds = Math.floor(time/60);
+//   return `${minutes}:${seconds.toString().padStart(2,'0')}`;
+// };
 
   useEffect(() => {
+    if(playlist){
     if (playlist.length > 0) {
       setCurrentTrack(playlist[trackIndex]);
-    }
+    }}
   }, [playlist, trackIndex]);
 
 
+  useEffect(()=>{
+    if(token){
+      const decodedToken = jwtDecode(token); 
+      setUserid(decodedToken.userid);
+    }else{
+      console.log("There is no token");
+    }
+}, [token])
 
 
   const handlePlayClick = (index) => {
@@ -72,26 +90,33 @@ const formatTime = (time)=>{
   };
 
   const onLoadedMetadata = () =>{
-    // console.log("DURATION", audioRef.current.duration);
     const seconds = audioRef.current.duration;
     setDuration(seconds)
     progressBarRef.current.max=seconds;
   }
 
+  const addAudioElement = async (blob) => {
+    const name = 'as'
 
-  //recording 
-  const recorderControls = useAudioRecorder()
-  const addAudioElement = (blob) => {
-    const url = URL.createObjectURL(blob);
-    const newAudio = document.createElement("audio");
-    newAudio.src = url;
-    newAudio.controls = false;
-    document.body.appendChild(newAudio);
-    console.log(newAudio.src);
+    const formData = new FormData();
+      formData.append("file", blob);
+      formData.append("imgid", imgid);
+      formData.append("userid", userid);
+      formData.append("name", name);
+
+
+      try {
+        const res = await axios.post("http://localhost:3001/api/pending/upload-single", formData);
+        // setFileData(res.data);
+      } catch (error) {
+        console.log(error.response.data.msg);
+      }
   };
 
 
-  return (    
+
+  return ( <>
+    {playlist ? (
     <div className='innerd'>
       {playlist.length > 0 ? (<>
 
@@ -144,25 +169,26 @@ const formatTime = (time)=>{
                 onPlayClick={() => handlePlayClick(index)}
                 isPlaying={isPlaying && currentTrackIndex === index}/>
 
-                {/* <p>{audio.recordid}</p> */}
-
               </div>)})}
 
-
       </>):(<p className=''>There are no audios yet</p>)}
-      <p className='hint'onClick={handleShowRecord}>Create record?</p>
-      {showRecord &&  
-          <div className='box recorderBox'>
-          <AudioRecorder 
-            onRecordingComplete={(blob) => addAudioElement(blob)}
-            recorderControls={recorderControls}
-            showVisualizer={true}/>
-          </div>
+      {token&& <>
+        <p className='hint'onClick={handleShowRecord}>Create record?</p>
+          {showRecord &&  
+            <div className='box recorderBox'>
+            <AudioRecorder 
+              onRecordingComplete={(blob) => addAudioElement(blob)}
+              // onRecordingComplete={handleRecordingComplete}
 
-      } 
-
-    </div> 
-  )
+              // recorderControls={recorderControls}
+              showVisualizer={true}
+              downloadOnSavePress={false}
+              downloadFileExtension="webm"
+              />
+            </div>} </>}
+      </div> ):(<p className=''> There are no audios yet </p>)}
+      </>
+  ) 
 }
 
 export default AudioPlayer 

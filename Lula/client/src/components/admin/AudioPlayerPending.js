@@ -52,8 +52,6 @@ const formatTime = (time)=>{
 
       audioRef.current.src = playlist[index].link; // Set the audio source
       audioRef.current.play();
-
-
     }
   };
 
@@ -67,7 +65,7 @@ const formatTime = (time)=>{
 
   return (    
     <div className='innerd'>
-      {playlist.length > 0 ? (
+      {playlist.length ? (
       <div>
       <audio 
       src={currentTrack.link}  

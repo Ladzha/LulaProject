@@ -16,7 +16,6 @@ const OneUser = ({id}) => {
           try {
               const userData = await UserService.getById(id);
               setUser(userData);
-              console.log(userData);
 
               if (userData.avatarid) {
                   const avatarData = await AvatarService.getById(userData.avatarid);

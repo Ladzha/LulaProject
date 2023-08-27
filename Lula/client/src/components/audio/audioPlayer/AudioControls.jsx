@@ -107,34 +107,61 @@ const AudioControls  = ({
   }
 
   const handlePrevious =()=>{
-  
-    if(trackIndex === 0){ //if it is the first track in the playlist to loop to the last one
-      let lastTrackIndex = playlist.length-1;
-      setTrackIndex(lastTrackIndex);
-      setCurrentTrack(playlist[lastTrackIndex]);
-    }
-    else{     
-      setTrackIndex(trackIndex-1);
-      setCurrentTrack(playlist[trackIndex - 1])
-    } 
-    setIsPlaying(true); //new line
+    try {
+      if(trackIndex === 0){
+        let lastTrackIndex = playlist.length-1;
+        setTrackIndex(lastTrackIndex);
+        setCurrentTrack(playlist[lastTrackIndex]);
+      }
+      else{
+        setTrackIndex(trackIndex -1);
+        setCurrentTrack(playlist[trackIndex -1])
+      } 
 
-    audioRef.current.play();
+      setIsPlaying(true); //new line
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then(item => {
+          // audioRef.current.pause();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleNext =()=>{
-    console.log("NEXT", trackIndex);
-    if(trackIndex >=playlist.length -1){
-      setTrackIndex(0);
-      setCurrentTrack(playlist[0]);
+    try{
+
+      if(trackIndex >=playlist.length -1){
+        setTrackIndex(0);
+        setCurrentTrack(playlist[0]);
+      }
+      else{
+        setTrackIndex(trackIndex +1);
+        setCurrentTrack(playlist[trackIndex +1])
+      } 
+
+      setIsPlaying(true); //new line
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then(item => {
+          // audioRef.current.pause();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
+
     }
-    else{
-      setTrackIndex(trackIndex +1);
-      setCurrentTrack(playlist[trackIndex +1])
-    } 
-    
-    setIsPlaying(true); //new line
-    audioRef.current.play();
+    catch(error){
+      console.log(error);
+    }
+
   };
 
   return (

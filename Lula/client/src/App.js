@@ -12,9 +12,13 @@ export const AppContext = createContext();
 
 function App() {
   const [token, setToken] = useState(null);
+  const handleLogout = () => {
+    // Clear token from the context when logging out
+    setToken(null);
+  };
   return (
     <BrowserRouter>
-      <AppContext.Provider value={{ token, setToken }}>
+      <AppContext.Provider value={{ token, setToken, handleLogout }}>
       
         <AppRouter/>
 

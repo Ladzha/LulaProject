@@ -5,7 +5,7 @@ export const getAllImg  = async ()=>{
         const imgList = await db('img')
         .select('*')
         .returning(["imgid", "name", "link", "sectionid", "languageid"])
-        console.log("imgList=>",  imgList)
+        // console.log("imgList=>",  imgList)
         return imgList;
         
     } catch (error) {
@@ -36,7 +36,7 @@ export const getImgBySectionId = async (sectionid)=>{
         .select('*')
         .where('sectionid', sectionid)
         .returning(["imgid", "name", "link", "sectionid", "languageid"])
-        console.log("imgList=>",  imgList)
+        // console.log("imgList=>",  imgList)
         return imgList;       
     } catch (error) {
         console.log(error);
@@ -51,7 +51,7 @@ export const getImgByLanguageId = async (languageid)=>{
       .select('*')
       .where('languageid', languageid)
       .returning(["imgid", "name", "link", "sectionid", "languageid"])
-      console.log("imgList=>",  imgList)
+      // console.log("imgList=>",  imgList)
       return imgList;       
   } catch (error) {
       console.log(error);
