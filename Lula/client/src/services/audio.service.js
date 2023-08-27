@@ -54,11 +54,10 @@ export const AudioService = {
         }
     },
 
-    async postAudio(userid, name, link, imgid) { 
+    async postAudio(userid, link, imgid) { 
         try {
         const response = await axios.post('http://localhost:3001/api/audio/post', {
             userid, 
-            name,
             link,
             imgid
         }) 
@@ -71,10 +70,6 @@ export const AudioService = {
             console.log(error);
         }
     },
-
-
-    //HOW TO SEND TO AWS
-
 
 
 }

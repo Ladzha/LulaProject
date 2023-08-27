@@ -27,6 +27,7 @@ const PendingIconBox = ({recordid}) => {
           const pendingData = await PendingService.getById(recordid);
           if (!pendingData) return;
           const audioData = await AudioService.postAudio(pendingData.userid, pendingData.link, pendingData.imgid);
+          console.log("TEST NA LINK", pendingData);
           setAudio(audioData);
           handleRejection();
         } catch (error) {

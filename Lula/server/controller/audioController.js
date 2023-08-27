@@ -61,8 +61,8 @@ export const getAudioByImgIdController= async(request, response)=>{
 
 //ADD AUDIO
 export const addAudioController = async(request, response)=>{
-    const userid = request.body.userid ;
-    const link = request.body.link ;
+    const userid = request.body.userid;
+    const link = request.body.link;
     const imgid = request.body.imgid;
     try {
         const audio = await addAudio({userid, link, imgid})

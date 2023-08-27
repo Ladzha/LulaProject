@@ -20,7 +20,7 @@ export const getPending = async (recordid)=>{
     try {
         const audio = await db('pending')
         .select('pending.*','uploads.location as link')
-        .leftJoin('uploads', 'link', '=', 'uploads.location')
+        .leftJoin('uploads', 'link', '=', 'uploads.id')
         .where('pending.recordid', recordid)
 
         console.log(audio);
