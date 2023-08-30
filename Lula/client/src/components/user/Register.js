@@ -42,7 +42,7 @@ const navigate = useNavigate();
         {/* <input className="input" type='password' id="inputPasswordConfirm" name="inputPasswordConfirm" placeholder='Confirm Password' required/> */}
         <button className='submitButton' type="submit">Register</button>   
       </form>
-      <p className='hint'>Already have an account? <span className="boldLink"><Link to="/login">Login</Link></span></p>
+      <p className='hint'>Already have an account? <Link to="/login"className="boldLink">Login</Link></p>
     </div>
   )
 }

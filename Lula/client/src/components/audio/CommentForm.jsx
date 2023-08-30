@@ -59,7 +59,7 @@ const CommentForm = ({recordid, userid, setCommentForm}) => {
   }
   return (
       <div className='newCommentBlock'>
-      <UserBox avatar={avatar[0].link} username ={user.username} info={user.about}/>
+      <UserBox avatar={avatar[0].link} username ={user.username} userid ={user.userid} info={user.about}/>
       <form 
       className='newComment' 
       onSubmit={(event)=>handleCommentSubmit(event)}

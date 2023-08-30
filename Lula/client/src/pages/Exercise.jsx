@@ -42,10 +42,11 @@ const Exercise = () => {
   return(
     <div className='containerColumn'>
     <p className='titleMain'> Listen to what they say about this photo </p>
+    <p className='instruction'>Listen to various audio recordings related to the chosen scenario and enhance your language skills. Feel free to leave a comment or contribute your own audio to enrich the experience for fellow learners.</p>
     <div>
         
         <div className='exerciseContainer'>
-        <img className='imgExercise' src={img[0].link}/>
+        <img className='imgExercise' src={img[0].link} alt="exercise-preview"/>
             <div className= 'box listRecord'>
               <AudioPlayer playlist={audios}/>
               <Link to={`/section/${img[0].sectionid}`} ><p className='languageButton'>Back</p></Link>       

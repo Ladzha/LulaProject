@@ -40,29 +40,66 @@ const CommentsBlock = ({recordid}) => {
         setCommentForm(!commentForm)
     }
 
-  return (
-    <div className='listComment'> 
-    
-    {comments.length>0 && comments.map((comment, index)=> { 
-      return(
-        <div key={index}>
-        <CommentElement 
-        id={comment.commentid} userid={comment.userid} text={comment.text} 
-        created={new Intl.DateTimeFormat('en-US', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit'
-      }).format(new Date(comment.created))}/>
-        </div>)})}      
+    return (
+      <div className="listComment">
+        {comments && comments.length > 0 ? (
+          comments.map((comment, index) => (
+            <div key={index}>
+              <CommentElement
+                id={comment.commentid}
+                userid={comment.userid}
+                text={comment.text}
+                created={new Intl.DateTimeFormat('en-US', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit'
+                }).format(new Date(comment.created))}
+              />
+            </div>
+          ))
+        ) : (
+          <span className='information'>No comments yet</span>
+        )}
+  
+        {token && (
+          <>
+            <button className="submitButton addButton" onClick={handleComment}>
+              {commentForm ? 'Hide form' : 'Leave a comment'}
+            </button>
+            {commentForm && (
+              <CommentForm
+                recordid={recordid}
+                userid={userid}
+                setCommentForm={setCommentForm}
+              />
+            )}
+          </>
+        )}
+      </div>
+    );
+  };
 
-      { token&& <>
-        <button className='submitButton addButton' onClick={handleComment}>
-        {commentForm? 'Hide form' : 'Leave a comment'}</button>
-        {commentForm && <CommentForm recordid={recordid} userid={userid} setCommentForm={setCommentForm}/>}</> 
-      }
+//   return (
+//     <div className='listComment'> 
+//     {comments ? (
+//       comments.length>0 && comments.map((comment, index)=> { 
+//         <div key={index}>
+//         <CommentElement 
+//         id={comment.commentid} userid={comment.userid} text={comment.text} 
+//         created={new Intl.DateTimeFormat('en-US', {
+//           year: 'numeric',
+//           month: '2-digit',
+//           day: '2-digit'
+//       }).format(new Date(comment.created))}/>
+//         </div>))):(<span>No comments yet</span>)
 
-    </div>
-  )
-}
+//       { token&& <>
+//         <button className='submitButton addButton' onClick={handleComment}>
+//         {commentForm? 'Hide form' : 'Leave a comment'}</button>
+//         {commentForm && <CommentForm recordid={recordid} userid={userid} setCommentForm={setCommentForm}/>}</> 
+//       )} 
+//     </div>
+//   );
+// }
 
 export default CommentsBlock

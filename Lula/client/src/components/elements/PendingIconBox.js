@@ -7,35 +7,47 @@ const PendingIconBox = ({recordid}) => {
 
   const [audio, setAudio]=useState([{}]);
 
-  const handleRejection=()=>{
+  const handleRejection= async()=>{
     if (!recordid) return;
-      const fetchData = async () => {
-        try {
-          const pendingData = await PendingService.deleteById(recordid);
-          setAudio(pendingData);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-  };
+      try {
+        const pendingData = await PendingService.deleteById(recordid);
+        setAudio(pendingData);
+        console.log("REJECTED");
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  const handleApproval=()=>{
+  const handleApproval= async()=>{
     if (!recordid) return;
-      const fetchData = async () => {
-        try {
-          const pendingData = await PendingService.getById(recordid);
-          if (!pendingData) return;
-          const audioData = await AudioService.postAudio(pendingData.userid, pendingData.link, pendingData.imgid);
-          console.log("TEST NA LINK", pendingData);
+      try {
+        const pendingData = await PendingService.getById(recordid);
+        console.log("recordid", recordid);
+
+        if(pendingData){
+          const audioData = await AudioService.postAudio(
+            pendingData[0].userid, 
+            pendingData[0].link, 
+            pendingData[0].imgid);
+  
           setAudio(audioData);
           handleRejection();
-        } catch (error) {
-          console.log(error);
+
         }
-      };
-      fetchData();
-  };
+
+        else{
+          console.log("Pending data is undefined or null");
+          return;
+        }
+
+
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  useEffect(() => {}, [audio]);
 
   return (
     <div className='pendingIconBox'>

@@ -171,9 +171,9 @@ const AudioPlayer = ({playlist}) => {
 
               </div>)})}
 
-      </>):(<p className=''>There are no audios yet</p>)}
+      </>):(<p className='information'>There are no audios yet</p>)}
       {token&& <>
-        <p className='hint'onClick={handleShowRecord}>Create record?</p>
+        <p className='hint'onClick={handleShowRecord}>{showRecord?'Hide microphone':'Create record'}</p>
           {showRecord &&  
             <div className='box recorderBox'>
             <AudioRecorder 

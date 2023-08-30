@@ -10,6 +10,9 @@ import { AvatarService } from '../../services/avatar.service.js';
 import AudioPlayer from '../audio/audioPlayer/AudioPlayer'
 import UserBox from '../elements/UserBox.js';
 
+import { AppContext } from '../../App.js';
+import jwtDecode from 'jwt-decode';
+
 
 const Profile = () => {
 
@@ -20,7 +23,9 @@ const Profile = () => {
   const [user, setUser]=useState([{}]);
   const [avatar, setAvatar]=useState([{}]);
 
-  // console.log("COMMENT", comments);
+  const [currentUserId, setCurrentUserId]=useState('');
+  
+  const { token } = useContext(AppContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,12 +60,22 @@ const Profile = () => {
     fetchData();
   }, [userid]);
         
-  return (
-    <div className='containerColumn'>
-    <p className='titleMain'> Profile by {user.username} </p>
-      <div className='profileContainer'>
+  useEffect(()=>{
+    if(token){
+      const decodedToken = jwtDecode(token); 
+      setCurrentUserId(decodedToken.userid);
+    }else{
+      console.log("There is no token");
+    }
+}, [token])
 
-        <img className='userIconInProfile' src={avatar[0].link}></img>
+
+  return (
+    <div className='containerColumn'> 
+    <p className='titleMain'> {currentUserId === userid ? `My account: ${user.username}` : `${user.username}'s Profile`} </p>
+
+      <div className='profileContainer'>
+        <img className='userIconInProfile' src={avatar[0].link} alt="user-avatar"></img>
         <p className="loading">My name is: <span className='bold'>{user.firstname}</span> </p>
         <p className="loading">Something about me: <span className='bold'>{user.about}</span></p>
 

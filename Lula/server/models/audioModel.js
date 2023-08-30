@@ -4,8 +4,15 @@ import {db} from '../config/db.js';
 export const getAllAudios  = async ()=>{
     try {
         const audioList = await db('audios')
-        .select("audios.recordid", "audios.userid", "audios.created", "audios.likes", "audios.imgid",'uploads.location as link')
-        .leftJoin('uploads', 'audios.link', '=', 'uploads.id')
+        .select(
+        "audios.recordid", 
+        "audios.userid", 
+        "audios.created", 
+        "audios.likes", 
+        "audios.imgid",
+        'audios.link',
+        'uploads.location as link_integer')
+        .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
         return audioList;       
     } catch (error) {
         console.log(error);
@@ -17,8 +24,15 @@ export const getAllAudios  = async ()=>{
 export const getAudio = async (recordid)=>{
     try {
         const audio = await db('audios')
-        .select("audios.recordid", "audios.userid", "created", "likes", "imgid",'uploads.location as link')
-        .leftJoin('uploads', 'link', '=', 'uploads.id')
+        .select(
+            "audios.recordid", 
+            "audios.userid", 
+            "audios.created", 
+            "audios.likes", 
+            "audios.imgid",
+            'audios.link',
+            'uploads.location as link_integer')
+            .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
         .where('audios.recordid', recordid)
         return audio;      
 
@@ -33,8 +47,15 @@ export const getAudio = async (recordid)=>{
 export const getAudioByUserId = async (userid)=>{
     try {
         const audioList = await db('audios')
-        .select("audios.recordid", "audios.userid", "created", "likes", "imgid",'uploads.location as link')
-        .leftJoin('uploads', 'link', '=', 'uploads.id')
+        .select(
+            "audios.recordid", 
+            "audios.userid", 
+            "audios.created", 
+            "audios.likes", 
+            "audios.imgid",
+            'audios.link',
+            'uploads.location as link_integer')
+            .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
         .where('audios.userid', userid)
         console.log("audioList=>",  audioList)
         return audioList;       
@@ -47,8 +68,15 @@ export const getAudioByUserId = async (userid)=>{
 export const getAudioByImgId = async (imgid)=>{
     try {
         const audioList = await db('audios')
-        .select("audios.recordid", "audios.userid", "audios.created", "audios.likes", "audios.imgid",'uploads.location as link')
-        .leftJoin('uploads', 'audios.link', '=', 'uploads.id')
+        .select(
+            "audios.recordid", 
+            "audios.userid", 
+            "audios.created", 
+            "audios.likes", 
+            "audios.imgid",
+            'audios.link',
+            'uploads.location as link_integer')
+            .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
         .where('audios.imgid', imgid)
           return audioList;       
     } catch (error) {

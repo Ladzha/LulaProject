@@ -1,5 +1,4 @@
 import React from 'react';
-import AllUsers from '../components/admin/AllUsers'
 import AllPending from '../components/admin/AllPending'
 
 

@@ -22,9 +22,10 @@ const AudioComponent = ({id, created,  classname, onPlayClick, isPlaying  }) => 
         try {
           const audioData = await AudioService.getById(id);
           setAudio(audioData);
+          
 
-          if(audioData.userid){
-            const userData = await UserService.getById(audioData.userid);
+          if(audioData[0].userid){
+            const userData = await UserService.getById(audioData[0].userid);
             setUser(userData);
 
           if (userData.avatarid) {
@@ -45,14 +46,13 @@ const AudioComponent = ({id, created,  classname, onPlayClick, isPlaying  }) => 
       <div className='listBox'>
         <div className='infoBlock'>   
               <ActiveInfoBox avatar={avatar[0].link} 
-              username ={user.username} 
-              userid ={user.userid} 
+              username={user.username} 
+              userid={user.userid} 
               info={created} toggleComments={toggleComments} 
               classname={classname}
               isPlaying={isPlaying}
               onPlayClick={onPlayClick}/>
-
-              {commentBlock && <CommentsBlock recordid={audio.recordid}/>}   
+              {commentBlock && <CommentsBlock recordid={audio[0].recordid}/>}   
               
       </div>
     </div>

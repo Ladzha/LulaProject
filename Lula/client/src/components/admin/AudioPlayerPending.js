@@ -19,11 +19,11 @@ const AudioPlayerPending = ({playlist}) => {
   const [isPlaying, setIsPlaying] = useState(false); //play or not
 
 
-const formatTime = (time)=>{
-  const minutes = Math.floor(time/60);
-  const seconds = Math.floor(time/60);
-  return `${minutes}:${seconds.toString().padStart(2,'0')}`;
-};
+// const formatTime = (time)=>{
+//   const minutes = Math.floor(time/60);
+//   const seconds = Math.floor(time/60);
+//   return `${minutes}:${seconds.toString().padStart(2,'0')}`;
+// };
 
   useEffect(() => {
     if (playlist.length > 0) {
@@ -56,7 +56,6 @@ const formatTime = (time)=>{
   };
 
   const onLoadedMetadata = () =>{
-    // console.log("DURATION", audioRef.current.duration);
     const seconds = audioRef.current.duration;
     setDuration(seconds)
     progressBarRef.current.max=seconds;

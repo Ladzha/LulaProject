@@ -42,7 +42,7 @@ const Login = () => {
         <input className="input" type='password' name="password" placeholder='password' required/>
         <button className='submitButton' type="submit">Login</button>
       </form>
-      <p className='hint'>Don't have an account? <span className="boldLink"><Link to="/register">Sing Up</Link></span></p>
+      <p className='hint'>Don't have an account? <Link to="/register" className="boldLink">Sing Up</Link></p>
 
     </div>
   )

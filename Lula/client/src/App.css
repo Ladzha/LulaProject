@@ -26,8 +26,9 @@ html, body, #root{
   --border-elements-radius: 25px;
   --shadow: 0 2px 6px rgba(255, 54, 60, 0.4);
   --text-main: 1.1em;
-  --text-element: 0.8em;
-  --text-title: 1.5em;
+  --text-detail: 0.85em;
+  --text-element: 0.7em;
+  --text-title: 1.6em;
 
 }
 
@@ -128,8 +129,9 @@ a{
 .titleHomeMain{
   color: var(--white-color);
   font-size: var(--text-title);
-  font-weight: bold;
+  font-weight:600;
   padding: 20px;
+  border-bottom: var(--border-container) var(--white-color);
 }
 
 .titleMain{
@@ -137,17 +139,15 @@ a{
   font-size: var(--text-title);
   font-weight:400;
   padding: 20px;
-  margin-bottom: 50px;
   border-bottom: var(--border-container) var(--white-color);
 }
 
 .moto{
-  margin-top: -40px;
-  font-size: var(--text-main);
+  margin: 0px;
+  font-size: 1.4rem;
   color: var(--white-color);
+  font-weight: 500;
   padding-bottom: 20px;
-  /* margin-bottom: 60px;
-  border-bottom: var(--border-container) var(--yellow-color); */
 }
 
 .link{
@@ -176,6 +176,15 @@ a{
 .loading{
     color: var(--white-color);
     font-weight: 400;
+}
+
+.instruction{
+  font-size: var(--text-detail);
+  line-height: 1.4rem;
+  color: var(--white-color);
+  font-weight: 400;
+  margin-bottom: 30px;
+  margin-top: 0px;
 }
 
 .bold{
@@ -229,7 +238,13 @@ a{
 textarea{
   border-radius: 20px;
   padding: 10px;
+  resize: none; 
   font-family: 'Montserrat', sans-serif;
+}
+
+.information{
+  font-size: var(--text-element);
+  color: var(--secondary-text-color);
 }
 
 .commentBlock {
@@ -240,8 +255,8 @@ textarea{
   justify-content: center;
   /* align-items: center; */
   gap: 10px;
-  width: 250px;
-  margin-top: 10px;
+  /* width: 250px; */
+  /* margin-top: 10px; */
 }
 
 .newCommentBlock {
@@ -331,7 +346,7 @@ font-weight: bold;
   height: 35px;
 }
 
-.input:hover, textarea{
+.input:hover, textarea, .newCommentText{
   border: var(--border-elements) var(--green-color);
 }
 
@@ -357,12 +372,12 @@ font-weight: bold;
 .addButton{
   width: 100%;
 }
+
 ::placeholder {
   color: var(--placeholder-text-color);
-  font-size: var(--text-element)
 }
 
-.hint, .boldLink{
+.hint{
   font-size: var(--text-element);
   font-weight: 600;
   color: var(--secondary-text-color);
@@ -379,8 +394,7 @@ font-weight: bold;
 }
 
 .boldLink:visited{
-  color: var(--main-text-color);
-  color: #58DC00;
+  color: var(--green-color);
 }
 
 li{
@@ -411,20 +425,28 @@ li{
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* gap: 10px; */
+
+}
+
+.infoPendingBlock{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
 
 }
 
 
-.audio-recorder-mic{
-  color: rgb(255, 255, 255);
-  background-color: var(--white-color);
+.audio-recorder-mic, .audio-recorder-options{
+  height: 22px !important;
+  padding: 8px !important;
 }
 
-.audio-recorder, .recorder {
-  background-color: var(--withe-color);
+.audio-recorder{
+  background-color: var(--withe-color)!important;
   color: rgb(255, 255, 255);
-  box-shadow: none;
+  box-shadow: none !important;
 
 }
 
@@ -434,6 +456,7 @@ li{
   box-shadow: none;
 
 }
+
 
 .rav-recorder .rav-recorder-icon-microphone {
   color: var(--withe-color); 
@@ -754,3 +777,5 @@ button svg {
 .top__bar p {
   margin: 0;
 }
+
+
