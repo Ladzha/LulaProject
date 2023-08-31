@@ -35,12 +35,10 @@ const AudioControls  = ({
   const repeat = useCallback(()=>{ //useCallback to cash function between rendering
     
 
-
     const handlePlayPause  = () => {
       setIsPlaying(!isPlaying);
     };
-
-
+///WHY IT IS HERE??
     const currentTime = audioRef.current ? audioRef.current.currentTime : 0;
     setTimeProgress(currentTime);
     if(!progressBarRef.current) return;
@@ -50,14 +48,33 @@ const AudioControls  = ({
       `${(progressBarRef.current.value / duration) * 100}%`
     );
 
+    // console.log(currentTime); endless
+    // console.log(duration);
+
     playAnimationRef.current=requestAnimationFrame(repeat);
  
   }, [audioRef, progressBarRef, duration, setTimeProgress]);
 
 
+
   useEffect(()=>{
     if(isPlaying && audioRef.current){
-      audioRef.current.play();
+      try {
+        const playPromise = audioRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise.then(item => {
+              // audioRef.current.pause();
+            })
+            .catch(error => {
+              // console.log(error);
+              // setIsPlaying(false)
+              // audioRef.current.pause();
+            });
+          }
+      } catch (error) {
+        console.log(error);
+      }
+      
       playAnimationRef.current=requestAnimationFrame(repeat)
     }else{
       audioRef.current?.pause();
@@ -114,14 +131,17 @@ const AudioControls  = ({
         setCurrentTrack(playlist[currentTrackIndex -1])
       } 
 
-      setIsPlaying(true); //new line
+      setIsPlaying(true); 
+
       const playPromise = audioRef.current.play();
+
       if (playPromise !== undefined) {
         playPromise.then(item => {
           // audioRef.current.pause();
         })
         .catch(error => {
           console.log(error);
+          // audioRef.current.pause();
         });
       }
       
@@ -150,6 +170,7 @@ const AudioControls  = ({
         })
         .catch(error => {
           console.log(error);
+          // audioRef.current.pause();
         });
       }
 

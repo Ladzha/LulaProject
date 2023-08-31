@@ -65,16 +65,36 @@ const AudioPlayer = ({playlist}) => {
       setCurrentTrackIndex(null);
 
     } else {
+      try {
 
-      if (currentTrackIndex !== null) {
+        if (currentTrackIndex !== null) {
+          audioRef.current.pause();
+        }
+  
+        setCurrentTrackIndex(index);
+        setIsPlaying(true);
+
+        if(playlist[index].link){
+          audioRef.current.src = playlist[index].link; // Set the audio source
+          const playPromise = audioRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise.then(item => {
+              // audioRef.current.pause();
+            })
+            .catch(error => {
+              // console.log(error);
+              
+              // audioRef.current.pause();
+            });
+          }
+        }
+   
+      } catch (error) {
+        console.log(error);
+        setIsPlaying(false)
         audioRef.current.pause();
       }
 
-      setCurrentTrackIndex(index);
-      setIsPlaying(true);
-
-      audioRef.current.src = playlist[index].link; // Set the audio source
-      audioRef.current.play();
     }
   };
 
@@ -106,7 +126,7 @@ const AudioPlayer = ({playlist}) => {
       {playlist.length > 0 ? (<>
 
       <audio 
-      src={currentTrack.link}  
+      src={currentTrack&&currentTrack.link}  
       ref={audioRef}
       onCanPlay={onLoadedMetadata}/>   
 
@@ -126,9 +146,7 @@ const AudioPlayer = ({playlist}) => {
       setCurrentTrack={setCurrentTrack}
 
       isPlaying={isPlaying}
-      setIsPlaying ={setIsPlaying}
-
-      />
+      setIsPlaying ={setIsPlaying}/>
 
       <ProgressBar 
       progressBarRef={progressBarRef} 
@@ -137,23 +155,21 @@ const AudioPlayer = ({playlist}) => {
       timeProgress={timeProgress} />
 
       {playlist.length > 0 && playlist.map((audio, index)=>{
-            return( 
-              <div key={index}>
-                <AudioComponent 
-                id={audio.recordid}  
-                duration={`${0}:${0}`}
-                classname={currentTrackIndex === index ? 'selected' : ''}
-                created={new Intl.DateTimeFormat('en-US', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                }).format(new Date(audio.created))}
+        return( 
+          <div key={index}>
+            <AudioComponent 
+            id={audio.recordid}  
+            created={new Intl.DateTimeFormat('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+            }).format(new Date(audio.created))}
 
-                onPlayClick={() => handlePlayClick(index)}
-                isPlaying={isPlaying && currentTrackIndex === index}
-                currentTrackIndex={currentTrackIndex}/> 
+            onPlayClick={() => handlePlayClick(index)}
+            isPlaying={isPlaying && currentTrackIndex === index}
+            currentTrackIndex={currentTrackIndex}/> 
 
-              </div>)})}
+          </div>)})}
 
       </>):(<p className='information'>There are no audios yet</p>)}
       {token&& <>

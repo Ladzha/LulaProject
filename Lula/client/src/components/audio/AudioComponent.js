@@ -5,7 +5,7 @@ import { AudioService } from '../../services/audio.service.js';
 import ActiveInfoBox from '../elements/ActiveInfoBox.js'
 import CommentsBlock from './CommentsBlock.jsx'
 
-const AudioComponent = ({id, created,  classname, onPlayClick, isPlaying, currentTrackIndex}) => {
+const AudioComponent = ({id, created, onPlayClick, isPlaying, currentTrackIndex}) => {
 
     const [audio, setAudio]=useState([{}]);
     const [user, setUser]=useState([{}]);
@@ -23,7 +23,6 @@ const AudioComponent = ({id, created,  classname, onPlayClick, isPlaying, curren
           const audioData = await AudioService.getById(id);
           setAudio(audioData);
           
-
           if(audioData[0].userid){
             const userData = await UserService.getById(audioData[0].userid);
             setUser(userData);
@@ -45,14 +44,14 @@ const AudioComponent = ({id, created,  classname, onPlayClick, isPlaying, curren
   return (
     <div className='listBox'>
       <div className='infoBlock'>   
-      <p className='hint'> currentTrackIndex {currentTrackIndex}</p>
         <ActiveInfoBox avatar={avatar[0].link} 
         username={user.username} 
         userid={user.userid} 
         info={created} toggleComments={toggleComments} 
-        classname={classname}
         isPlaying={isPlaying}
-        onPlayClick={onPlayClick}/>
+        onPlayClick={onPlayClick}
+        id={id}
+        currentTrackIndex={currentTrackIndex}/>
         {commentBlock && <CommentsBlock recordid={audio[0].recordid}/>}             
     </div>
     </div>

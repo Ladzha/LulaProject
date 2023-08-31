@@ -41,15 +41,49 @@ const AudioPlayerPending = () => {
 
     } else {
 
-      if (currentTrackIndex !== null) {
-        audioRef.current.pause();
+      try {
+
+        if (currentTrackIndex !== null) {
+          audioRef.current.pause();
+        }
+  
+        setCurrentTrackIndex(index);
+        setIsPlaying(true);
+
+        if(playlist[index].link){
+
+//How to put this?
+          const playPromise = audioRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise.then(item => {
+              // audioRef.current.pause();
+            })
+            .catch(error => {
+              console.log(error);
+              // setIsPlaying(false)
+              // audioRef.current.pause();
+            });
+          }
+          else{
+            audioRef.current.src = playlist[index].link; // Set the audio source
+            const _playPromise = audioRef.current.play();
+            if (_playPromise !== undefined) {
+              _playPromise.then(item => {
+                // audioRef.current.pause();
+              })
+              .catch(error => {
+                console.log(error);
+                // audioRef.current.pause();
+              });
+            }
+          }
+
+        }
+      
+      } catch (error) {
+        console.log(error);
       }
 
-      setCurrentTrackIndex(index);
-      setIsPlaying(true);
-
-      audioRef.current.src = playlist[index].link; // Set the audio source
-      audioRef.current.play();
     }
   };
 
@@ -64,7 +98,7 @@ const AudioPlayerPending = () => {
       {playlist.length ? (
       <div>
       <audio 
-      src={currentTrack.link}  
+      src={currentTrack&&currentTrack.link}  
       ref={audioRef}
       onCanPlay={onLoadedMetadata}/>   
 
@@ -83,9 +117,7 @@ const AudioPlayerPending = () => {
       setCurrentTrack={setCurrentTrack}
 
       isPlaying={isPlaying}
-      setIsPlaying ={setIsPlaying}
-
-      />
+      setIsPlaying ={setIsPlaying} />
 
       <ProgressBar 
       progressBarRef={progressBarRef} 
@@ -98,6 +130,7 @@ const AudioPlayerPending = () => {
       <div key={index}>
         <PendingComponent 
         recordid={audio.recordid} 
+        // currentTrackIndex={currentTrackIndex}
         classname={currentTrackIndex === index ? 'selected' : ''}
         created={new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
