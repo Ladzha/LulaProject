@@ -52,7 +52,6 @@ const Exercise = () => {
               <Link to={`/section/${img[0].sectionid}`} ><p className='languageButton'>Back</p></Link>       
             </div>
         </div>
-
       </div>
     </div>
   )

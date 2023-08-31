@@ -3,15 +3,21 @@ import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { PendingService } from '../../services/pending.service.js';
 import { AudioService } from '../../services/audio.service.js';
 
+import { usePlaylist } from '../admin/PlaylistContext';
+
 const PendingIconBox = ({recordid}) => {
 
-  const [audio, setAudio]=useState([{}]);
+  const { playlist, setPlaylist } = usePlaylist();
 
   const handleRejection= async()=>{
     if (!recordid) return;
       try {
         const pendingData = await PendingService.deleteById(recordid);
-        setAudio(pendingData);
+
+        if(pendingData){
+          const allPendingData=await PendingService.getAll();
+          setPlaylist(allPendingData);
+        }
         console.log("REJECTED");
       } catch (error) {
         console.log(error);
@@ -22,17 +28,14 @@ const PendingIconBox = ({recordid}) => {
     if (!recordid) return;
       try {
         const pendingData = await PendingService.getById(recordid);
-        console.log("recordid", recordid);
 
         if(pendingData){
           const audioData = await AudioService.postAudio(
             pendingData[0].userid, 
             pendingData[0].link, 
             pendingData[0].imgid);
-  
-          setAudio(audioData);
+ 
           handleRejection();
-
         }
 
         else{
@@ -40,14 +43,11 @@ const PendingIconBox = ({recordid}) => {
           return;
         }
 
-
-
       } catch (error) {
         console.log(error);
       }
     };
 
-  useEffect(() => {}, [audio]);
 
   return (
     <div className='pendingIconBox'>

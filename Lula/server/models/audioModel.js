@@ -10,9 +10,9 @@ export const getAllAudios  = async ()=>{
         "audios.created", 
         "audios.likes", 
         "audios.imgid",
-        'audios.link',
-        'uploads.location as link_integer')
-        .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
+        'audios.link')
+        // 'uploads.location as link_integer')
+        // .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
         return audioList;       
     } catch (error) {
         console.log(error);
@@ -30,9 +30,10 @@ export const getAudio = async (recordid)=>{
             "audios.created", 
             "audios.likes", 
             "audios.imgid",
-            'audios.link',
-            'uploads.location as link_integer')
-            .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
+            'audios.link')
+            // ,
+            // 'uploads.location as link_integer')
+            // .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
         .where('audios.recordid', recordid)
         return audio;      
 
@@ -53,9 +54,10 @@ export const getAudioByUserId = async (userid)=>{
             "audios.created", 
             "audios.likes", 
             "audios.imgid",
-            'audios.link',
-            'uploads.location as link_integer')
-            .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
+            'audios.link')
+            // ,
+            // 'uploads.location as link_integer')
+            // .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
         .where('audios.userid', userid)
         console.log("audioList=>",  audioList)
         return audioList;       
@@ -74,9 +76,10 @@ export const getAudioByImgId = async (imgid)=>{
             "audios.created", 
             "audios.likes", 
             "audios.imgid",
-            'audios.link',
-            'uploads.location as link_integer')
-            .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
+            'audios.link')
+            // ,
+            // 'uploads.location as link_integer')
+            // .leftJoin('uploads', 'link_integer', '=', 'uploads.id')
         .where('audios.imgid', imgid)
           return audioList;       
     } catch (error) {

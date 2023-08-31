@@ -21,13 +21,22 @@ const navigate = useNavigate();
 
     try {
       const userData = await UserService.register(username, firstname, lastname, email, password);
-      console.log('User registered:', userData);
-      formRef.current.reset();  //clean inputs 
-      navigate('/')
+      if(userData){
+        setMsg('You registered successfully')
+        formRef.current.reset();  //clean inputs 
+        navigate('/login')
+      }
+      else{
+        setMsg('User already exist');
+      }
       
     } catch (error) {
-          console.log(error)   
-      }
+      if (error.response) {
+               
+      } else {
+        setMsg('Registration failed');
+      } 
+    }
   }
 
   return (
@@ -39,9 +48,9 @@ const navigate = useNavigate();
         <input className="input" type='text' id="inputLastName" name="inputLastName" placeholder='Last Name' required/>
         <input className="input" type='email' id="inputEmail" name="inputEmail" placeholder='Email' required/>
         <input className="input" type='password' id="inputPassword" name="inputPassword" placeholder='Password' required/>
-        {/* <input className="input" type='password' id="inputPasswordConfirm" name="inputPasswordConfirm" placeholder='Confirm Password' required/> */}
         <button className='submitButton' type="submit">Register</button>   
       </form>
+      {msg && <p className={msg === 'You registered successfully' ? 'successMsg' : 'errorMsg'}>{msg}</p>}
       <p className='hint'>Already have an account? <Link to="/login"className="boldLink">Login</Link></p>
     </div>
   )

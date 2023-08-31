@@ -1,5 +1,5 @@
 import React, {useRef, useState, useContext} from 'react'
-import {NavLink, Link, useLocation, useNavigate  } from 'react-router-dom';
+import {Link, useNavigate  } from 'react-router-dom';
 import { UserService } from '../../services/user.service.js';
 
 import { AppContext } from "../../App.js";
@@ -42,6 +42,7 @@ const Login = () => {
         <input className="input" type='password' name="password" placeholder='password' required/>
         <button className='submitButton' type="submit">Login</button>
       </form>
+      {msg && <p className={msg === 'Login successful' ? 'successMsg' : 'errorMsg'}>{msg}</p>}
       <p className='hint'>Don't have an account? <Link to="/register" className="boldLink">Sing Up</Link></p>
 
     </div>

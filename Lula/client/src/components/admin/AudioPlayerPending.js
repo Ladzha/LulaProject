@@ -1,22 +1,23 @@
 import React from 'react'
 import { useState, useRef, useEffect } from 'react'
-
+import { usePlaylist } from './PlaylistContext';
 import ProgressBar from '../audio/audioPlayer/ProgressBar.jsx'
 import PendingComponent from './PendingComponent'
 import AudioControls from '../audio/audioPlayer/AudioControls.jsx'
 
 
-const AudioPlayerPending = ({playlist}) => {
+const AudioPlayerPending = () => {
 
   const audioRef = useRef(); //to get audio tag in html
   const progressBarRef = useRef(); //to get input range tag in html
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [trackIndex, setTrackIndex] = useState(0); // index of track
   const [timeProgress, setTimeProgress]=useState(0); //to get current time of audio
   const [currentTrack, setCurrentTrack] = useState({});
   const [duration, setDuration]=useState(0); //to get duration of the audio
   const [isPlaying, setIsPlaying] = useState(false); //play or not
+
+  const { playlist } = usePlaylist(); 
 
 
 // const formatTime = (time)=>{
@@ -27,12 +28,9 @@ const AudioPlayerPending = ({playlist}) => {
 
   useEffect(() => {
     if (playlist.length > 0) {
-      setCurrentTrack(playlist[trackIndex]);
+      setCurrentTrack(playlist[currentTrackIndex]);
     }
-  }, [playlist, trackIndex]);
-
-
-
+  }, [playlist, currentTrackIndex]);
 
   const handlePlayClick = (index) => {
     if (currentTrackIndex === index) {
@@ -61,7 +59,6 @@ const AudioPlayerPending = ({playlist}) => {
     progressBarRef.current.max=seconds;
   }
 
-
   return (    
     <div className='innerd'>
       {playlist.length ? (
@@ -78,15 +75,15 @@ const AudioPlayerPending = ({playlist}) => {
       duration ={duration}
       setTimeProgress={setTimeProgress}
       
-      playlist={playlist}
-      trackIndex={trackIndex}
-      setTrackIndex = {setTrackIndex}
+      playlist={playlist}  //need to put it here because I use this AudioControls on exercise too. That's why cant use useContext inside.
+    
+      currentTrackIndex={currentTrackIndex}
+      setCurrentTrackIndex = {setCurrentTrackIndex}
+
       setCurrentTrack={setCurrentTrack}
 
       isPlaying={isPlaying}
       setIsPlaying ={setIsPlaying}
-
-      currentTrackIndex={currentTrackIndex}
 
       />
 
@@ -97,29 +94,26 @@ const AudioPlayerPending = ({playlist}) => {
       timeProgress={timeProgress} />
 
 
-
     {playlist.length > 0 && playlist.map((audio, index)=>(
-            <div key={index}>
-
-                <PendingComponent 
-                recordid={audio.recordid} 
-                classname={currentTrackIndex === index ? 'selected' : ''}
-                created={new Intl.DateTimeFormat('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                }).format(new Date(audio.created))}
-                onPlayClick={() => handlePlayClick(index)}
-                isPlaying={isPlaying && currentTrackIndex === index}/>
-                
-            </div>
-            ))}
-        </div>
-        ):(
-        <p>There are no pending audios</p>
-        )}
+      <div key={index}>
+        <PendingComponent 
+        recordid={audio.recordid} 
+        classname={currentTrackIndex === index ? 'selected' : ''}
+        created={new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        }).format(new Date(audio.created))}
+        onPlayClick={() => handlePlayClick(index)}
+        isPlaying={isPlaying && currentTrackIndex === index}/>        
+      </div>
+      ))}
+    </div>
+    ):(
+    <p>There are no pending audios</p>
+    )}
     </div>)
 }
 

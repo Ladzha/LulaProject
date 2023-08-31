@@ -1,24 +1,19 @@
 import React from 'react';
 import {PendingService} from '../../services/pending.service.js';
 
+import {PlaylistProvider, usePlaylist } from './PlaylistContext';
+
 import {useState, useEffect} from 'react';
 import AudioPlayerPending from './AudioPlayerPending'
 
 const AllPending =()=>{
-  const [pendingAudios, setPendingAudios]=useState([])
-
-  useEffect(()=>{
-    const fetchData = async()=>{
-      const pendingData = await PendingService.getAll()
-      setPendingAudios(pendingData)
-    }
-    fetchData()
-  }, []) 
-
+  
   return(
-    <div className= 'box listRecord'>
+    <div className='box listRecord'>
 
-      <AudioPlayerPending playlist={pendingAudios}/>
+      <PlaylistProvider>
+        <AudioPlayerPending/>
+      </PlaylistProvider>
       
       </div>)
 }

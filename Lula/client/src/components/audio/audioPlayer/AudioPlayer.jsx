@@ -10,10 +10,6 @@ import { AudioRecorder} from 'react-audio-voice-recorder';
 import { AppContext } from '../../../App.js';
 import jwtDecode from 'jwt-decode';
 
-/*Because we will need the audio data in multiple children 
-components, we will import the playlist file in the 
-AudioPlayer parent component. */
-
 const AudioPlayer = ({playlist}) => {
 
   const audioRef = useRef(); //to get audio tag in html
@@ -21,7 +17,6 @@ const AudioPlayer = ({playlist}) => {
 
   //to play track from playlist
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [trackIndex, setTrackIndex] = useState(0); // index of track
   const [timeProgress, setTimeProgress]=useState(0); //to get current time of audio
   const [currentTrack, setCurrentTrack] = useState({});
   const [duration, setDuration]=useState(0); //to get duration of the audio
@@ -35,12 +30,9 @@ const AudioPlayer = ({playlist}) => {
   const { token } = useContext(AppContext);
   const [userid, setUserid] = useState('');
 
-
   const handleShowRecord = () => {
     setShowRecord(!showRecord);
     };
-
-
 
 // const formatTime = (time)=>{
 //   const minutes = Math.floor(time/60);
@@ -50,10 +42,10 @@ const AudioPlayer = ({playlist}) => {
 
   useEffect(() => {
     if(playlist){
-    if (playlist.length > 0) {
-      setCurrentTrack(playlist[trackIndex]);
+    if (playlist.length > 0) { 
+      setCurrentTrack(playlist[currentTrackIndex]);
     }}
-  }, [playlist, trackIndex]);
+  }, [playlist, currentTrackIndex]); 
 
 
   useEffect(()=>{
@@ -64,7 +56,6 @@ const AudioPlayer = ({playlist}) => {
       console.log("There is no token");
     }
 }, [token])
-
 
   const handlePlayClick = (index) => {
     if (currentTrackIndex === index) {
@@ -84,18 +75,16 @@ const AudioPlayer = ({playlist}) => {
 
       audioRef.current.src = playlist[index].link; // Set the audio source
       audioRef.current.play();
-
-
     }
   };
 
-  const onLoadedMetadata = () =>{
+  const onLoadedMetadata = () =>{ //get duration, but doesn't work
     const seconds = audioRef.current.duration;
     setDuration(seconds)
     progressBarRef.current.max=seconds;
   }
 
-  const addAudioElement = async (blob) => {
+  const addAudioElement = async (blob) => { //recording audio
     const name = 'as'
 
     const formData = new FormData();
@@ -104,16 +93,12 @@ const AudioPlayer = ({playlist}) => {
       formData.append("userid", userid);
       formData.append("name", name);
 
-
       try {
         const res = await axios.post("http://localhost:3001/api/pending/upload-single", formData);
-        // setFileData(res.data);
       } catch (error) {
         console.log(error.response.data.msg);
       }
   };
-
-
 
   return ( <>
     {playlist ? (
@@ -134,24 +119,22 @@ const AudioPlayer = ({playlist}) => {
       setTimeProgress={setTimeProgress}
       
       playlist={playlist}
-      trackIndex={trackIndex}
-      setTrackIndex = {setTrackIndex}
+
+      currentTrackIndex={currentTrackIndex}
+      setCurrentTrackIndex={setCurrentTrackIndex}
+
       setCurrentTrack={setCurrentTrack}
 
       isPlaying={isPlaying}
       setIsPlaying ={setIsPlaying}
 
-      currentTrackIndex={currentTrackIndex}
-
       />
-
 
       <ProgressBar 
       progressBarRef={progressBarRef} 
       audioRef={audioRef} 
       duration ={duration} 
       timeProgress={timeProgress} />
-
 
       {playlist.length > 0 && playlist.map((audio, index)=>{
             return( 
@@ -167,7 +150,8 @@ const AudioPlayer = ({playlist}) => {
                 }).format(new Date(audio.created))}
 
                 onPlayClick={() => handlePlayClick(index)}
-                isPlaying={isPlaying && currentTrackIndex === index}/>
+                isPlaying={isPlaying && currentTrackIndex === index}
+                currentTrackIndex={currentTrackIndex}/> 
 
               </div>)})}
 

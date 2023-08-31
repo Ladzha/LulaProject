@@ -377,7 +377,7 @@ font-weight: bold;
   color: var(--placeholder-text-color);
 }
 
-.hint{
+.hint, .successMsg, .errorMsg{
   font-size: var(--text-element);
   font-weight: 600;
   color: var(--secondary-text-color);
@@ -387,6 +387,20 @@ font-weight: bold;
 
 .hint:hover{
   color: var(--main-text-color);
+}
+
+.successMsg{
+  color: var(--green-color);
+  font-weight: 700;
+  padding: 5px;
+
+}
+
+.errorMsg{
+  color: var(--red-color);
+  font-weight: 700;
+  padding: 5px;
+
 }
 
 .boldLink{
@@ -512,7 +526,7 @@ li{
   justify-content:space-between;
   gap: 12px;
   position: absolute;
-  bottom: -6px;
+  bottom: -7px;
   right: -3px;
 }
 
@@ -622,8 +636,8 @@ color:#9747FF
   align-items: center;
   background-color: var(--red-color);
   border-radius: 50px;
-  width:58px;
-  height:58px;
+  width:60px;
+  height:60px;
   z-index: 1;
 }
 

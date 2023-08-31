@@ -2,8 +2,6 @@ import React from 'react';
 import { AiFillHeart } from "react-icons/ai";
 import IconMore from '../../img/icon-more.svg'
 
-
-
 const ActiveIconBox = (props) => {
 
 const handleLike=()=>{
@@ -14,7 +12,6 @@ const handleMore=()=>{
     props.toggleComments()
     console.log("I click more information");
 }
-
 
   return (
     <div className='activeIconBox'>

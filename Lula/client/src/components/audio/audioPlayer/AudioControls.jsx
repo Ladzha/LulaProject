@@ -9,19 +9,18 @@ import PrevButton from '../../../img/prev-icon.svg';
 import { FaVolumeUp } from "react-icons/fa";
 
 
-
-import Template from '../../../img/template.svg'; 
-
-
 const AudioControls  = ({
   audioRef, 
   progressBarRef, 
   duration, 
-  setTimeProgress,  
-  setTrackIndex, 
+  setTimeProgress,
+
+  currentTrackIndex,
+  setCurrentTrackIndex, 
+
   setCurrentTrack,
   playlist, 
-  trackIndex,
+ 
   isPlaying,
   setIsPlaying,
 }) => { 
@@ -40,7 +39,6 @@ const AudioControls  = ({
     const handlePlayPause  = () => {
       setIsPlaying(!isPlaying);
     };
-
 
 
     const currentTime = audioRef.current ? audioRef.current.currentTime : 0;
@@ -72,8 +70,6 @@ const AudioControls  = ({
     });
 
     playAnimationRef.current=requestAnimationFrame(repeat);
-
-
 
     return () => {
       if(!audioRef.current) return;
@@ -108,14 +104,14 @@ const AudioControls  = ({
 
   const handlePrevious =()=>{
     try {
-      if(trackIndex === 0){
+      if(currentTrackIndex === 0){
         let lastTrackIndex = playlist.length-1;
-        setTrackIndex(lastTrackIndex);
+        setCurrentTrackIndex(lastTrackIndex);
         setCurrentTrack(playlist[lastTrackIndex]);
       }
       else{
-        setTrackIndex(trackIndex -1);
-        setCurrentTrack(playlist[trackIndex -1])
+        setCurrentTrackIndex(currentTrackIndex -1);
+        setCurrentTrack(playlist[currentTrackIndex -1])
       } 
 
       setIsPlaying(true); //new line
@@ -137,13 +133,13 @@ const AudioControls  = ({
   const handleNext =()=>{
     try{
 
-      if(trackIndex >=playlist.length -1){
-        setTrackIndex(0);
+      if(currentTrackIndex >=playlist.length -1){
+        setCurrentTrackIndex(0);
         setCurrentTrack(playlist[0]);
       }
       else{
-        setTrackIndex(trackIndex +1);
-        setCurrentTrack(playlist[trackIndex +1])
+        setCurrentTrackIndex(currentTrackIndex +1);
+        setCurrentTrack(playlist[currentTrackIndex +1])
       } 
 
       setIsPlaying(true); //new line
@@ -166,39 +162,36 @@ const AudioControls  = ({
 
   return (
     <div className='plyerElement'>  
-      <div className='line'>
-      
-          <div className='playBlock'>
+      <div className='line'>      
+        <div className='playBlock'>
+        <div className='playerButtonsBox'>
 
-          <div className='playerButtonsBox'>
+          <img  onClick={handlePrevious} 
+          className='playerIcons' 
+          src={PrevButton} alt='Previous'/>
 
-              <img  onClick={handlePrevious} 
-              className='playerIcons' 
-              src={PrevButton} alt='Previous'/>
-  
-              <img onClick={handlePlayPause}
-              className='playerIcons' 
-              src={isPlaying? PauseButton: PlayButton}
-              alt={isPlaying ? 'Pause' : 'Play'}/>
+          <img onClick={handlePlayPause}
+          className='playerIcons' 
+          src={isPlaying? PauseButton: PlayButton}
+          alt={isPlaying ? 'Pause' : 'Play'}/>
 
-              <img onClick={handleNext}
-              className='playerIcons' 
-              src={NextButton} alt='Next'/>
+          <img onClick={handleNext}
+          className='playerIcons' 
+          src={NextButton} alt='Next'/>
 
-          </div> 
+        </div> 
 
-          <div className="volume">
-             <FaVolumeUp className='icon-grey'/>
-             <input style={{background: `linear-gradient(to right, #FF363C ${volume}%, #FFE500 ${volume}%)`}} 
-             type="range"
-             min={0} 
-             max={100} 
-             value={volume} 
-             onChange={(event)=>setVolume(event.target.value)}/>
+        <div className="volume">
+          <FaVolumeUp className='icon-grey'/>
+          <input style={{background: `linear-gradient(to right, #FF363C ${volume}%, #FFE500 ${volume}%)`}} 
+          type="range"
+          min={0} 
+          max={100} 
+          value={volume} 
+          onChange={(event)=>setVolume(event.target.value)}/>
+        </div>
 
-          </div>
-
-          </div>
+        </div>
       </div>
     </div>
   )
