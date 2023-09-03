@@ -72,7 +72,7 @@ const Profile = () => {
 
   return (
     <div className='containerColumn'> 
-    <p className='titleMain'> {currentUserId === userid ? `My account: ${user.username}` : `${user.username}'s Profile`} </p>
+    <p className='titleMain'> {currentUserId == userid ? `My account: ${user.username}` : `${user.username}'s Profile`} </p>
 
       <div className='profileContainer'>
         <img className='userIconInProfile' src={avatar[0].link} alt="user-avatar"></img>

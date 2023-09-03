@@ -4,7 +4,7 @@ export const CommentService = {
 
     async getAll() {
         try {
-        const response = await axios.get('http://localhost:3001/api/comment')
+        const response = await axios.get('/api/comment')
         if(response){
             return response.data;
         }else{
@@ -17,7 +17,7 @@ export const CommentService = {
 
     async getById(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/comment/${id}`)
+        const response = await axios.get(`/api/comment/${id}`)
         if(response){
             return response.data;
         }else{
@@ -30,7 +30,7 @@ export const CommentService = {
 
     async getByAudioId(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/comment/${id}`)
+        const response = await axios.get(`/api/comment/${id}`)
         if(response){
             return response.data;
         }else{
@@ -44,7 +44,7 @@ export const CommentService = {
 
     async getByUserId(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/comment/user/${id}`)
+        const response = await axios.get(`/api/comment/user/${id}`)
         if(response){
             return response.data;
         }else{
@@ -58,7 +58,7 @@ export const CommentService = {
     
     async getByAudioId(id) { 
         try {
-        const response = await axios.get(`http://localhost:3001/api/comment/audio/${id}`)
+        const response = await axios.get(`/api/comment/audio/${id}`)
         if(response){
             return response.data;
         }else{
@@ -71,7 +71,7 @@ export const CommentService = {
 
     async postComment(userid, recordid, text) {
         try {
-        const response = await axios.post(`http://localhost:3001/api/comment/post`, {
+        const response = await axios.post('/api/comment/post', {
             userid, 
             recordid,
             text

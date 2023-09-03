@@ -21,7 +21,6 @@ CREATE TABLE users (
 
 CREATE TABLE avatars (
     avatarid SERIAL PRIMARY KEY,
-    userid INT NOT NULL,
     name VARCHAR(100) NOT NULL,
     link VARCHAR(255) NOT NULL,
     FOREIGN KEY (userid) REFERENCES users (userid)

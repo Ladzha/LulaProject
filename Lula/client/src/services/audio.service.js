@@ -4,7 +4,7 @@ export const AudioService = {
 
     async getAll() {
         try {
-        const response = await axios.get('http://localhost:3001/api/audio')
+        const response = await axios.get('/api/audio')
         if(response){
             return response.data;
         }else{
@@ -17,7 +17,7 @@ export const AudioService = {
 
     async getById(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/audio/${id}`)
+        const response = await axios.get(`/api/audio/${id}`)
         if(response){
             return response.data;
         }else{
@@ -30,7 +30,7 @@ export const AudioService = {
 
     async getByImageId(id) { 
         try {
-        const response = await axios.get(`http://localhost:3001/api/audio/exercise/records/${id}`)
+        const response = await axios.get(`/api/audio/exercise/records/${id}`)
         if(response){
             return response.data; 
         }else{
@@ -43,7 +43,7 @@ export const AudioService = {
 
     async getByUserId(id) { 
         try {
-        const response = await axios.get(`http://localhost:3001/api/audio/records/${id}`)
+        const response = await axios.get(`/api/audio/records/${id}`)
         if(response){
             return response.data; 
         }else{
@@ -56,7 +56,7 @@ export const AudioService = {
 
     async postAudio(userid, link, imgid) { 
         try {
-        const response = await axios.post('http://localhost:3001/api/audio/post', {
+        const response = await axios.post('/api/audio/post', {
             userid, 
             link,
             imgid

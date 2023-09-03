@@ -2,8 +2,11 @@ import React, {useContext, useState, useEffect} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AiFillHome } from "react-icons/ai";
 import { UserService } from '../services/user.service.js';
+import { AvatarService } from '../services/avatar.service.js';
 import { AppContext } from '../App.js';
 import jwtDecode from 'jwt-decode';
+
+
 
 
 
@@ -14,6 +17,9 @@ const Navbar = () => {
   const [username, setUsername] = useState('');
   const [userid, setUserid] = useState('');
   const [role, setRole] = useState('');
+
+  const [user, setUser]=useState([{}]);
+  const [avatar, setAvatar]=useState([{}]);
 
   useEffect(()=>{
     if(token){
@@ -31,6 +37,8 @@ const Navbar = () => {
     try {
       const response = await UserService.logout();
       handleLogout();
+      if(!response) return;
+    
     if (response.status === 200) {
       navigate('/');
     }
@@ -38,7 +46,25 @@ const Navbar = () => {
     console.log(error);
     }
   }
-    
+  
+  useEffect(() => {
+    if (!userid) return;
+    const fetchData = async () => {
+      try {
+        const userData = await UserService.getById(userid);
+        setUser(userData);
+
+        if (userData.avatarid) {
+          const avatarData = await AvatarService.getById(userData.avatarid);
+          setAvatar(avatarData);
+          }
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    fetchData();
+}, [userid]);
 
   return (
     <div className='navbar'>
@@ -48,7 +74,8 @@ const Navbar = () => {
 
       <ul>
       {token ? (
-        <>
+        <>  
+        <li><NavLink to={`/profile/${userid}`}><img src={avatar[0].link} className='userIconNav' alt={`avatar ${username}`}/></NavLink></li>
         <li className="link"><NavLink to={`/profile/${userid}`} className='link'>{username}</NavLink></li>
         <li className='divider'>  |  </li>
         <li><NavLink to="/login" className="link" onClick={logout}>Logout</NavLink></li>      

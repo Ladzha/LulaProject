@@ -4,7 +4,7 @@ export const PendingService = {
 
   async getAll() { //token v headers
     try {
-      const response = await axios.get('http://localhost:3001/api/pending') //,{headers: {'x-access-token': token}}
+      const response = await axios.get('/api/pending') //,{headers: {'x-access-token': token}}
       if(response){
         return response.data;
       }else{
@@ -17,7 +17,7 @@ export const PendingService = {
  
   async getById(recordid) {
     try {
-      const response = await axios.get(`http://localhost:3001/api/pending/${recordid}`)
+      const response = await axios.get(`/api/pending/${recordid}`)
       if(response){
         return response.data;
       }else{
@@ -30,7 +30,7 @@ export const PendingService = {
 
   async postAudio(userid, name, link, imgid) { 
     try {
-    const response = await axios.post(`http://localhost:3001/api/audio/post`, {
+    const response = await axios.post(`/api/audio/post`, {
       userid, 
       name,
       link,
@@ -49,7 +49,7 @@ export const PendingService = {
 
   async uploadRecord(blob) { 
     try {
-    const response = await axios.post('http://localhost:3001/api/pending/upload-single', {
+    const response = await axios.post('/api/pending/upload-single', {
       blob
     }) 
     if(response){
@@ -64,7 +64,7 @@ export const PendingService = {
 
   async getAudioWithUserInfo(recordid) {
     try {
-      const response = await axios.get(`http://localhost:3001/api/pending/info/userinfo/${recordid}`);
+      const response = await axios.get(`/api/pending/info/userinfo/${recordid}`);
       if (response) {
         return response.data;
       } else {
@@ -77,7 +77,7 @@ export const PendingService = {
 
   async deleteById(recordid) {
     try {
-      const response = await axios.delete(`http://localhost:3001/api/pending/delete/${recordid}`)
+      const response = await axios.delete(`/api/pending/delete/${recordid}`)
       if(response){
           return response.data;
       }else{

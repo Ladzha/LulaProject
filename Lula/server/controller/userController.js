@@ -50,13 +50,14 @@ export const registerController = async(request, response)=>{
     const lastname = request.body.lastname;
     const email = request.body.email;
     const password = request.body.password +''; //to make it string
+    const avatarid = request.body.avatarid;
 
     //hide password
     const salt = bcrypt.genSaltSync(5)
     const hashPassword = bcrypt.hashSync(password, salt)
 
     try {
-        const rows = await register(username, firstname, lastname, email, hashPassword)
+        const rows = await register(username, firstname, lastname, email, hashPassword, avatarid)
         response.json(rows)
 
         } catch (error) {
@@ -86,6 +87,7 @@ export const loginController = async(request, response)=>{
         
         //send to cookie
         response.cookie('token', accessToken, {httpOnly: true, maxAge: 60 * 1000 * 60 * 24})
+
         
         return response.json({token:accessToken})
         

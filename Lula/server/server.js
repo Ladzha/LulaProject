@@ -14,13 +14,14 @@ import { userRouter} from './routers/userRouter.js';
 
 dotenv.config();
 const app = express();
+app.use(cookieParser());
+
 const __dirname = path.resolve();
 app.use("/", express.static(__dirname + "/static"));
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json()) //for work with json 
-app.use(cookieParser());
 
 app.use('/api', audioRouter);
 app.use('/api', avatarRouter);

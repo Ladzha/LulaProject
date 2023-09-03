@@ -4,7 +4,7 @@ export const AvatarService = {
 
     async getAll() {
         try {
-        const response = await axios.get('http://localhost:3001/api/avatar')
+        const response = await axios.get('/api/avatar')
         if(response){
             return response.data;
         }else{
@@ -17,7 +17,7 @@ export const AvatarService = {
 
     async getById(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/avatar/${id}`)
+        const response = await axios.get(`/api/avatar/${id}`)
         if(response){
             return response.data;
         }else{

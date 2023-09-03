@@ -10,6 +10,13 @@ const navigate = useNavigate();
   const formRef = useRef();
   const [msg, setMsg] = useState('');
 
+  // Generate a random number fo avatarid
+  function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  const randomNumber = getRandomNumber(1, 10);
+  console.log(randomNumber);
+
   const handleSubmit =async (event)=>{
     event.preventDefault()
 
@@ -18,9 +25,10 @@ const navigate = useNavigate();
     const lastname = event.target.inputLastName.value;
     const email = event.target.inputEmail.value;
     const password = event.target.inputPassword.value;
+    const avatarid= randomNumber;
 
     try {
-      const userData = await UserService.register(username, firstname, lastname, email, password);
+      const userData = await UserService.register(username, firstname, lastname, email, password, avatarid);
       if(userData){
         setMsg('You registered successfully')
         formRef.current.reset();  //clean inputs 
@@ -29,6 +37,7 @@ const navigate = useNavigate();
       else{
         setMsg('User already exist');
       }
+      console.log(userData);
       
     } catch (error) {
       if (error.response) {
@@ -38,6 +47,9 @@ const navigate = useNavigate();
       } 
     }
   }
+
+
+  
 
   return (
     <div className='registerBox box'>

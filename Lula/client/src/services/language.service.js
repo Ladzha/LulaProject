@@ -4,7 +4,7 @@ export const LanguageService = {
 
     async getAll() {
         try {
-        const response = await axios.get('http://localhost:3001/api/language')
+        const response = await axios.get('/api/language')
         if(response){
             return response.data;
         }else{
@@ -17,7 +17,7 @@ export const LanguageService = {
 
     async getById(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/language/${id}`)
+        const response = await axios.get(`/api/language/${id}`)
 
         if(response){
             return response.data;

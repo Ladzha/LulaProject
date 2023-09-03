@@ -4,7 +4,7 @@ export const ImgService = {
 
     async getAll() {
         try {
-        const response = await axios.get('http://localhost:3001/api/img')
+        const response = await axios.get('/api/img')
         if(response){
             return response.data;
         }else{
@@ -16,7 +16,7 @@ export const ImgService = {
     },
     async getById(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/img/${id}`)
+        const response = await axios.get(`/api/img/${id}`)
         if(response){
             return response.data;
         }else{
@@ -29,7 +29,7 @@ export const ImgService = {
 
     async getAllBySectionId(sectionid) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/img/section/${sectionid}`)
+        const response = await axios.get(`/api/img/section/${sectionid}`)
         if(response){
             return response.data;
         }else{
@@ -42,7 +42,7 @@ export const ImgService = {
 
     async getAllByLanguageId(languageid) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/img/language/${languageid}`)
+        const response = await axios.get(`/api/img/language/${languageid}`)
         if(response){
             return response.data;
         }else{
@@ -55,7 +55,7 @@ export const ImgService = {
 
     async getByIdInfo(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/img/details/${id}`)
+        const response = await axios.get(`/api/img/details/${id}`)
         if(response){
             return response.data;
         }else{

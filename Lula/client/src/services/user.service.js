@@ -4,7 +4,7 @@ export const UserService = {
 
     async getAll() {
         try {
-        const response = await axios.get('http://localhost:3001/api/users')
+        const response = await axios.get('/api/users')
         if(response){
             return response.data;
         }else{
@@ -17,7 +17,7 @@ export const UserService = {
 
     async getById(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/users/${id}`)
+        const response = await axios.get(`/api/users/${id}`)
         if(response){
             return response.data;
         }else{
@@ -28,14 +28,15 @@ export const UserService = {
         }
     },
 
-    async register(username, firstname, lastname, email, password ) {
+    async register(username, firstname, lastname, email, password, avatarid ) {
         try {
-        const response = await axios.post(`http://localhost:3001/api/users/register`, {
+        const response = await axios.post('/api/users/register', {
             username,
             firstname,
             lastname,
             email,
-            password
+            password,
+            avatarid
         }, {
             headers: {
               'Content-Type': 'application/json'
@@ -53,7 +54,7 @@ export const UserService = {
 
     async login(username, password ) {
         try {
-        const response = await axios.post('http://localhost:3001/api/users/login', {
+        const response = await axios.post('/api/users/login', {
             username,
             password
 
@@ -74,7 +75,7 @@ export const UserService = {
 
     async logout() {
         try {
-        const response = await axios.delete('http://localhost:3001/api/users/logout');
+        const response = await axios.delete('/api/users/logout');
         if (response.status === 200) {
         }
         } catch(error) {
@@ -84,7 +85,7 @@ export const UserService = {
 
     async updateById(id) {
         try {
-        const response = await axios.put(`http://localhost:3001/api/users/update/${id}`)
+        const response = await axios.put(`/api/users/update/${id}`)
         if(response){
             return response.data;
         }else{

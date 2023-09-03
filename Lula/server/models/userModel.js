@@ -30,10 +30,10 @@ export const getUser = async (userid)=>{
 }
 
 //ADD NEW USER 
-export const register = async ( username, firstname, lastname, email, hash)=>{
+export const register = async ( username, firstname, lastname, email, hash, avatarid)=>{
     try {
         const newUser = await db('users')
-        .insert({username, firstname, lastname, email, password: hash, created: new Date()})
+        .insert({username, firstname, lastname, email, password: hash, created: new Date(), avatarid})
         .returning(["userid", "username", "firstname", "lastname", "email", "password", "created", "avatarid", "about", "role"]);
         return newUser;      
     } catch (error) {

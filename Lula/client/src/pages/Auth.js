@@ -12,8 +12,14 @@ const Auth = (props) => {
 
   const verifyMyToken = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/api/verify");
-      if (res.status === 200) return setRedirect(true);
+      // const response = await axios.get('/api/verify');
+
+      const response = await axios.get('/api/verify', {
+        withCredentials: true, // Add this line to send cookies with the request
+      });
+
+
+      if (response.status === 200) return setRedirect(true);
       setRedirect(false)
     //   navigate("/login");
     } catch (error) {

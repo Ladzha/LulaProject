@@ -55,7 +55,15 @@ const AudioControls  = ({
  
   }, [audioRef, progressBarRef, duration, setTimeProgress]);
 
-
+  // Add a useEffect to listen for changes in currentTrackIndex
+  useEffect(() => {
+    // Check if the current track should be played or paused
+    if (currentTrackIndex === null) {
+      setIsPlaying(false); // Pause if no track is selected
+    } else {
+      setIsPlaying(true); // Play if a track is selected
+    }
+  }, [currentTrackIndex]);
 
   useEffect(()=>{
     if(isPlaying && audioRef.current){
@@ -120,6 +128,7 @@ const AudioControls  = ({
   }
 
   const handlePrevious =()=>{
+    setIsPlaying(false)
     try {
       if(currentTrackIndex === 0){
         let lastTrackIndex = playlist.length-1;
@@ -151,6 +160,7 @@ const AudioControls  = ({
   };
 
   const handleNext =()=>{
+    setIsPlaying(false)
     try{
 
       if(currentTrackIndex >=playlist.length -1){

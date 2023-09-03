@@ -16,3 +16,4 @@ userRouter.delete('/users/delete/:userid', deleteUserController)
 userRouter.get("/verify", authMiddleware, (req, res) => {  
     res.sendStatus(200);
 });
+

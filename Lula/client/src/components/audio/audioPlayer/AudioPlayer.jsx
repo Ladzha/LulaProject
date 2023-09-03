@@ -21,7 +21,6 @@ const AudioPlayer = ({playlist}) => {
   const [currentTrack, setCurrentTrack] = useState({});
   const [duration, setDuration]=useState(0); //to get duration of the audio
   const [isPlaying, setIsPlaying] = useState(false); //play or not
-  // const [volume, setVolume]=useState(60)
 
   const [showRecord, setShowRecord] =useState(false)
   const { imgid } = useParams();
@@ -41,10 +40,9 @@ const AudioPlayer = ({playlist}) => {
 // };
 
   useEffect(() => {
-    if(playlist){
-    if (playlist.length > 0) { 
+    if (playlist && playlist.length > 0) {
       setCurrentTrack(playlist[currentTrackIndex]);
-    }}
+    }
   }, [playlist, currentTrackIndex]); 
 
 
@@ -124,8 +122,7 @@ const AudioPlayer = ({playlist}) => {
     {playlist ? (
     <div className='innerd'>
       {playlist.length > 0 ? (<>
-
-      <audio 
+      <audio //display track
       src={currentTrack&&currentTrack.link}  
       ref={audioRef}
       onCanPlay={onLoadedMetadata}/>   

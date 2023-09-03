@@ -4,7 +4,7 @@ export const SectionService = {
 
     async getAll() {
         try {
-        const response = await axios.get('http://localhost:3001/api/section')
+        const response = await axios.get('/api/section')
         if(response){
             return response.data;
         }else{
@@ -17,7 +17,7 @@ export const SectionService = {
 
     async getById(id) {
         try {
-        const response = await axios.get(`http://localhost:3001/api/section/${id}`)
+        const response = await axios.get(`/api/section/${id}`)
         if(response){
             return response.data;
         }else{
