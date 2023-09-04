@@ -1,5 +1,4 @@
 import React from 'react';
-import Template from '../../../img/template.svg';
 
 const DisplayTrack = ({
   currentTrack, 
@@ -16,19 +15,9 @@ const DisplayTrack = ({
 
   return (
     <div>
-      <div className='playBlock'>
-
-        
-        <img 
-        // src={currentTrack.avatar || Template} 
-        className='activeRecordAvatar'
-        alt='User avatar'/>  
-      </div> 
-
-      {/* <p>{currentTrack.name}</p> */}
-
+  
       <audio 
-      src={currentTrack.link}  
+      src={currentTrack && currentTrack.link}  
       ref={audioRef}
       onCanPlay={onLoadedMetadata}/>  
 

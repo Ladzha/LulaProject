@@ -16,7 +16,7 @@ const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
       const formatSeconds =seconds < 10 ? `0${seconds}` : `${seconds}`;
       return `${formatMinutes}:${formatSeconds}`;
     }
-    return '00:00';
+    // return '00:00';
   };
 
 
@@ -24,7 +24,7 @@ const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
     <div className='progress'>
       <span className='time current'>{formatTime(timeProgress)}</span>
       <input type="range" ref={progressBarRef} onChange={handleProgressChange}/>
-      <span className='time'>{duration =='Infinity:NaN'? formatTime(duration): '00:00'}</span>
+      <span className='time'>{duration =='Infinity:NaN'? formatTime(duration): 'No'}</span>
     </div>
   );
 };

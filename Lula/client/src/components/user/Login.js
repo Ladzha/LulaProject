@@ -1,4 +1,4 @@
-import React, {useRef, useState, useContext} from 'react'
+import React, {useRef, useState,  useEffect, useContext} from 'react'
 import {Link, useNavigate  } from 'react-router-dom';
 import { UserService } from '../../services/user.service.js';
 
@@ -7,10 +7,8 @@ import { AppContext } from "../../App.js";
 const Login = () => {
 
    const formRef = useRef();
-
    const [msg, setMsg] = useState('');
    const { setToken } = useContext(AppContext);
-
    const navigate = useNavigate ();
 
   const handleSubmit = async (event)=>{
@@ -23,6 +21,7 @@ const Login = () => {
       const userData = await UserService.login(username, password);
       setToken(userData.token); //set token in App.js
       // console.log('token', userData.token);
+
       console.log('userData', userData)
       formRef.current.reset();  //clean inputs
       setMsg('Login successful')

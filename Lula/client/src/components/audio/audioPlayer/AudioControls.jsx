@@ -8,7 +8,6 @@ import PrevButton from '../../../img/prev-icon.svg';
 
 import { FaVolumeUp } from "react-icons/fa";
 
-
 const AudioControls  = ({
   audioRef, 
   progressBarRef, 
@@ -108,14 +107,14 @@ const AudioControls  = ({
 
   }, [isPlaying, audioRef, repeat])
 
-  // useEffect(()=>{
-  //   if(audioRef.current.currentTime){
-  //     if(audioRef.current.currentTime===duration){
-  //       isPlaying =(false)
-  //     }
-  //   }
+  useEffect(()=>{
+    if(audioRef.current.currentTime){
+      if(audioRef.current.currentTime===duration){
+        isPlaying =(false)
+      }
+    }
 
-  // }, [audioRef]);  //to change button in the and of a track. Does NOT  work?
+  }, [audioRef]);  //to change button in the and of a track. Does NOT  work?
 
   useEffect(()=>{
     if(audioRef.current){
@@ -128,7 +127,7 @@ const AudioControls  = ({
   }
 
   const handlePrevious =()=>{
-    setIsPlaying(false)
+    // setIsPlaying(false)
     try {
       if(currentTrackIndex === 0){
         let lastTrackIndex = playlist.length-1;
@@ -140,7 +139,7 @@ const AudioControls  = ({
         setCurrentTrack(playlist[currentTrackIndex -1])
       } 
 
-      setIsPlaying(true); 
+      // setIsPlaying(true); 
 
       const playPromise = audioRef.current.play();
 
@@ -160,7 +159,7 @@ const AudioControls  = ({
   };
 
   const handleNext =()=>{
-    setIsPlaying(false)
+    // setIsPlaying(false)
     try{
 
       if(currentTrackIndex >=playlist.length -1){
@@ -172,7 +171,7 @@ const AudioControls  = ({
         setCurrentTrack(playlist[currentTrackIndex +1])
       } 
 
-      setIsPlaying(true); //new line
+      // setIsPlaying(true); //new line
       const playPromise = audioRef.current.play();
       if (playPromise !== undefined) {
         playPromise.then(item => {

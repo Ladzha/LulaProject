@@ -83,6 +83,7 @@ ul{
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  width: 80%;
   gap: 45px;
 }
 
@@ -200,7 +201,7 @@ a{
   line-height: var(--line-hight);
   color: var(--white-color);
   font-weight: 400;
-  width: 80%;
+  width: 70%;
   margin-bottom: 30px;
   margin-top: 0px;
 }
@@ -230,6 +231,7 @@ a{
 .imgPreview{
   width: 220px;
   height: 220px;
+  object-fit: cover;
   border-radius:25px;
 }
 
@@ -648,8 +650,9 @@ color:#9747FF
 }
 
 .imgExercise{
-  width: 350px;
-  height: 350px;
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
   border: var(--border-container) var(--white-color);
   border-radius: var(--border-container-radius);
   

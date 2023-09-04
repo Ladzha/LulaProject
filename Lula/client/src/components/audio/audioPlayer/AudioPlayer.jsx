@@ -7,6 +7,8 @@ import AudioControls from './AudioControls'
 import AudioComponent from '../AudioComponent'
 import { AudioRecorder} from 'react-audio-voice-recorder';
 
+import DisplayTrack from './DisplayTrack';
+
 import { AppContext } from '../../../App.js';
 import jwtDecode from 'jwt-decode';
 
@@ -29,21 +31,23 @@ const AudioPlayer = ({playlist}) => {
   const { token } = useContext(AppContext);
   const [userid, setUserid] = useState('');
 
+  console.log("Load page isPlaying", isPlaying);
+
   const handleShowRecord = () => {
     setShowRecord(!showRecord);
     };
 
-// const formatTime = (time)=>{
-//   const minutes = Math.floor(time/60);
-//   const seconds = Math.floor(time/60);
-//   return `${minutes}:${seconds.toString().padStart(2,'0')}`;
-// };
+  const formatTime = (time)=>{
+    const minutes = Math.floor(time/60);
+    const seconds = Math.floor(time/60);
+    return `${minutes}:${seconds.toString().padStart(2,'0')}`;
+  };
 
   useEffect(() => {
     if (playlist && playlist.length > 0) {
       setCurrentTrack(playlist[currentTrackIndex]);
     }
-  }, [playlist, currentTrackIndex]); 
+  }, [playlist]); 
 
 
   useEffect(()=>{
@@ -57,10 +61,16 @@ const AudioPlayer = ({playlist}) => {
 
   const handlePlayClick = (index) => {
     if (currentTrackIndex === index) {
-      setIsPlaying(!isPlaying);
 
-      audioRef.current.pause();
-      setCurrentTrackIndex(null);
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      // setIsPlaying(!isPlaying);
+
+      // audioRef.current.pause();
+      // setCurrentTrackIndex(null);
 
     } else {
       try {
@@ -92,17 +102,11 @@ const AudioPlayer = ({playlist}) => {
         setIsPlaying(false)
         audioRef.current.pause();
       }
-
     }
   };
 
-  const onLoadedMetadata = () =>{ //get duration, but doesn't work
-    const seconds = audioRef.current.duration;
-    setDuration(seconds)
-    progressBarRef.current.max=seconds;
-  }
-
-  const addAudioElement = async (blob) => { //recording audio
+//recording audio
+  const addAudioElement = async (blob) => { 
     const name = 'as'
 
     const formData = new FormData();
@@ -122,13 +126,24 @@ const AudioPlayer = ({playlist}) => {
     {playlist ? (
     <div className='innerd'>
       {playlist.length > 0 ? (<>
-      <audio //display track
-      src={currentTrack&&currentTrack.link}  
+
+
+      <DisplayTrack 
+      currentTrack={currentTrack} 
+      audioRef={audioRef}
+      progressBarRef={progressBarRef}
+      setDuration={setDuration}
+      />
+
+
+      {/* <audio //display track
       ref={audioRef}
-      onCanPlay={onLoadedMetadata}/>   
+      src={currentTrack&&currentTrack.link}
+      onCanPlay={onLoadedMetadata}/>  */}
 
 
       {/* Render audio controls */}
+
       <AudioControls  
       audioRef={audioRef}
       progressBarRef={progressBarRef}

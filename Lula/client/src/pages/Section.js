@@ -35,7 +35,7 @@ const Section = () => {
       return(
         <div className='containerColumn'>
           <p className='titleMain'> Let's talk about "{section[0].name}"</p>
-          <p className='instruction'> Here, you can choose from a variety of scenarios and topics that pique your interest. Simply click on the picture that intrigues you the most, and you'll be directed to a world of authentic language experiences. Start your language journey now!</p>
+          <p className='instruction'> Here, you can choose from a variety of scenarios and topics that pique your interest. <br/>Simply click on the picture that intrigues you the most, and you'll be directed to a world of authentic language experiences. Start your language journey now!</p>
               <div className='homeContainer'>
             {previews.length > 0 && previews.map((preview, index)=>{
               return( 
