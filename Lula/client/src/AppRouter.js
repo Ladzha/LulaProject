@@ -1,30 +1,23 @@
 import './App.css';
-import React, {useContext, useState} from 'react';
+import React from 'react';
 
-
-import { BrowserRouter, Routes, Route, Redirect } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-import avatar from './img/avatar13.jpg'
 import Exercise from './pages/Exercise.jsx'
 import Section from './pages/Section'
 import Language from './pages/Language'
 
-
 import Login from './components/user/Login';
 import Register from './components/user/Register';
-import Account from './components/user/Account';
 import Profile from './components/user/Profile';
 
-
-// import AudioPlayer from './components/audio/AudioPlayer'
 import Record from './components/audio/Record';
-import Home from './pages/Home';
+import Home from './components/Home';
 import AdminZone from './pages/AdminZone';
 import Contact from './components/admin/Contact';
 import Auth from './pages/Auth';
-
 
 function AppRouter() {
 
@@ -40,9 +33,6 @@ function AppRouter() {
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/record' element={<Record/>}/>
-
-      {/* <Route path='/audio' element={<AudioPlayer/>}/> */}
-      {/* <Route path='/account' element={<Account username="Sara" about="I am soo cool" img={avatar}/>}/> */}
          
       <Route path='/admin' element={<AdminZone/>}/>
       <Route path='/contact' element={<Contact/>}/>
@@ -55,7 +45,6 @@ function AppRouter() {
       
       </div>
       <Footer/>
-      
       </Auth>
     </div>
   );

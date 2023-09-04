@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "aws-sdk": "^2.1440.0",
     "axios": "^1.4.0",
+    "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
     "mobx": "^6.10.0",
     "mobx-react-lite": "^4.0.3",

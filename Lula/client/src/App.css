@@ -8,6 +8,13 @@ body{
 html, body, #root{
   height: 100%;
 }
+
+ul{
+  margin-right: 0;
+  margin-left: 0;
+  padding: 0;
+}
+
 :root{
   --red-color: #FF363C;
   --yellow-color: #FFE500;
@@ -26,9 +33,16 @@ html, body, #root{
   --border-elements-radius: 25px;
   --shadow: 0 2px 6px rgba(255, 54, 60, 0.4);
   --text-main: 1.1em;
+  --line-hight: 1.5em;
   --text-detail: 0.85em;
   --text-element: 0.7em;
-  --text-title: 1.6em;
+  --text-title: 1.3em;
+  --text-title-main: 1.7em;
+/*small screen*/
+  --text-main-ss: 0.9em;
+  --text-detail-ss: 0.7em;
+  --text-element-ss: 0.6em;
+  --text-title-ss: 1em;
 
 }
 
@@ -49,10 +63,9 @@ html, body, #root{
   margin: 70px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   text-align: center;
   font-size: var(--text-main);
-  /* background-color: var(--red-color); */
   flex: 1 1 auto;
 }
 
@@ -128,7 +141,7 @@ a{
 
 .titleHomeMain{
   color: var(--white-color);
-  font-size: var(--text-title);
+  font-size: var(--text-title-main);
   font-weight:600;
   padding: 20px;
   border-bottom: var(--border-container) var(--white-color);
@@ -144,7 +157,7 @@ a{
 
 .moto{
   margin: 0px;
-  font-size: 1.4rem;
+  font-size: var(--text-main);
   color: var(--white-color);
   font-weight: 500;
   padding-bottom: 20px;
@@ -169,20 +182,22 @@ a{
   background-color: var(--white-color);
   padding: 15px;
   text-align: center;
+  margin-bottom: 0;
   font-size: var(--text-element);
-  width: 100%;
-  position: fixed;
+  /* width: 100%; */
+  /* position: fixed; */
   bottom: 0;
 }
 
 .loading{
+    margin: 50px;
     color: var(--white-color);
     font-weight: 400;
 }
 
 .instruction{
   font-size: var(--text-detail);
-  line-height: 1.4rem;
+  line-height: var(--line-hight);
   color: var(--white-color);
   font-weight: 400;
   width: 80%;
@@ -283,7 +298,7 @@ textarea{
 
 .title{
 color: var(--red-color);
-font-size: 1.5rem;
+font-size: var(--text-title);
 font-weight: bold;
 }
 
@@ -300,7 +315,7 @@ font-weight: bold;
 
   width: 300px;
   margin: 50px;
-  padding: 20px;
+  padding: 15px;
 }
 
 .newCommentBox{
@@ -633,8 +648,8 @@ color:#9747FF
 }
 
 .imgExercise{
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  height: 350px;
   border: var(--border-container) var(--white-color);
   border-radius: var(--border-container-radius);
   
@@ -803,4 +818,51 @@ button svg {
   margin: 0;
 }
 
+@media screen and (max-width: 768px){
+  
+.mainContainer {
+    margin: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  .navbar{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .instruction{
+    font-size: var(--text-detail-ss);
+    width: 90%;
+    line-height: 1rem;
+    font-weight: 400;   
+  }
+
+  .titleHomeMain{
+    color: var(--white-color);
+    font-size: var(--text-title-ss);
+  }
+    
+  .titleMain{
+    color: var(--white-color);
+    font-size: var(--text-title-ss);
+  }
+
+  .title{
+    font-size: var(--text-title-ss);
+    }
+    
+  .moto{
+    font-size: 1rem;
+  }
+
+  .imgExercise{
+    width: 300px;
+    height: 300px;
+  }
+
+}
+  
 

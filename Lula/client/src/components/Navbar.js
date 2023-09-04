@@ -6,10 +6,6 @@ import { AvatarService } from '../services/avatar.service.js';
 import { AppContext } from '../App.js';
 import jwtDecode from 'jwt-decode';
 
-
-
-
-
 const Navbar = () => {
 
   const navigate = useNavigate ();

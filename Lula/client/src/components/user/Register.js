@@ -15,7 +15,6 @@ const navigate = useNavigate();
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   const randomNumber = getRandomNumber(1, 10);
-  console.log(randomNumber);
 
   const handleSubmit =async (event)=>{
     event.preventDefault()
@@ -63,7 +62,8 @@ const navigate = useNavigate();
         <button className='submitButton' type="submit">Register</button>   
       </form>
       {msg && <p className={msg === 'You registered successfully' ? 'successMsg' : 'errorMsg'}>{msg}</p>}
-      <p className='hint'>Already have an account? <Link to="/login"className="boldLink">Login</Link></p>
+      <p className='hint'>Already have an account?</p>
+      <p className='hint'><Link to="/login"className="boldLink">Login</Link></p> 
     </div>
   )
 }

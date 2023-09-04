@@ -17,15 +17,23 @@ const ExercisePreview = ({ id }) => {
         try {
 
           const imgData = await ImgService.getById(id);
-          setImg(imgData);
+          if (imgData && imgData.length > 0) {
+            setImg(imgData)};
+          
 
           if(imgData[0].sectionid){
             const sectionData = await SectionService.getById(imgData[0].sectionid);
-            setSection(sectionData);
+            if (sectionData && sectionData.length > 0) {
+              setSection(sectionData);
+            }
           }
 
-          const languageData = await LanguageService.getById(imgData[0].languageid);
-          setLanguage(languageData);
+          if (imgData[0].languageid) {
+            const languageData = await LanguageService.getById(imgData[0].languageid);
+            if (languageData && languageData.length > 0) {
+              setLanguage(languageData);
+            }
+          }
 
         } catch (error) {
             console.log(error);
@@ -34,13 +42,16 @@ const ExercisePreview = ({ id }) => {
         fetchData();
     }, [id]);
     return (
-      <div className='previewBox'>
+      <>
+      {img.length >0 ?(<div className='previewBox'>
         <Link to={`/exercise/${img[0].imgid}`} ><img className='imgPreview' src={img[0].link}/></Link>
         <div className='previewInfo'>
         <Link to={'/'} ><p className='languageButton'>Back</p></Link>
         <Link to={`/exercise/${img[0].imgid}`} ><p className='sectionButton'>Learn</p></Link>
         </div>
-      </div>
+      </div>) :(<div className='loading'>Loading...</div>)}
+      </>
+
     )
   }
     

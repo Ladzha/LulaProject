@@ -24,14 +24,14 @@ const Exercise = () => {
         const imgData = await ImgService.getById(imgid); //IMG BY ID
         setImg(imgData);
 
-        if(!imgData) return;
+        if(!imgData) return; 
 
         const audiosData = await AudioService.getByImageId(imgid) //GET LIST OF AUDIO BY IMG ID
         // console.log(audiosData);
-        if(!audiosData) return;
+        if(audiosData && audiosData.length>0){
+          setAudios(audiosData); 
+        }
         
-        setAudios(audiosData); 
-
           } catch (error) {
               console.log(error);
           }
@@ -42,7 +42,7 @@ const Exercise = () => {
   return(
     <div className='containerColumn'>
     <p className='titleMain'> Listen to what they say about this photo </p>
-    <p className='instruction'>Listen to various audio recordings related to the chosen scenario and enhance your language skills. Feel free to leave a comment or contribute your own audio to enrich the experience for fellow learners.</p>
+    <p className='instruction'>Get ready to enhance your language skills through interactive exercises. Listen to audio recordings from real people discussing different scenarios. Absorb the nuances of language as it's naturally spoken, and feel free to leave comments or even create your own recordings to enrich the learning experience. Let's get started!</p>
     <div>
         
         <div className='exerciseContainer'>

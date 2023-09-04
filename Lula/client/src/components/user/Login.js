@@ -43,7 +43,9 @@ const Login = () => {
         <button className='submitButton' type="submit">Login</button>
       </form>
       {msg && <p className={msg === 'Login successful' ? 'successMsg' : 'errorMsg'}>{msg}</p>}
-      <p className='hint'>Don't have an account? <Link to="/register" className="boldLink">Sing Up</Link></p>
+      <p className='hint'>Don't have an account?</p>
+      <p className='hint'><Link to="/register" className="boldLink">Sing Up</Link></p>
+
 
     </div>
   )

@@ -86,7 +86,7 @@ export const loginController = async(request, response)=>{
         const accessToken=await generateAccessToken(user[0].userid, user[0].username, user[0].role)
         
         //send to cookie
-        response.cookie('token', accessToken, {httpOnly: true, maxAge: 60 * 1000 * 60 * 24})
+        response.cookie('token', accessToken, {httpOnly: true, maxAge: 60 * 1000 * 60 * 24});
 
         
         return response.json({token:accessToken})
@@ -103,6 +103,7 @@ export const logoutController = (request, response) => {
     response.clearCookie('token');
     return response.sendStatus(200);
 };
+
     
 //UPDATE USER
 export const updateUserController = async(request, response)=>{
