@@ -15,6 +15,6 @@ const AllPending =()=>{
         <AudioPlayerPending/>
       </PlaylistProvider>
       
-      </div>)
+    </div>)
 }
 export default AllPending

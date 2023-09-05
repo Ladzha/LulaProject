@@ -10,14 +10,14 @@ const AudioPlayerPending = () => {
 
   const audioRef = useRef(); //to get audio tag in html
   const progressBarRef = useRef(); //to get input range tag in html
-
+  const { playlist } = usePlaylist(); 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [timeProgress, setTimeProgress]=useState(0); //to get current time of audio
-  const [currentTrack, setCurrentTrack] = useState({});
+  const [currentTrack, setCurrentTrack] = useState(playlist[0]);
   const [duration, setDuration]=useState(0); //to get duration of the audio
   const [isPlaying, setIsPlaying] = useState(false); //play or not
 
-  const { playlist } = usePlaylist(); 
+ 
 
 
 // const formatTime = (time)=>{
@@ -32,7 +32,7 @@ const AudioPlayerPending = () => {
     }
   }, [playlist, currentTrackIndex]);
 
-  const handlePlayClick = (index) => {
+  const handlePlayPause = (index) => {
     if (currentTrackIndex === index) {
       setIsPlaying(!isPlaying);
 
@@ -139,7 +139,7 @@ const AudioPlayerPending = () => {
         hour: '2-digit',
         minute: '2-digit',
         }).format(new Date(audio.created))}
-        onPlayClick={() => handlePlayClick(index)}
+        onPlayClick={() => handlePlayPause(index)}
         isPlaying={isPlaying && currentTrackIndex === index}/>        
       </div>
       ))}

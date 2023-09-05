@@ -22,9 +22,9 @@ const AudioControls  = ({
  
   isPlaying,
   setIsPlaying,
-}) => { 
 
-  // const [isPlaying, setIsPlaying] = useState(false);
+  // handlePlayPause,
+}) => { 
 
   const [volume, setVolume] = useState(60) //For Volume slider
 
@@ -33,10 +33,6 @@ const AudioControls  = ({
   
   const repeat = useCallback(()=>{ //useCallback to cash function between rendering
     
-
-    const handlePlayPause  = () => {
-      setIsPlaying(!isPlaying);
-    };
 ///WHY IT IS HERE??
     const currentTime = audioRef.current ? audioRef.current.currentTime : 0;
     setTimeProgress(currentTime);
@@ -55,16 +51,17 @@ const AudioControls  = ({
   }, [audioRef, progressBarRef, duration, setTimeProgress]);
 
   // Add a useEffect to listen for changes in currentTrackIndex
-  useEffect(() => {
-    // Check if the current track should be played or paused
-    if (currentTrackIndex === null) {
-      setIsPlaying(false); // Pause if no track is selected
-    } else {
-      setIsPlaying(true); // Play if a track is selected
-    }
-  }, [currentTrackIndex]);
+  // useEffect(() => {
+  //   // Check if the current track should be played or paused
+  //   if (currentTrackIndex === null) {
+  //     setIsPlaying(false); // Pause if no track is selected
+  //   } else {
+  //     setIsPlaying(true); // Play if a track is selected
+  //   }
+  // }, [currentTrackIndex]);
 
   useEffect(()=>{
+    console.log("isPlaying", isPlaying);
     if(isPlaying && audioRef.current){
       try {
         const playPromise = audioRef.current.play();
@@ -89,7 +86,7 @@ const AudioControls  = ({
     }
 
     audioRef.current.addEventListener('ended', () => {
-      setIsPlaying(false); // Change the button to PlayButton when track finishes
+      // setIsPlaying(false); // Change the button to PlayButton when track finishes
       cancelAnimationFrame(playAnimationRef.current);
     });
 
@@ -108,9 +105,10 @@ const AudioControls  = ({
   }, [isPlaying, audioRef, repeat])
 
   useEffect(()=>{
+    console.log("is playing use effect audio ref", isPlaying);
     if(audioRef.current.currentTime){
       if(audioRef.current.currentTime===duration){
-        isPlaying =(false)
+        setIsPlaying(false)
       }
     }
 
@@ -123,11 +121,14 @@ const AudioControls  = ({
   }, [volume, audioRef]);
 
   const handlePlayPause =()=>{
-    setIsPlaying(!isPlaying)
+    setIsPlaying((prev) => !prev)
   }
 
+  
   const handlePrevious =()=>{
-    // setIsPlaying(false)
+    
+    // setIsPlaying(true) //esli sttavlu zdes ne rabotaet player po click
+
     try {
       if(currentTrackIndex === 0){
         let lastTrackIndex = playlist.length-1;
@@ -159,7 +160,7 @@ const AudioControls  = ({
   };
 
   const handleNext =()=>{
-    // setIsPlaying(false)
+     setIsPlaying(false) //esli sttavlu zdes ne rabotaet player po click
     try{
 
       if(currentTrackIndex >=playlist.length -1){
@@ -182,7 +183,6 @@ const AudioControls  = ({
           // audioRef.current.pause();
         });
       }
-
     }
     catch(error){
       console.log(error);

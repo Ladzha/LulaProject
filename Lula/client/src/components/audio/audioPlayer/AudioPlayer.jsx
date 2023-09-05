@@ -20,7 +20,7 @@ const AudioPlayer = ({playlist}) => {
   //to play track from playlist
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [timeProgress, setTimeProgress]=useState(0); //to get current time of audio
-  const [currentTrack, setCurrentTrack] = useState({});
+  const [currentTrack, setCurrentTrack] = useState(playlist[0]); //vmesto {}
   const [duration, setDuration]=useState(0); //to get duration of the audio
   const [isPlaying, setIsPlaying] = useState(false); //play or not
 
@@ -32,10 +32,11 @@ const AudioPlayer = ({playlist}) => {
   const [userid, setUserid] = useState('');
 
   console.log("Load page isPlaying", isPlaying);
+  console.log("playlist", playlist);
 
   const handleShowRecord = () => {
     setShowRecord(!showRecord);
-    };
+  };
 
   const formatTime = (time)=>{
     const minutes = Math.floor(time/60);
@@ -47,8 +48,7 @@ const AudioPlayer = ({playlist}) => {
     if (playlist && playlist.length > 0) {
       setCurrentTrack(playlist[currentTrackIndex]);
     }
-  }, [playlist]); 
-
+  }, [playlist]); //playlist
 
   useEffect(()=>{
     if(token){
@@ -59,7 +59,8 @@ const AudioPlayer = ({playlist}) => {
     }
 }, [token])
 
-  const handlePlayClick = (index) => {
+  const handlePlayPause = (index) => {
+    console.log("handlePlayPause", isPlaying);
     if (currentTrackIndex === index) {
 
       if (isPlaying) {
@@ -67,18 +68,12 @@ const AudioPlayer = ({playlist}) => {
       } else {
         audioRef.current.play();
       }
-      // setIsPlaying(!isPlaying);
-
-      // audioRef.current.pause();
-      // setCurrentTrackIndex(null);
 
     } else {
       try {
-
         if (currentTrackIndex !== null) {
           audioRef.current.pause();
         }
-  
         setCurrentTrackIndex(index);
         setIsPlaying(true);
 
@@ -90,13 +85,11 @@ const AudioPlayer = ({playlist}) => {
               // audioRef.current.pause();
             })
             .catch(error => {
-              // console.log(error);
-              
+              console.log(error);
               // audioRef.current.pause();
             });
           }
         }
-   
       } catch (error) {
         console.log(error);
         setIsPlaying(false)
@@ -127,20 +120,13 @@ const AudioPlayer = ({playlist}) => {
     <div className='innerd'>
       {playlist.length > 0 ? (<>
 
-
+      {/* Render audio tag */}
       <DisplayTrack 
       currentTrack={currentTrack} 
       audioRef={audioRef}
       progressBarRef={progressBarRef}
       setDuration={setDuration}
       />
-
-
-      {/* <audio //display track
-      ref={audioRef}
-      src={currentTrack&&currentTrack.link}
-      onCanPlay={onLoadedMetadata}/>  */}
-
 
       {/* Render audio controls */}
 
@@ -158,7 +144,10 @@ const AudioPlayer = ({playlist}) => {
       setCurrentTrack={setCurrentTrack}
 
       isPlaying={isPlaying}
-      setIsPlaying ={setIsPlaying}/>
+      setIsPlaying ={setIsPlaying}
+
+      //proba
+      handlePlayPause={handlePlayPause}/>
 
       <ProgressBar 
       progressBarRef={progressBarRef} 
@@ -177,7 +166,7 @@ const AudioPlayer = ({playlist}) => {
                 day: '2-digit',
             }).format(new Date(audio.created))}
 
-            onPlayClick={() => handlePlayClick(index)}
+            onPlayClick={() => handlePlayPause(index)}
             isPlaying={isPlaying && currentTrackIndex === index}
             currentTrackIndex={currentTrackIndex}/> 
 
@@ -190,9 +179,6 @@ const AudioPlayer = ({playlist}) => {
             <div className='box recorderBox'>
             <AudioRecorder 
               onRecordingComplete={(blob) => addAudioElement(blob)}
-              // onRecordingComplete={handleRecordingComplete}
-
-              // recorderControls={recorderControls}
               showVisualizer={true}
               downloadOnSavePress={false}
               downloadFileExtension="webm"

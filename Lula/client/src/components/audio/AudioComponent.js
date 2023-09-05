@@ -16,28 +16,27 @@ const AudioComponent = ({id, created, onPlayClick, isPlaying, currentTrackIndex}
       setCommentBlock(!commentBlock);
     };
 
-    useEffect(() => {
-      if (!id) return;
-      const fetchData = async () => {
-        try {
-          const audioData = await AudioService.getById(id);
-          setAudio(audioData);
-          
-          if(audioData[0].userid){
-            const userData = await UserService.getById(audioData[0].userid);
-            setUser(userData);
+  useEffect(() => {
+    if (!id) return;
+    const fetchData = async () => {
+      try {
+        const audioData = await AudioService.getById(id);
+        setAudio(audioData);
 
-          if (userData.avatarid) {
-            const avatarData = await AvatarService.getById(userData.avatarid);
-            setAvatar(avatarData);
-            }
-          }
+        if(audioData[0].userid){
+          const userData = await UserService.getById(audioData[0].userid);
+          setUser(userData);
 
-          } catch (error) {
-              console.log(error);
+        if (userData.avatarid) {
+          const avatarData = await AvatarService.getById(userData.avatarid);
+          setAvatar(avatarData);
           }
-      };
-      fetchData();
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    fetchData();
   }, [id]);
  
   
@@ -45,8 +44,8 @@ const AudioComponent = ({id, created, onPlayClick, isPlaying, currentTrackIndex}
     <div className='listBox'>
       <div className='infoBlock'>   
         <ActiveInfoBox avatar={avatar[0].link} 
-        username={user.username} 
-        userid={user.userid} 
+        username={user&&user.username} 
+        userid={user&&user.userid} 
         info={created} toggleComments={toggleComments} 
         isPlaying={isPlaying}
         onPlayClick={onPlayClick}
