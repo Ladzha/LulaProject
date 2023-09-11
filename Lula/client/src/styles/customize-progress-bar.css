@@ -4,6 +4,10 @@ Custom Input range
 
 /* Input range - chrome and safari */
 
+input{
+  outline: none;
+}
+
 input[type="range"] {
     --range-progress: 0;
     -webkit-appearance: none;

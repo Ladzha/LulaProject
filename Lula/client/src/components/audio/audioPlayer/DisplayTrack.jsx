@@ -7,20 +7,18 @@ const DisplayTrack = ({
   setDuration}) => {
 
     const onLoadedMetadata = () =>{
-      console.log("DURATION", audioRef.current.duration);
-      const seconds = audioRef.current.duration;
-      setDuration(seconds)
-      progressBarRef.current.max=seconds; 
+      // console.log("DURATION", audioRef.current.duration);
+      // const seconds = audioRef.current.duration;
+      // setDuration(seconds)
+      // progressBarRef.current.max=seconds; 
     }
 
   return (
     <div>
-  
       <audio 
       src={currentTrack && currentTrack.link}  
       ref={audioRef}
-      onCanPlay={onLoadedMetadata}/>  
-
+      onLoadedMetadata={onLoadedMetadata}/>  
     </div>
   )
 }

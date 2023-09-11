@@ -4,7 +4,8 @@ const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
 
   const handleProgressChange =()=>{
     if(!audioRef.current) return;
-    audioRef.current.currentTime=progressBarRef.current.value; 
+    // audioRef.current.currentTime=formatTime(progressBarRef.current.value); 
+    // console.log("progressBarRef.current.value", progressBarRef.current.value);
   }
 
 //Function to convert time format
@@ -21,10 +22,17 @@ const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
 
 
   return (
-    <div className='progress'>
-      <span className='time current'>{formatTime(timeProgress)}</span>
-      <input type="range" ref={progressBarRef} onChange={handleProgressChange}/>
-      <span className='time'>{duration =='Infinity:NaN'? formatTime(duration): 'No'}</span>
+    <div className='display-time'>
+      {/* <span className='time current'>{formatTime(timeProgress)}</span> */}
+      
+      <input 
+      // type="range" 
+      type='text'
+      ref={progressBarRef}
+      defaultValue="00:00"
+      readOnly
+      className='time input-time' />
+      {/* <span className='time'>{duration =='Infinity:NaN'? formatTime(duration): 'No'}</span> */}
     </div>
   );
 };

@@ -43,7 +43,7 @@ const AudioPlayer = ({playlist}) => {
     const seconds = Math.floor(time/60);
     return `${minutes}:${seconds.toString().padStart(2,'0')}`;
   };
-
+  
   useEffect(() => {
     if (playlist && playlist.length > 0) {
       setCurrentTrack(playlist[currentTrackIndex]);
@@ -60,7 +60,6 @@ const AudioPlayer = ({playlist}) => {
 }, [token])
 
   const handlePlayPause = (index) => {
-    console.log("handlePlayPause", isPlaying);
     if (currentTrackIndex === index) {
 
       if (isPlaying) {
@@ -97,6 +96,7 @@ const AudioPlayer = ({playlist}) => {
       }
     }
   };
+
 
 //recording audio
   const addAudioElement = async (blob) => { 

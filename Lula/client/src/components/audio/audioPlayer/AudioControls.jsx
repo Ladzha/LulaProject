@@ -23,45 +23,46 @@ const AudioControls  = ({
   isPlaying,
   setIsPlaying,
 
-  // handlePlayPause,
 }) => { 
 
   const [volume, setVolume] = useState(60) //For Volume slider
 
   const playAnimationRef = useRef(); //for animating progress
 
-  
+  const [audioEnded, setAudioEnded] = useState(false); //state variable to track the audio's play status when it ends
+
+
   const repeat = useCallback(()=>{ //useCallback to cash function between rendering
-    
+
+    //Function to convert time format
+  const formatTime = (time) => {
+    if (time && !isNaN(time)) {
+      const minutes = Math.floor(time / 60);
+      const formatMinutes =minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(time % 60);
+      const formatSeconds =seconds < 10 ? `0${seconds}` : `${seconds}`;
+      return `${formatMinutes}:${formatSeconds}`;
+    }
+    // return '00:00';
+  };
+
 ///WHY IT IS HERE??
     const currentTime = audioRef.current ? audioRef.current.currentTime : 0;
+
     setTimeProgress(currentTime);
     if(!progressBarRef.current) return;
-    progressBarRef.current.value = currentTime;
+    progressBarRef.current.value = formatTime(currentTime); //
     progressBarRef.current.style.setProperty(
       '--range-progress',
       `${(progressBarRef.current.value / duration) * 100}%`
     );
 
-    // console.log(currentTime); endless
-    // console.log(duration);
-
     playAnimationRef.current=requestAnimationFrame(repeat);
  
   }, [audioRef, progressBarRef, duration, setTimeProgress]);
 
-  // Add a useEffect to listen for changes in currentTrackIndex
-  // useEffect(() => {
-  //   // Check if the current track should be played or paused
-  //   if (currentTrackIndex === null) {
-  //     setIsPlaying(false); // Pause if no track is selected
-  //   } else {
-  //     setIsPlaying(true); // Play if a track is selected
-  //   }
-  // }, [currentTrackIndex]);
 
   useEffect(()=>{
-    console.log("isPlaying", isPlaying);
     if(isPlaying && audioRef.current){
       try {
         const playPromise = audioRef.current.play();
@@ -70,8 +71,8 @@ const AudioControls  = ({
               // audioRef.current.pause();
             })
             .catch(error => {
-              // console.log(error);
-              // setIsPlaying(false)
+              console.log(error);
+              setIsPlaying(false) ////////
               // audioRef.current.pause();
             });
           }
@@ -86,7 +87,8 @@ const AudioControls  = ({
     }
 
     audioRef.current.addEventListener('ended', () => {
-      // setIsPlaying(false); // Change the button to PlayButton when track finishes
+      setIsPlaying(false); // Change the button to PlayButton when track finishes
+      setAudioEnded(true); ////////
       cancelAnimationFrame(playAnimationRef.current);
     });
 
@@ -96,6 +98,7 @@ const AudioControls  = ({
       if(!audioRef.current) return;
       audioRef.current.removeEventListener('ended', () => {
         setIsPlaying(false);
+        setAudioEnded(true);
         cancelAnimationFrame(playAnimationRef.current);
       });
 
@@ -127,7 +130,7 @@ const AudioControls  = ({
   
   const handlePrevious =()=>{
     
-    // setIsPlaying(true) //esli sttavlu zdes ne rabotaet player po click
+    setIsPlaying(false) //esli sttavlu zdes ne rabotaet player po click
 
     try {
       if(currentTrackIndex === 0){
@@ -160,7 +163,9 @@ const AudioControls  = ({
   };
 
   const handleNext =()=>{
-     setIsPlaying(false) //esli sttavlu zdes ne rabotaet player po click
+    setIsPlaying(false) //esli sttavlu zdes ne rabotaet player po click
+    console.log('handleNext', isPlaying);
+
     try{
 
       if(currentTrackIndex >=playlist.length -1){
@@ -171,8 +176,6 @@ const AudioControls  = ({
         setCurrentTrackIndex(currentTrackIndex +1);
         setCurrentTrack(playlist[currentTrackIndex +1])
       } 
-
-      // setIsPlaying(true); //new line
       const playPromise = audioRef.current.play();
       if (playPromise !== undefined) {
         playPromise.then(item => {
@@ -202,7 +205,7 @@ const AudioControls  = ({
 
           <img onClick={handlePlayPause}
           className='playerIcons' 
-          src={isPlaying? PauseButton: PlayButton}
+          src={isPlaying || !audioEnded ? PauseButton: PlayButton}
           alt={isPlaying ? 'Pause' : 'Play'}/>
 
           <img onClick={handleNext}
@@ -220,7 +223,6 @@ const AudioControls  = ({
           value={volume} 
           onChange={(event)=>setVolume(event.target.value)}/>
         </div>
-
         </div>
       </div>
     </div>

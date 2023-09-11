@@ -645,7 +645,7 @@ color:#9747FF
 }
 
 .icon-home{
-  margin-bottom: -3.5px;
+  margin-bottom: -7px;
   color: var(--purple-color)
 }
 
@@ -868,4 +868,15 @@ button svg {
 
 }
   
+.display-time{
+  display: flex;
+  justify-content: center;
 
+  text-align: center;
+}
+
+.input-time{
+  text-align: center;
+  outline: none;
+  border: 0;
+}

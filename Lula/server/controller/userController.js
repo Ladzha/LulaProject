@@ -9,7 +9,7 @@ dotenv.config();
 const generateAccessToken = async (userid, username, role) => {
 
     const payload = { userid, username, role}
-    console.log('payload from userController', payload);
+    // console.log('payload from userController', payload);
 
     return jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '1d'}) //Token expires in 1 day
 
